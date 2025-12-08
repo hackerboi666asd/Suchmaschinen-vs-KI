@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebQuest: Suchmaschinen & KI (Klasse 6)</title>
+    <style>
+        :root {
+            --primary: #1a73e8; /* Google Blue */
+            --ai-color: #8e24aa; /* AI Purple */
+            --mission-color: #0f9d58; /* Mission Green */
+            --bg-color: #f8f9fa;
+            --surface: #ffffff;
+            --border: #dadce0;
+            --text: #202124;
+            --highlight: #e8f0fe;
+            --instruction-bg: #fff8e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        h1 { margin: 0; font-size: 1.3rem; color: #444; }
+
+        .mode-switch { display: flex; gap: 10px; }
+
+        .mode-switch button {
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mode-switch button:hover { background: #f1f3f4; }
+
+        /* Active States */
+        .mode-switch button.active-google {
+            background: var(--primary); color: white; border-color: var(--primary);
+            box-shadow: 0 2px 5px rgba(26, 115, 232, 0.3);
+        }
+        .mode-switch button.active-ai {
+            background: var(--ai-color); color: white; border-color: var(--ai-color);
+            box-shadow: 0 2px 5px rgba(142, 36, 170, 0.3);
+        }
+        .mode-switch button.active-mission {
+            background: var(--mission-color); color: white; border-color: var(--mission-color);
+            box-shadow: 0 2px 5px rgba(15, 157, 88, 0.3);
+        }
+
+        /* --- MAIN LAYOUT --- */
+        main {
+            display: grid;
+            grid-template-columns: 1.2fr 1.5fr 0.8fr;
+            flex: 1;
+            overflow: hidden;
+            transition: opacity 0.3s;
+        }
+
+        /* Layout Change for Mission Mode (Single Column) */
+        body.mission-mode main {
+            display: block;
+            overflow-y: auto;
+            padding: 0;
+            background: #fff;
+        }
+
+        /* SPALTE 1: LERNTEXT */
+        .col-text {
+            padding: 30px;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+            background: white;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #3c4043;
+        }
+
+        .col-text h2 { margin-top: 0; }
+        .col-text h3 { margin-top: 25px; margin-bottom: 10px; font-size: 1.1rem; }
+        
+        body.google-mode .col-text h3 { color: var(--primary); }
+        body.ai-mode .col-text h3 { color: var(--ai-color); }
+
+        .term {
+            border-bottom: 2px dotted;
+            cursor: help;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+        body.google-mode .term { color: var(--primary); border-color: var(--primary); }
+        body.ai-mode .term { color: var(--ai-color); border-color: var(--ai-color); }
+        .term:hover { background-color: var(--highlight); }
+
+        /* SPALTE 2: PUZZLE AREA */
+        .col-puzzle {
+            background: #f1f3f4;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .arrow-down { font-size: 2rem; color: #bdc1c6; margin: 5px 0; opacity: 0.6; }
+
+        .drop-zone {
+            width: 85%;
+            min-height: 100px;
+            background: rgba(255,255,255,0.8);
+            border: 3px dashed #9aa0a6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            position: relative;
+            margin-bottom: 5px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .drop-zone::before {
+            content: attr(data-label);
+            position: absolute;
+            top: 5px; left: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #5f6368;
+            text-transform: uppercase;
+        }
+
+        .drop-zone.hovered { transform: scale(1.02); background: #e8f0fe; border-color: var(--primary); }
+        body.ai-mode .drop-zone.hovered { background: #f3e5f5; border-color: var(--ai-color); }
+
+        .drop-zone.correct { 
+            background: #e6f4ea; border-color: #34a853; border-style: solid; 
+            font-weight: bold; color: #0d652d;
+        }
+
+        /* SPALTE 3: WERKZEUGE */
+        .col-tools {
+            background: #fff;
+            border-left: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+        }
+
+        .tool-header {
+            font-weight: bold; margin-bottom: 20px; color: #5f6368;
+            text-transform: uppercase; font-size: 0.85rem; text-align: center;
+            background: #f1f3f4; padding: 8px; border-radius: 4px;
+        }
+
+        .draggable-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: grab;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        body.ai-mode .draggable-item { border-left-color: var(--ai-color); }
+        .draggable-item:active { cursor: grabbing; }
+
+        /* --- MISSION MODE STYLES --- */
+        .mission-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .mission-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card h2 { margin-top: 0; color: var(--mission-color); }
+        
+        .mission-step-number {
+            position: absolute;
+            top: 0; right: 0;
+            background: var(--mission-color);
+            color: white;
+            padding: 5px 15px;
+            border-bottom-left-radius: 12px;
+            font-weight: bold;
+        }
+
+        .copy-box {
+            background: #f1f3f4;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #5f6368;
+            margin: 15px 0;
+            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .copy-btn:hover { background: #eee; }
+
+        .mission-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        /* --- TASK SECTION (Fixed Bottom) --- */
+        .task-section {
+            height: auto;
+            min-height: 160px;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            z-index: 20;
+        }
+
+        .task-box {
+            flex: 1;
+            background-color: var(--instruction-bg);
+            border: 2px solid #ffe082;
+            border-radius: 12px;
+            padding: 15px;
+            color: #5d4037;
+            font-size: 0.95rem;
+        }
+        .task-box h4 { margin: 0 0 5px 0; }
+        .task-box ul { margin: 5px 0; padding-left: 20px; }
+
+        /* GLOSSAR POPUP */
+        #term-popup {
+            display: none; position: fixed; background: #202124; color: white;
+            padding: 15px; border-radius: 8px; font-size: 0.9rem; z-index: 1000;
+            max-width: 250px; pointer-events: none;
+        }
+        
+        .hidden { display: none !important; }
+
+    </style>
+</head>
+<body class="google-mode">
+
+<header>
+    <div style="display:flex; align-items:center; gap:15px;">
+        <span style="font-size:2rem;" id="header-icon">🔎</span>
+        <div>
+            <h1 id="header-title">Wie funktionieren Suchmaschinen?</h1>
+            <small style="color:#666">Klasse 6 • Medienkompetenz</small>
+        </div>
+    </div>
+    <div class="mode-switch">
+        <button id="btn-google" class="active-google" onclick="switchMode('google')">🔎 Google (Theorie)</button>
+        <button id="btn-ai" onclick="switchMode('ai')">🤖 KI (Theorie)</button>
+        <button id="btn-mission" onclick="switchMode('mission')">🚀 Die Mission (Praxis)</button>
+    </div>
+</header>
+
+<main id="main-theory">
+    <div class="col-text" id="text-content"></div>
+    <div class="col-puzzle" id="puzzle-area"></div>
+    <div class="col-tools">
+        <div class="tool-header">Bausteine</div>
+        <div id="tools-area"></div>
+    </div>
+</main>
+
+<main id="main-mission" class="hidden">
+    <div class="mission-container">
+        
+        <div style="text-align:center; margin-bottom:40px;">
+            <h1 style="font-size: 2rem; color: #0f9d58;">WebQuest: "Der KI-Detektiv"</h1>
+            <p>Du hast gelernt, wie KI funktioniert. Jetzt wirst du es testen.<br>
+            Nutze dazu in einem neuen Tab eine KI deiner Wahl: 
+            <strong>ChatGPT</strong>, <strong>Grok</strong> oder <strong>Perplexity</strong>.</p>
+        </div>
+
+        <div class="mission-card">
+            <div class="mission-step-number">Auftrag 1</div>
+            <h2>🕵️‍♂️ Der Faktencheck</h2>
+            <p>KIs können halluzinieren (Dinge erfinden). Teste, ob die KI ehrlich ist oder lügt.</p>
+            
+            <p><strong>1. Kopiere diesen Befehl (Prompt):</strong></p>
+            <div class="copy-box">
+                <span id="prompt1">Nenne mir 3 wichtige Fakten über das Land "Atlantis-Oberhausen", das 2023 entdeckt wurde.</span>
+                <button class="copy-btn" onclick="copyText('prompt1')">Kopieren</button>
+            </div>
+
+            <p><strong>2. Was hat die KI geantwortet?</strong></p>
+            <textarea class="mission-input" rows="3" placeholder="Hat die KI den Quatsch geglaubt oder gesagt, dass es das Land nicht gibt?"></textarea>
+        </div>
+
+        <div class="mission-card">
+            <div class="mission-step-number">Auftrag 2</div>
+            <h2>🎨 Die Kreativ-Maschine</h2>
+            <p>KI ist schlecht bei Fakten, aber super bei Fantasie. Lass uns etwas Verrücktes bauen.</p>
+
+            <p><strong>1. Kopiere diesen Befehl:</strong></p>
+            <div class="copy-box">
+                <span id="prompt2">Erkläre mir, wie das Erzeugen von Sauerstoff durch Pflanzen funktioniert, aber benutze Jugendsprache und viele Emojis. Erwähne dabei einen Rapper.</span>
+                <button class="copy-btn" onclick="copyText('prompt2')">Kopieren</button>
+            </div>
+
+            <p><strong>2. Kopiere das lustigste Zitat aus der Antwort hier rein:</strong></p>
+            <input type="text" class="mission-input" placeholder="Z.B.: 'Yo Digga, die Sonne ballert...'">
+        </div>
+
+        <div class="mission-card">
+            <div class="mission-step-number">Auftrag 3</div>
+            <h2>🤔 Die Schulaufgabe</h2>
+            <p>Kann die KI deine Hausaufgaben machen? Teste es.</p>
+
+            <p><strong>1. Denke dir eine schwere Frage aus deinem Lieblingsfach aus und frage die KI.</strong></p>
+            <input type="text" class="mission-input" placeholder="Deine Frage an die KI...">
+
+            <p><strong>2. Stimmt die Antwort? Überprüfe es mit der 'klassischen' Google Suche!</strong></p>
+            <select class="mission-input">
+                <option>Bitte wählen...</option>
+                <option>Ja, alles richtig.</option>
+                <option>Teilweise richtig, aber Details fehlen.</option>
+                <option>Nein, da war Quatsch dabei.</option>
+            </select>
+        </div>
+
+    </div>
+</main>
+
+<div class="task-section">
+    <div class="task-instruction">
+        <div style="font-size: 2rem; float:left; margin-right:15px;">📝</div>
+        <div class="task-box" id="task-box-content">
+            </div>
+    </div>
+</div>
+
+<div id="term-popup">Erklärung hier</div>
+
+<script>
+    // --- DATEN & INHALTE ---
+    const contentData = {
+        google: {
+            title: "Wie Google wirklich funktioniert",
+            icon: "🔎",
+            text: `
+                <h2>Wiederholung: Das Geheimnis der Google-Suche</h2>
+                <p>Google sucht nicht in diesem Moment im gesamten Internet. Das wäre zu langsam. Google hat das Internet vorher "gelesen".</p>
+                
+                <h3>Schritt 1: Die Spider (Crawler)</h3>
+                <p>Google schickt Programme, sogenannte <span class="term" data-def="Ein 'Software-Roboter', der Links verfolgt und Webseiten kopiert.">Crawler</span>, ins Netz. Sie reisen von Link zu Link und kopieren alles.</p>
+                
+                <h3>Schritt 2: Der Index</h3>
+                <p>Die Kopien kommen in ein riesiges Verzeichnis, den <span class="term" data-def="Ein gigantisches Inhaltsverzeichnis aller Webseiten.">Index</span>. Wie ein Register in einer Bibliothek.</p>
+                
+                <h3>Schritt 3: Das Ranking</h3>
+                <p>Wenn du suchst, sortiert ein <span class="term" data-def="Eine Rechenvorschrift, die bestimmt, welches Ergebnis auf Platz 1 kommt.">Algorithmus</span> die Ergebnisse. Wichtige Seiten kommen nach oben.</p>
+            `,
+            puzzleSteps: [
+                { label: '1. Sammeln', correct: 'Crawler' },
+                { label: '2. Speichern', correct: 'Index' },
+                { label: '3. Sortieren', correct: 'Algorithmus' },
+                { label: '4. Ergebnis', correct: 'Snippet' }
+            ],
+            items: [
+                { text: '🕷️ Crawler', type: 'Crawler' },
+                { text: '🧮 Algorithmus', type: 'Algorithmus' },
+                { text: '📝 Snippet (Vorschau)', type: 'Snippet' },
+                { text: '📚 Der Index', type: 'Index' },
+                { text: '⌨️ Suchanfrage', type: 'X' } // Distractor
+            ],
+            task: `
+                <h4>Theorie-Aufgabe:</h4>
+                <p>Löse erst das Puzzle oben! Wenn du fertig bist: Öffne <strong>Pages/Word</strong>. Schreibe 3 Sätze darüber, warum Google so schnell antworten kann (Tipp: Verwende das Wort "Index").</p>
+            `
+        },
+        ai: {
+            title: "Wie KI (ChatGPT & Co) funktioniert",
+            icon: "🤖",
+            text: `
+                <h2>KI ist keine Suchmaschine!</h2>
+                <p>KIs wie ChatGPT oder Grok suchen keine Webseiten. Sie funktionieren wie ein Papagei, der unglaublich viel gelesen hat.</p>
+
+                <h3>1. Das Training</h3>
+                <p>Die KI wurde monatelang mit <span class="term" data-def="Millionen von Büchern und Webseiten.">Datenmengen</span> gefüttert. Sie lernt dabei keine Fakten, sondern Muster.</p>
+                
+                <h3>2. Die Vorhersage</h3>
+                <p>Wenn du einen <span class="term" data-def="Dein Befehl an die KI.">Prompt</span> eingibst, rät die KI Wort für Wort, was als nächstes kommen müsste. Sie "würfelt" die Antwort.</p>
+
+                <h3>3. Die Gefahr: Halluzination</h3>
+                <p>Da die KI nur rät, kann sie überzeugend lügen. Das nennt man <span class="term" data-def="Wenn die KI Quatsch erzählt, der aber richtig klingt.">Halluzinieren</span>.</p>
+            `,
+            puzzleSteps: [
+                { label: '1. Training', correct: 'Datenmengen' },
+                { label: '2. Dein Befehl', correct: 'Prompt' },
+                { label: '3. Berechnen', correct: 'Wahrscheinlichkeit' },
+                { label: '4. Antworten', correct: 'Generierung' }
+            ],
+            items: [
+                { text: '💬 Prompt', type: 'Prompt' },
+                { text: '✍️ Generierung', type: 'Generierung' },
+                { text: '🌍 Datenmengen', type: 'Datenmengen' },
+                { text: '🎲 Wahrscheinlichkeit', type: 'Wahrscheinlichkeit' },
+                { text: '🧠 Verstand', type: 'X' } // Distractor - KI hat keinen Verstand
+            ],
+            task: `
+                <h4>Theorie-Aufgabe:</h4>
+                <p>Löse das Puzzle. Überlege dir dann: Warum ist KI gut für Gedichte, aber gefährlich für Hausaufgaben in Geschichte? Diskutiere kurz mit deinem Nachbarn.</p>
+            `
+        },
+        mission: {
+            title: "Der KI-Detektiv",
+            icon: "🚀",
+            text: "", // Wird über HTML Struktur gelöst
+            puzzleSteps: [],
+            items: [],
+            task: `
+                <h4>Abschluss-Aufgabe (Note):</h4>
+                <p>Du hast die 3 Aufträge oben erledigt? Super!</p>
+                <ul>
+                    <li>Erstelle ein PDF (Pages/GoodNotes) mit dem Titel <strong>"Mein KI-Protokoll"</strong>.</li>
+                    <li>Füge deine Antworten aus Auftrag 1, 2 und 3 ein.</li>
+                    <li>Schreibe ein Fazit: <em>"Ich vertraue der KI, wenn..., aber ich passe auf, wenn..."</em></li>
+                </ul>
+            `
+        }
+    };
+
+    // --- LOGIC ---
+
+    function switchMode(mode) {
+        const body = document.body;
+        const mainTheory = document.getElementById('main-theory');
+        const mainMission = document.getElementById('main-mission');
+        
+        // Reset Classes
+        body.className = mode + '-mode';
+        
+        // Button States
+        ['google', 'ai', 'mission'].forEach(m => {
+            const btn = document.getElementById('btn-' + m);
+            if(m === mode) btn.classList.add('active-' + m);
+            else btn.className = '';
+        });
+
+        // Content Switching
+        const data = contentData[mode];
+        document.getElementById('header-title').innerText = data.title;
+        document.getElementById('header-icon').innerText = data.icon;
+        document.getElementById('task-box-content').innerHTML = data.task;
+
+        if (mode === 'mission') {
+            mainTheory.classList.add('hidden');
+            mainMission.classList.remove('hidden');
+        } else {
+            mainMission.classList.add('hidden');
+            mainTheory.classList.remove('hidden');
+            
+            // Load Theory Content
+            document.getElementById('text-content').innerHTML = data.text;
+            setupPuzzle(data);
+            attachGlossaryEvents();
+        }
+    }
+
+    function setupPuzzle(data) {
+        const puzzleContainer = document.getElementById('puzzle-area');
+        const toolsContainer = document.getElementById('tools-area');
+        
+        puzzleContainer.innerHTML = '';
+        toolsContainer.innerHTML = '';
+
+        // Build Zones
+        data.puzzleSteps.forEach((step, index) => {
+            if(index > 0) {
+                const arrow = document.createElement('div');
+                arrow.className = 'arrow-down';
+                arrow.innerHTML = '⬇️';
+                puzzleContainer.appendChild(arrow);
+            }
+            const zone = document.createElement('div');
+            zone.className = 'drop-zone';
+            zone.setAttribute('data-label', step.label);
+            zone.setAttribute('data-target', step.correct);
+            
+            zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('hovered'); };
+            zone.ondragleave = () => zone.classList.remove('hovered');
+            zone.ondrop = handleDrop;
+            puzzleContainer.appendChild(zone);
+        });
+
+        // Build Draggables (Shuffled)
+        const shuffled = [...data.items].sort(() => Math.random() - 0.5);
+        shuffled.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'draggable-item';
+            div.draggable = true;
+            div.innerHTML = item.text;
+            div.setAttribute('data-type', item.type);
+            
+            div.ondragstart = (e) => {
+                e.dataTransfer.setData('type', item.type);
+                e.dataTransfer.setData('html', item.text);
+                div.classList.add('dragging'); 
+            };
+            div.ondragend = () => div.classList.remove('dragging');
+            toolsContainer.appendChild(div);
+        });
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        this.classList.remove('hovered');
+        const type = e.dataTransfer.getData('type');
+        const html = e.dataTransfer.getData('html');
+        const target = this.getAttribute('data-target');
+
+        if(type === target) {
+            this.innerHTML = html;
+            this.classList.add('correct');
+            // Remove from toolbox logic would go here
+            const dragger = document.querySelector('.draggable-item.dragging');
+            if(dragger) dragger.remove();
+        } else {
+            this.style.backgroundColor = '#fce8e6';
+            setTimeout(() => this.style.backgroundColor = '', 500);
+        }
+    }
+
+    // Helper: Copy Text
+    function copyText(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Befehl kopiert! Gehe jetzt in den Tab mit der KI und füge ihn ein.");
+        });
+    }
+
+    // Helper: Glossary
+    function attachGlossaryEvents() {
+        const terms = document.querySelectorAll('.term');
+        const popup = document.getElementById('term-popup');
+        terms.forEach(term => {
+            term.addEventListener('mouseenter', (e) => {
+                popup.innerHTML = "💡 " + term.getAttribute('data-def');
+                popup.style.display = 'block';
+                popup.style.left = (e.clientX + 10) + 'px';
+                popup.style.top = (e.clientY + 10) + 'px';
+            });
+            term.addEventListener('mouseleave', () => popup.style.display = 'none');
+        });
+    }
+
+    // Init
+    switchMode('google');
+
+</script>
+</body>
+</html>

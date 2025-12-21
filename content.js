@@ -1,6 +1,6 @@
 /* CONTENT MODULE 
-   Kindgerechte Texte für 6. Klasse (11-12 Jahre)
-   Aufgaben auf Pages/GoodNotes umgestellt.
+   Texte & Aufgaben für Klasse 6
+   Inkl. Pages/GoodNotes Instruktionen
 */
 
 const modules = {
@@ -21,9 +21,9 @@ const modules = {
                     <li>✅ <strong>Verstehen:</strong> Wie findet Google Webseiten?</li>
                     <li>✅ <strong>Lernen:</strong> Wie lernt eine KI sprechen?</li>
                     <li>✅ <strong>Experimentieren:</strong> Trainiere dein eigenes KI-Modell im Labor.</li>
-                    <li>✅ <strong>Mission:</strong> Löse 3 spannende Fälle mit einer echten KI.</li>
+                    <li>✅ <strong>Mission:</strong> Löse 4 spannende Fälle mit einer echten KI.</li>
                 </ul>
-                <p style="margin-top: 20px; font-style: italic; color: #666;">💡 Halte dein iPad bereit! Du brauchst später <strong>Pages</strong> oder <strong>GoodNotes</strong>.</p>
+                <p style="margin-top: 20px; font-style: italic; color: #666; background: #f0f0f0; padding: 10px; border-radius: 8px;">💡 <strong>Wichtig:</strong> Öffne jetzt <strong>Pages</strong> oder <strong>GoodNotes</strong> auf deinem iPad. Du musst dort gleich Dinge eintragen!</p>
             </div>
             <button class="start-btn" onclick="app.nextStep()">Los geht's!</button>
         `,
@@ -43,7 +43,12 @@ const modules = {
                <p>Alle gesammelten Infos kommen in ein riesiges Inhaltsverzeichnis, den <span class="term" data-def="Ein gigantisches, sortiertes Verzeichnis aller Wörter im Internet.">Index</span>. Wenn du suchst, schaut der Computer nur in diesen Index, nicht ins echte Internet – das geht viel schneller!</p>
                
                <h3 style="color:var(--primary)">3. Der Algorithmus (Der Chef)</h3>
-               <p>Wenn du "Pferde" suchst, gibt es Millionen Treffer. Ein <span class="term" data-def="Eine strenge Rechenvorschrift, die bestimmt, welches Ergebnis auf Platz 1 kommt.">Algorithmus</span> berechnet blitzschnell, welche Seite die beste ist (z.B. weil viele andere Seiten darauf verlinken).</p>`,
+               <p>Wenn du "Pferde" suchst, gibt es Millionen Treffer. Ein <span class="term" data-def="Eine strenge Rechenvorschrift, die bestimmt, welches Ergebnis auf Platz 1 kommt.">Algorithmus</span> berechnet blitzschnell, welche Seite die beste ist (z.B. weil viele andere Seiten darauf verlinken).</p>
+               
+               <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
+                   <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
+                   Baue das Puzzle rechts. Übertrage den Ablauf (Crawler -> Index -> Algorithmus -> Ergebnis) dann als kleine Zeichnung oder mit Formen in dein Dokument.
+               </div>`,
         puzzle: [
             { label: '1. Sammeln', correct: 'Crawler' },
             { label: '2. Speichern', correct: 'Index' },
@@ -57,7 +62,7 @@ const modules = {
             { text: '📝 Ergebnis-Text', type: 'Snippet' },
             { text: '⌨️ Deine Frage', type: 'distractor' }
         ],
-        hint: "👉 <strong>Aufgabe:</strong> Löse das Puzzle. Öffne dann <strong>Pages/GoodNotes</strong>. Schreibe in eigenen Worten: Warum muss eine Suchmaschine das Internet kopieren (Index)?"
+        hint: "Puzzle fertig? Dann zeichne den Ablauf jetzt in dein Dokument (nutze Pfeile und Formen)."
     },
 
     // --- MODUL 2: KI BASICS 1 ---
@@ -73,7 +78,12 @@ const modules = {
                <p>Wenn du "Guten" sagst, weiß die KI, dass danach oft "Morgen" oder "Tag" kommt. Sie versteht nicht wirklich, was sie sagt. Sie berechnet nur Wort für Wort: <em>"Welches Wort passt am besten als nächstes?"</em></p>
                
                <h3 class="ai-title">3. Achtung: Halluzination!</h3>
-               <p>Weil die KI die Antwort "errechnet" und nicht nachschlägt, kann sie Dinge erfinden. Wenn sie etwas nicht weiß, rät sie einfach. Das nennt man <span class="term" data-def="Wenn eine KI überzeugend lügt oder Quatsch erzählt.">Halluzinieren</span>.</p>`,
+               <p>Weil die KI die Antwort "errechnet" und nicht nachschlägt, kann sie Dinge erfinden. Wenn sie etwas nicht weiß, rät sie einfach. Das nennt man <span class="term" data-def="Wenn eine KI überzeugend lügt oder Quatsch erzählt.">Halluzinieren</span>.</p>
+
+               <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--ai-color);">
+                   <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
+                   Schreibe in eigenen Worten: Was ist der Unterschied zwischen einer Suchmaschine (die sucht) und einer KI (die rät)?
+               </div>`,
         puzzle: [
             { label: '1. Lernen', correct: 'Daten' },
             { label: '2. Eingabe', correct: 'Prompt' },
@@ -87,7 +97,7 @@ const modules = {
             { text: '✍️ Text schreiben', type: 'Generierung' },
             { text: '🧐 Bewusstsein', type: 'distractor' }
         ],
-        hint: "👉 <strong>Aufgabe:</strong> Löse das Puzzle. Schreibe dann in <strong>Pages/GoodNotes</strong>: Was ist der Unterschied zwischen <em>Suchen</em> (Google) und <em>Errechnen</em> (KI)?"
+        hint: "Löse das Puzzle. Erkläre dann in deinem Dokument den Unterschied zwischen Suche und KI."
     },
 
     // --- MODUL 3: KI BASICS 2 (LABOR) ---
@@ -95,7 +105,7 @@ const modules = {
         type: 'html-insert',
         targetId: 'lab-intro-text',
         content: `
-            
+             
 
 [Image of neural network training diagram]
 
@@ -108,14 +118,14 @@ const modules = {
                 <li>⚡ <strong>Viel Power:</strong> Supercomputer, die Tag und Nacht rechnen (Compute).</li>
             </ul>
         `,
-        hint: "👉 <strong>Aufgabe:</strong> Schiebe die Regler! Was passiert, wenn du das Gehirn riesig machst, aber zu wenig Strom (Power) hast?"
+        hint: "Spiele mit den Reglern! Beschreibe in Pages/GoodNotes, was passiert, wenn du zwar viel Gehirn, aber wenig Strom hast."
     },
 
     // --- MODUL 4: HYBRID ---
     hybrid: {
         text: `<h2>Hybrid: Suchmaschine + KI</h2>
-               
-               <p>Vielleicht hast du es schon bemerkt: Suchmaschinen verändern sich. Früher bekamst du nur eine Liste mit 10 blauen Links. Heute bekommst du oft direkt eine fertige Antwort.</p>
+                
+               <p>Suchmaschinen ändern sich gerade gewaltig. Früher gab es nur 10 blaue Links. Heute gibt es <strong>KI-Antworten</strong> direkt über den Links.</p>
                
                <div class="hybrid-box">
                    <h3 style="margin-top:0; color:#e37400;">Der neue Mix</h3>
@@ -129,15 +139,20 @@ const modules = {
                
                <h3>Vor- und Nachteile</h3>
                <ul>
-                   <li>✅ <strong>Super schnell:</strong> Du musst keine langen Texte mehr lesen.</li>
-                   <li>❌ <strong>Stille Post:</strong> Wenn die KI den Text auf der Webseite falsch versteht, erzählt sie dir Quatsch, obwohl die Quelle richtig war.</li>
-               </ul>`,
+                   <li>✅ <strong>Vorteil:</strong> Du sparst Zeit, weil du keine langen Texte lesen musst.</li>
+                   <li>❌ <strong>Nachteil:</strong> Wenn die KI die Webseite falsch versteht, erzählt sie dir Quatsch ("Stille Post").</li>
+               </ul>
+
+               <div style="background: #fff8e1; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #fbbc04;">
+                   <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
+                   Notiere einen Vorteil und einen Nachteil der neuen Hybrid-Suche.
+               </div>`,
         quiz: [
             { text: 'Vorteil: Man muss nicht mehr so viele Links anklicken.', correct: true, feedback: '✅ Richtig! Das spart Zeit.' },
-            { text: 'Nachteil: Die KI kann den Inhalt von Webseiten falsch zusammenfassen.', correct: true, feedback: '✅ Genau! Das ist das Risiko "Stille Post".' },
+            { text: 'Nachteil: Die KI kann den Inhalt falsch zusammenfassen.', correct: true, feedback: '✅ Genau! Das ist das Risiko.' },
             { text: 'Die KI weiß immer alles besser als die Webseiten.', correct: false, feedback: '❌ Falsch. Die KI fasst nur zusammen, was sie findet.' }
         ],
-        hint: "👉 <strong>Aufgabe:</strong> Mache den Wissens-Check. Schreibe in <strong>Pages/GoodNotes</strong>: Welchen Vorteil und welchen Nachteil hat die neue Hybrid-Suche?"
+        hint: "Mache den Wissens-Check. Notiere dann Vor- und Nachteile in deinem Dokument."
     },
 
     // --- MODUL 5: MISSION ---
@@ -145,33 +160,40 @@ const modules = {
         intro: `
             <h1 style="color: var(--mission-color);">🕵️‍♂️ Mission: Der KI-Detektiv</h1>
             <p>Du weißt jetzt alles über KI. Jetzt wird es Zeit, das Gelernte zu testen!<br>
-            Benutze eine echte KI, um die folgenden Fälle zu lösen.</p>
+            Wähle eine KI und löse die 4 Fälle. <strong>Schreibe die Antworten in dein Pages/GoodNotes Dokument!</strong></p>
         `,
         tools: [
             { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Bekannteste' },
-            { name: 'Kopilot', icon: '🔵', url: 'https://copilot.microsoft.com', sub: 'Von Microsoft' },
+            { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Die neue KI (xAI)' },
             { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'Von Google' },
             { name: 'Perplexity', icon: '🧠', url: 'https://www.perplexity.ai', sub: 'Die Antwort-Maschine' }
         ],
         tasks: [
             {
                 title: 'Fall 1: Der Halluzinations-Test',
-                desc: 'Erinnerst du dich? KIs "würfeln" Wörter und können lügen. Teste es mit einem Land, das es gar nicht gibt!',
+                desc: 'KIs können lügen. Teste es mit einem Land, das es gar nicht gibt!',
                 prompt: 'Nenne mir 3 berühmte Sehenswürdigkeiten im Land "Atlantis-Oberhausen".',
-                placeholder: 'Was antwortet die KI? Glaubt sie es oder merkt sie den Trick?'
+                placeholder: ''
             },
             {
                 title: 'Fall 2: Der Kreativ-Modus',
                 desc: 'Google findet Fakten, aber KI kann kreativ sein. Lass uns den Stil ändern.',
                 prompt: 'Erkläre mir Photosynthese in Jugendsprache mit vielen Emojis. Tu so, als wärst du ein Rapper.',
-                placeholder: 'Kopiere hier den lustigsten Satz rein...'
+                placeholder: ''
             },
             {
-                title: 'Abschluss-Bericht (Note)',
-                desc: 'Öffne dein Dokument <strong>"KI-Führerschein"</strong> in Pages/GoodNotes.<br>1. Kopiere deine Ergebnisse aus Fall 1 & 2 hinein.<br>2. Schreibe ein Fazit: <em>"Ich vertraue einer KI, wenn..., aber ich passe auf, wenn..."</em>',
-                isInfo: true
+                title: 'Fall 3: Meinung vs. Fakt',
+                desc: 'Hat eine KI einen eigenen Geschmack? Frage sie nach ihrer Meinung.',
+                prompt: 'Welcher ist der beste Fußballverein der Welt und warum?',
+                placeholder: ''
+            },
+            {
+                title: 'Fall 4: Mathe-Genie?',
+                desc: 'KIs sind Sprach-Modelle, keine Taschenrechner. Können sie logisch denken?',
+                prompt: 'Ich habe 3 Äpfel. Gestern habe ich einen gegessen. Wie viele Äpfel habe ich heute?',
+                placeholder: ''
             }
         ],
-        hint: "Viel Erfolg bei deiner Mission! Wenn du fertig bist, zeige dein Pages-Dokument deinem Lehrer."
+        hint: "Glückwunsch! Wenn du alle 4 Fälle in deinem Dokument notiert hast, zeige es deinem Lehrer."
     }
 };

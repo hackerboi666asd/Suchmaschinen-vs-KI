@@ -79,15 +79,15 @@ const app = {
 
             // Puzzles initialisieren (falls vorhanden)
             if (data.puzzle) {
-                this.initPuzzle(mode, data);
+                // Kurze Verzögerung damit DOM bereit ist
+                setTimeout(() => this.initPuzzle(mode, data), 50);
             }
 
             // Visualisierung Hybrid
             if(mode === 'hybrid') {
                 document.getElementById('hybrid-visual-content').innerHTML = `
-                    <div style="font-size:3rem;">🤝</div>
-                    <h3 style="margin:10px 0;">Der perfekte Partner?</h3>
-                    <p style="font-size:0.9rem; color:#666;">Google liefert die Fakten (Links).<br>Die KI erklärt sie dir einfach.</p>
+                    <div style="font-size: 2rem; color: #ccc;">(Hier Screenshot einfügen)</div>
+                    <p style="color:#aaa; font-size:0.8rem;">Platzhalter für deinen<br>SGE/AI Overview Screenshot</p>
                 `;
             }
 
@@ -106,7 +106,7 @@ const app = {
         }
     },
 
-    /* --- PUZZLE LOGIC (DRAG & DROP FIX) --- */
+    /* --- PUZZLE LOGIC (ROBUST FIX) --- */
     initPuzzle: function(mode, data) {
         const pZone = document.getElementById(`puzzle-${mode}`);
         const tBox = document.getElementById(`toolbox-${mode}`);
@@ -124,19 +124,13 @@ const app = {
             el.dataset.label = step.label;
             el.dataset.target = step.correct;
             
-            // WICHTIG: preventDefault bei dragover ist zwingend für Drop!
-            el.addEventListener('dragover', (e) => {
-                e.preventDefault(); 
+            // WICHTIG: Event Delegation verhindern, direkt am Element hören
+            el.ondragover = (e) => { 
+                e.preventDefault(); // ERLAUBT DROP
                 el.classList.add('hovered');
-            });
-            
-            el.addEventListener('dragleave', () => {
-                el.classList.remove('hovered');
-            });
-
-            el.addEventListener('drop', (e) => {
-                this.handleDrop(e, el);
-            });
+            };
+            el.ondragleave = () => el.classList.remove('hovered');
+            el.ondrop = (e) => this.handleDrop(e, el);
 
             pZone.appendChild(el);
         });
@@ -149,47 +143,35 @@ const app = {
             el.innerText = item.text;
             el.dataset.type = item.type;
             
-            el.addEventListener('dragstart', (e) => {
+            el.ondragstart = (e) => {
                 e.dataTransfer.setData('type', item.type);
                 e.dataTransfer.setData('text', item.text);
                 e.dataTransfer.effectAllowed = "move";
                 el.classList.add('dragging');
-            });
-            
-            el.addEventListener('dragend', () => {
-                el.classList.remove('dragging');
-            });
+            };
+            el.ondragend = () => el.classList.remove('dragging');
             
             tBox.appendChild(el);
         });
     },
 
     handleDrop: function(e, zone) {
-        e.preventDefault(); // Zwingend notwendig
+        e.preventDefault();
+        e.stopPropagation(); // Bubbling verhindern
         zone.classList.remove('hovered');
         
-        // Prüfen ob Zone schon voll ist (optional, aber gut für UX)
-        if(zone.classList.contains('correct')) return;
-
         const type = e.dataTransfer.getData('type');
         const text = e.dataTransfer.getData('text');
         
         if (type === zone.dataset.target) {
-            // Richtig!
-            zone.innerText = text; 
+            zone.innerHTML = text; 
             zone.classList.add('correct');
-            
-            // Original entfernen
-            const dragged = document.querySelector('.draggable-item.dragging');
-            if(dragged) dragged.remove();
+            // Altes Element löschen
+            const old = document.querySelector('.draggable-item.dragging');
+            if(old) old.remove();
         } else {
-            // Falsch - Visuelles Feedback
             zone.style.backgroundColor = '#fce8e6';
-            zone.style.borderColor = 'red';
-            setTimeout(() => {
-                zone.style.backgroundColor = 'rgba(255,255,255,0.8)';
-                zone.style.borderColor = '#9aa0a6';
-            }, 500);
+            setTimeout(() => zone.style.backgroundColor = 'rgba(255,255,255,0.8)', 500);
         }
     },
 
@@ -199,24 +181,20 @@ const app = {
         const d = parseInt(document.getElementById('sim-data').value);
         const c = parseInt(document.getElementById('sim-compute').value);
         
-        // Logik: Potenzial = (Gehirn + Daten)/2. Realität = begrenzt durch Energie.
         const potential = (p + d) / 2;
-        let realized = c >= potential ? potential : c + (potential - c) * 0.1; // Strafe bei Flaschenhals
+        let realized = c >= potential ? potential : c + (potential - c) * 0.1;
         
         document.getElementById('iq-val').innerText = Math.round(realized);
         document.getElementById('bar-iq').style.width = realized + '%';
         
-        // Energie wächst exponentiell
         let energy = (p * d) / 80;
         document.getElementById('bar-nrg').style.width = Math.min(energy, 100) + '%';
         
-        // Badges freischalten
         document.getElementById('b1').style.display = realized > 10 ? 'inline-block' : 'none';
         document.getElementById('b2').style.display = realized > 40 ? 'inline-block' : 'none';
         document.getElementById('b3').style.display = realized > 70 ? 'inline-block' : 'none';
         document.getElementById('b4').style.display = realized > 90 ? 'inline-block' : 'none';
 
-        // Warnung
         document.getElementById('sim-warn').style.display = (c < potential - 15) ? 'block' : 'none';
     },
 
@@ -231,9 +209,7 @@ const app = {
             el.className = 'quiz-option';
             el.innerText = q.text;
             el.onclick = function() {
-                // Feedback Farbe
                 this.style.background = q.correct ? '#e6f4ea' : '#fce8e6';
-                this.style.borderColor = q.correct ? '#34a853' : '#ea4335';
                 this.innerText = q.feedback;
             };
             container.appendChild(el);
@@ -268,8 +244,9 @@ const app = {
                     <button class="step-btn" onclick="app.copyToClip('p-${i}')">Kopieren</button>
                 </div>`;
             }
-            if(t.placeholder) {
-                html += `<textarea class="mission-input" placeholder="${t.placeholder}"></textarea>`;
+            // KEIN Textarea mehr, sondern Hinweis
+            if(!t.isInfo) {
+                html += `<div style="color:#666; font-style:italic; margin-top:10px;">✍️ Notiere die Antwort in deinem Pages/GoodNotes Dokument.</div>`;
             }
             html += `</div>`;
             taskCont.innerHTML += html;
@@ -278,7 +255,7 @@ const app = {
 
     copyToClip: function(id) {
         navigator.clipboard.writeText(document.getElementById(id).innerText);
-        alert('Text kopiert! Füge ihn jetzt bei der KI ein.');
+        alert('Kopiert!');
     },
 
     attachGlossary: function() {

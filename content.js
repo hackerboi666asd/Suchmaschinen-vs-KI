@@ -1,6 +1,6 @@
 /* CONTENT MODULE 
    Texte & Aufgaben für Klasse 6
-   Inkl. Pages/GoodNotes Instruktionen
+   Update: Google Wiederholung & KI Erweiterung
 */
 
 const modules = {
@@ -18,7 +18,7 @@ const modules = {
             <div style="text-align: left; background: #fff; padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #e0e0e0; box-shadow: 0 5px 15px rgba(0,0,0,0.03);">
                 <h3 style="margin-top:0;">Dein Detektiv-Auftrag heute:</h3>
                 <ul style="line-height: 2; font-size: 1.1rem;">
-                    <li>✅ <strong>Verstehen:</strong> Wie findet Google Webseiten?</li>
+                    <li>✅ <strong>Wiederholung:</strong> Wie findet Google Webseiten?</li>
                     <li>✅ <strong>Lernen:</strong> Wie lernt eine KI sprechen?</li>
                     <li>✅ <strong>Experimentieren:</strong> Trainiere dein eigenes KI-Modell im Labor.</li>
                     <li>✅ <strong>Mission:</strong> Löse 4 spannende Fälle mit einer echten KI.</li>
@@ -30,24 +30,27 @@ const modules = {
         hint: "Lies dir deinen Auftrag durch und klicke dann auf 'Los geht's!'."
     },
 
-    // --- MODUL 1: KLASSISCHE SUCHE ---
+    // --- MODUL 1: KLASSISCHE SUCHE (Wiederholung) ---
     google: {
-        text: `<h2>Wie funktioniert eine Suchmaschine?</h2>
+        text: `<h2>Wiederholung: Die Suchmaschine</h2>
                
-               <p>Stell dir das Internet wie eine gigantische Bibliothek vor. Aber die Bücher (Webseiten) liegen alle durcheinander auf dem Boden. Wie findet man da was?</p>
+               <p>Erinnerst du dich an unsere letzte Einheit? Das Internet ist wie eine Bibliothek, in der alle Bücher auf dem Boden liegen. Damit wir etwas finden, muss die Suchmaschine vorher aufräumen.</p>
                
-               <h3 style="color:var(--primary)">1. Der Crawler (Der Sammler)</h3>
-               <p>Eine Suchmaschine schickt kleine Programme los, die <span class="term" data-def="Ein 'Software-Roboter', der Links verfolgt und Webseiten kopiert.">Crawler</span> heißen. Sie rennen Tag und Nacht durchs Internet, lesen jede Webseite und speichern eine Kopie.</p>
+               <h3 style="color:var(--primary)">1. Sammeln (Crawler)</h3>
+               <p>Kleine Programme, die <span class="term" data-def="Ein 'Software-Roboter', der Links verfolgt und Webseiten kopiert.">Crawler</span>, reisen Tag und Nacht durchs Netz und kopieren jede Seite, die sie finden.</p>
                
-               <h3 style="color:var(--primary)">2. Der Index (Der Katalog)</h3>
-               <p>Alle gesammelten Infos kommen in ein riesiges Inhaltsverzeichnis, den <span class="term" data-def="Ein gigantisches, sortiertes Verzeichnis aller Wörter im Internet.">Index</span>. Wenn du suchst, schaut der Computer nur in diesen Index, nicht ins echte Internet – das geht viel schneller!</p>
+               <h3 style="color:var(--primary)">2. Ordnen (Index)</h3>
+               <p>Die Kopien kommen in ein riesiges Verzeichnis, den <span class="term" data-def="Ein gigantisches, sortiertes Verzeichnis aller Wörter im Internet.">Index</span>. Wenn du googelst, suchst du eigentlich in diesem Index, nicht im Live-Internet.</p>
                
-               <h3 style="color:var(--primary)">3. Der Algorithmus (Der Chef)</h3>
-               <p>Wenn du "Pferde" suchst, gibt es Millionen Treffer. Ein <span class="term" data-def="Eine strenge Rechenvorschrift, die bestimmt, welches Ergebnis auf Platz 1 kommt.">Algorithmus</span> berechnet blitzschnell, welche Seite die beste ist (z.B. weil viele andere Seiten darauf verlinken).</p>
+               <h3 style="color:var(--primary)">3. Sortieren (Algorithmus)</h3>
+               <p>Auf deine Frage gibt es oft Millionen Antworten. Ein strenger <span class="term" data-def="Eine strenge Rechenvorschrift, die bestimmt, welches Ergebnis auf Platz 1 kommt.">Algorithmus</span> berechnet, welche Seite die beste und wichtigste ist (Ranking).</p>
                
+               <h3 style="color:var(--primary)">4. Anzeigen (Snippet)</h3>
+               <p>In der Ergebnisliste siehst du dann eine kleine Vorschau, das <span class="term" data-def="Die kleine Textvorschau in der Google-Liste.">Snippet</span>. So entscheidest du, ob du klickst.</p>
+
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Baue das Puzzle rechts. Übertrage den Ablauf dann als kleine Zeichnung oder mit Formen in dein Dokument.
+                   Baue das Puzzle rechts. Übertrage den Ablauf (Crawler -> Index -> Algorithmus -> Snippet) dann als kleine Zeichnung oder mit Formen in dein Dokument.
                </div>`,
         puzzle: [
             { label: '1. Sammeln', correct: 'Crawler' },
@@ -59,42 +62,49 @@ const modules = {
             { text: '🕷️ Crawler', type: 'Crawler' },
             { text: '📚 Der Index', type: 'Index' },
             { text: '🧮 Algorithmus', type: 'Algorithmus' },
-            { text: '📝 Ergebnis-Text', type: 'Snippet' },
-            { text: '⌨️ Deine Frage', type: 'distractor' }
+            { text: '📝 Snippet', type: 'Snippet' },
+            { text: '⌨️ Suchanfrage', type: 'distractor' }
         ],
         hint: "Puzzle fertig? Dann zeichne den Ablauf jetzt in dein Dokument (nutze Pfeile und Formen)."
     },
 
-    // --- MODUL 2: KI BASICS 1 ---
+    // --- MODUL 2: KI BASICS 1 (Erweitert) ---
     ai: {
         text: `<h2>Wie funktioniert eine KI? (Teil 1)</h2>
                
-               <p>Eine KI (wie ChatGPT) funktioniert ganz anders als eine Suchmaschine. Sie sucht nicht nach Webseiten. Sie ist eher wie ein extrem gut trainierter <strong>Papagei</strong>.</p>
                
-               <h3 class="ai-title">1. Das Training (Lesen, lesen, lesen)</h3>
-               <p>Bevor die KI mit dir sprechen kann, muss sie "in die Schule". Man füttert sie mit fast allem, was im Internet steht. Sie lernt dabei keine Fakten auswendig, sondern <span class="term" data-def="Regeln, welche Wörter oft zusammen vorkommen.">Muster</span>.</p>
+
+[Image of neural network layers diagram]
+
+               <p>Eine KI (wie ChatGPT) funktioniert ganz anders als eine Suchmaschine. Sie sucht nicht nach fertigen Webseiten. Sie "denkt" sich die Antwort Wort für Wort neu aus.</p>
                
-               <h3 class="ai-title">2. Die Vorhersage (Raten)</h3>
-               <p>Wenn du "Guten" sagst, weiß die KI, dass danach oft "Morgen" oder "Tag" kommt. Sie versteht nicht wirklich, was sie sagt. Sie berechnet nur Wort für Wort: <em>"Welches Wort passt am besten als nächstes?"</em></p>
+               <h3 class="ai-title">1. Training mit Daten</h3>
+               <p>Bevor die KI schlau ist, muss sie trainiert werden. Man füttert sie mit riesigen <strong>Datenmengen</strong> (Bücher, Wikipedia, Internet-Texte). Sie liest quasi das ganze Internet.</p>
                
-               <h3 class="ai-title">3. Achtung: Halluzination!</h3>
-               <p>Weil die KI die Antwort "errechnet" und nicht nachschlägt, kann sie Dinge erfinden. Wenn sie etwas nicht weiß, rät sie einfach. Das nennt man <span class="term" data-def="Wenn eine KI überzeugend lügt oder Quatsch erzählt.">Halluzinieren</span>.</p>
+               <h3 class="ai-title">2. Muster lernen</h3>
+               <p>Die KI lernt keine Fakten auswendig wie ein Schüler vor dem Test. Sie lernt <strong>Muster</strong>. Sie lernt, welche Wörter oft zusammengehören (z.B. nach "Guten" kommt oft "Morgen").</p>
+               
+               <h3 class="ai-title">3. Wahrscheinlichkeit berechnen</h3>
+               <p>Wenn du eine Frage stellst, berechnet die KI die <strong>Wahrscheinlichkeit</strong> für das nächste Wort. Sie rät: <em>"Welches Wort passt zu 99% hier hin?"</em>. Sie versteht den Inhalt aber nicht wirklich.</p>
+               
+               <h3 class="ai-title">4. Halluzination</h3>
+               <p>Weil sie nur rät, kann sie auch Dinge erfinden, die total echt klingen. Das nennt man <strong>Halluzinieren</strong>. Eine Suchmaschine findet, was da ist. Eine KI erfindet, was passen könnte.</p>
 
                <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--ai-color);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Schreibe in eigenen Worten: Was ist der Unterschied zwischen einer Suchmaschine (die sucht) und einer KI (die rät)?
+                   Schreibe in eigenen Worten: Was ist der Unterschied zwischen <em>Suchen</em> (Google) und <em>Errechnen</em> (KI)?
                </div>`,
         puzzle: [
-            { label: '1. Lernen', correct: 'Daten' },
-            { label: '2. Eingabe', correct: 'Prompt' },
-            { label: '3. Rechnen', correct: 'Muster' },
-            { label: '4. Antwort', correct: 'Generierung' }
+            { label: '1. Füttern', correct: 'Daten' },
+            { label: '2. Verstehen', correct: 'Muster' },
+            { label: '3. Raten', correct: 'Wahrscheinlichkeit' },
+            { label: '4. Fehler', correct: 'Halluzination' }
         ],
         items: [
             { text: '🌍 Datenmengen', type: 'Daten' },
-            { text: '💬 Dein Befehl', type: 'Prompt' },
-            { text: '🧠 Mustererkennung', type: 'Muster' },
-            { text: '✍️ Text schreiben', type: 'Generierung' },
+            { text: '🧠 Muster', type: 'Muster' },
+            { text: '🎲 Wahrscheinlichkeit', type: 'Wahrscheinlichkeit' },
+            { text: '👻 Halluzination', type: 'Halluzination' },
             { text: '🧐 Bewusstsein', type: 'distractor' }
         ],
         hint: "Löse das Puzzle. Erkläre dann in deinem Dokument den Unterschied zwischen Suche und KI."
@@ -123,7 +133,7 @@ const modules = {
     hybrid: {
         text: `<h2>Hybrid: Suchmaschine + KI</h2>
                 
-               <p>Suchmaschinen ändern sich gerade gewaltig. Früher gab es nur 10 blaue Links. Heute gibt es <strong>KI-Antworten</strong> direkt über den Links.</p>
+               <p>Suchmaschinen ändern sich gerade gewaltig. Früher gab es nur 10 blaue Links. Heute gibt es oft <strong>KI-Antworten</strong> direkt ganz oben (Google nennt das "AI Overviews").</p>
                
                <div class="hybrid-box">
                    <h3 style="margin-top:0; color:#e37400;">Der neue Mix</h3>
@@ -135,7 +145,7 @@ const modules = {
                    </ol>
                </div>
                
-<h3>Das Gute & Das Schlechte</h3>
+               <h3>Das Gute & Das Schlechte</h3>
                <ul style="line-height: 1.6;">
                    <li>✅ <strong>Zeit-Sparer:</strong> Du musst nicht 5 verschiedene Webseiten öffnen. Die KI fasst alles in einem Text zusammen.</li>
                    <li>✅ <strong>Verständlichkeit:</strong> Die KI kann komplizierte Experten-Texte in einfache Sprache übersetzen.</li>
@@ -147,12 +157,13 @@ const modules = {
 
                <div style="background: #fff8e1; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #fbbc04;">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Teste die Hybrid-Suche aus und schreibe auf, welche Vor- oder Nachteile du hier siehst.
+                   Wähle je einen Vorteil (✅) und einen Nachteil (❌) aus, die du am wichtigsten findest. Notiere sie in deinem Dokument.
                </div>`,
         quiz: [
-            { text: 'Vorteil: Man muss nicht mehr so viele Links anklicken.', correct: true, feedback: '✅ Richtig! Das spart Zeit.' },
-            { text: 'Nachteil: Die KI kann den Inhalt falsch zusammenfassen.', correct: true, feedback: '✅ Genau! Das ist das Risiko.' },
-            { text: 'Die KI weiß immer alles besser als die Webseiten.', correct: false, feedback: '❌ Falsch. Die KI fasst nur zusammen, was sie findet.' }
+            { text: 'Vorteil: Man spart Zeit, weil man nicht alles selbst lesen muss.', correct: true, feedback: '✅ Richtig! Das ist der Hauptgrund für KI-Suche.' },
+            { text: 'Nachteil: Man prüft nicht mehr, wer die Info geschrieben hat.', correct: true, feedback: '✅ Genau! Das nennt man "Quellen-Blindheit".' },
+            { text: 'Vorteil: Die KI kann komplizierte Texte einfach erklären.', correct: true, feedback: '✅ Stimmt! Sie ist wie ein Übersetzer.' },
+            { text: 'Die KI verbraucht viel weniger Strom als Google.', correct: false, feedback: '❌ Falsch. KI braucht riesige Rechenzentren (siehe Labor).' }
         ],
         hint: "Mache den Wissens-Check. Notiere dann Vor- und Nachteile in deinem Dokument."
     },
@@ -194,6 +205,11 @@ const modules = {
                 desc: 'KIs sind Sprach-Modelle, keine Taschenrechner. Können sie logisch denken?',
                 prompt: 'Ich habe 3 Äpfel. Gestern habe ich einen gegessen. Wie viele Äpfel habe ich heute?',
                 placeholder: ''
+            },
+            {
+                title: 'Abschluss-Bericht (Note)',
+                desc: 'Öffne dein Dokument <strong>"KI-Führerschein"</strong> in Pages/GoodNotes.<br>1. Kopiere deine Ergebnisse aus Fall 1-4 hinein.<br>2. Schreibe ein Fazit: <em>"Ich vertraue einer KI, wenn..., aber ich passe auf, wenn..."</em>',
+                isInfo: true
             }
         ],
         hint: "Glückwunsch! Wenn du alle 4 Fälle in deinem Dokument notiert hast, zeige es deinem Lehrer."

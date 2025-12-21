@@ -128,21 +128,26 @@ body .col-text h3.ai-title { color: var(--ai-color); }
 .start-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; margin-top: 30px; box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3); transition: transform 0.2s; }
 .start-btn:hover { transform: scale(1.05); }
 
-/* HYBRID PLACEHOLDER */
+/* HYBRID PLACEHOLDER - RESPONSIVE FIX */
 .hybrid-box { background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%); border: 2px solid #fbbc04; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
-/* HIER PLATZ FÜR SCREENSHOT */
+
 .hybrid-visual { 
-    width: 300px; height: 500px; 
+    width: 100%;
+    max-width: 864px; /* Maximale Breite des Originalbildes */
+    aspect-ratio: 864 / 464; /* Seitenverhältnis beibehalten */
     background: #eee; 
     border: 3px dashed #ccc; 
     border-radius: 12px; 
     margin: 20px auto; 
     display: flex; align-items: center; justify-content: center;
     color: #888;
-    background-image: url('https://www.eology.net/wp-content/uploads/2025/10/Bildschirmfoto-2025-10-14-um-13.30.06.png'); /* Falls du ein Bild hast */
-    background-size: cover;
+    /* Bild URL wird hier definiert, wird in app.js aber eh dynamisch gesetzt oder kann hier bleiben */
+    background-image: url('https://www.eology.net/wp-content/uploads/2025/10/Bildschirmfoto-2025-10-14-um-13.30.06.png'); 
+    background-size: contain; /* Passt das Bild komplett ein */
+    background-repeat: no-repeat;
     background-position: center;
 }
+
 .quiz-option { padding:15px; border:1px solid #ccc; margin-bottom:10px; cursor:pointer; border-radius:8px; transition: background 0.2s; font-size: 0.95rem;}
 .quiz-option:hover { background: #f1f1f1; }
 

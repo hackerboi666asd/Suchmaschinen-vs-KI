@@ -1,6 +1,6 @@
 /* APP LOGIC 
    Steuert Navigation, Simulator, Drag & Drop
-   Version: 10.2 (Bugfix Drag & Drop)
+   Version: 10.3 (Hybrid Quiz Extended)
 */
 
 const app = {
@@ -88,10 +88,7 @@ const app = {
             if(mode === 'hybrid') {
                 const visContainer = document.getElementById('hybrid-visual-content');
                 if(visContainer) {
-                    visContainer.innerHTML = `
-                        <div style="font-size: 2rem; color: #ccc;">🖼️</div>
-                        <p style="color:#aaa; font-size:0.8rem; margin-top:10px;">(Hier Screenshot von Google AI Overview einfügen)</p>
-                    `;
+                    visContainer.innerHTML = ``;
                 }
             }
 
@@ -122,7 +119,6 @@ const app = {
 
         // Drop Zones erstellen
         data.puzzle.forEach((step, i) => {
-            // FIX: Pfeil als echtes Element erstellen, NICHT per innerHTML +=
             if (i > 0) {
                 const arrow = document.createElement('div');
                 arrow.className = 'arrow-down';
@@ -258,7 +254,6 @@ const app = {
                 </div>`;
             }
             
-            // HIER IST DIE ÄNDERUNG: Nur noch der Hinweis, kein Input mehr
             if(!t.isInfo) {
                 html += `<div style="background:#fff3cd; color:#856404; padding:10px; border-radius:6px; font-size:0.9rem; margin-top:10px; border:1px solid #ffeeba;">
                             ✍️ <strong>Aufgabe:</strong> Übertrage die Antwort der KI in dein Pages/GoodNotes Dokument.

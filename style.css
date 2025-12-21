@@ -139,7 +139,7 @@ body .col-text h3.ai-title { color: var(--ai-color); }
     margin: 20px auto; 
     display: flex; align-items: center; justify-content: center;
     color: #888;
-    background-image: url('placeholder.png'); /* Falls du ein Bild hast */
+    background-image: url('https://www.eology.net/wp-content/uploads/2025/10/Bildschirmfoto-2025-10-14-um-13.30.06.png'); /* Falls du ein Bild hast */
     background-size: cover;
     background-position: center;
 }

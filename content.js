@@ -137,15 +137,19 @@ const modules = {
                    </ol>
                </div>
                
-               <h3>Vor- und Nachteile</h3>
-               <ul>
-                   <li>✅ <strong>Vorteil:</strong> Du sparst Zeit, weil du keine langen Texte lesen musst.</li>
-                   <li>❌ <strong>Nachteil:</strong> Wenn die KI die Webseite falsch versteht, erzählt sie dir Quatsch ("Stille Post").</li>
+<h3>Das Gute & Das Schlechte</h3>
+               <ul style="line-height: 1.6;">
+                   <li>✅ <strong>Zeit-Sparer:</strong> Du musst nicht 5 verschiedene Webseiten öffnen. Die KI fasst alles in einem Text zusammen.</li>
+                   <li>✅ <strong>Verständlichkeit:</strong> Die KI kann komplizierte Experten-Texte in einfache Sprache übersetzen.</li>
+                   <hr style="border:0; border-top:1px dashed #ccc; margin:10px 0;">
+                   <li>❌ <strong>"Stille Post"-Effekt:</strong> Wenn die KI den Text auf der Webseite falsch versteht, erzählt sie dir Quatsch, obwohl die Quelle eigentlich richtig war.</li>
+                   <li>❌ <strong>Quellen-Blindheit:</strong> Man vergisst leicht, zu prüfen, <em>wer</em> das eigentlich geschrieben hat. War das ein Professor oder irgendein Quatschkopf?</li>
+                   <li>❌ <strong>Strom-Hunger:</strong> Erinnere dich an das Labor! Eine KI-Antwort verbraucht ca. 10-mal mehr Strom als eine normale Suche.</li>
                </ul>
 
                <div style="background: #fff8e1; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #fbbc04;">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Notiere einen Vorteil und einen Nachteil der neuen Hybrid-Suche.
+                   Teste die Hybrid-Suche aus und schreibe auf, welche Vor- oder Nachteile du hier siehst.
                </div>`,
         quiz: [
             { text: 'Vorteil: Man muss nicht mehr so viele Links anklicken.', correct: true, feedback: '✅ Richtig! Das spart Zeit.' },

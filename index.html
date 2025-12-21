@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebQuest: Die Zukunft der Suche</title>
+    <title>WebQuest: Suche & KI</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
     <div class="logo-area">
-        <h1>WebQuest: Suche & KI</h1>
-        <small>Klasse 6 • Medienkompetenz</small>
+        <h1>WebQuest: Internet & KI</h1>
+        <small>Medienkompetenz Klasse 6</small>
     </div>
     
     <div class="stepper" id="stepper-nav">
         <button class="step-btn" data-target="start">Start</button>
-        <button class="step-btn" data-target="google">1. Google</button>
-        <button class="step-btn" data-target="ai">2. KI Basics</button>
-        <button class="step-btn" data-target="lab">3. Labor</button>
-        <button class="step-btn" data-target="hybrid">4. Hybrid</button>
-        <button class="step-btn" data-target="mission">5. Mission</button>
+        <button class="step-btn" data-target="google">1. Klassische Suche</button>
+        <button class="step-btn" data-target="ai">2. KI Funktionsweise (1)</button>
+        <button class="step-btn" data-target="lab">3. KI Funktionsweise (2)</button>
+        <button class="step-btn" data-target="hybrid">4. Hybrid: Suche + KI</button>
+        <button class="step-btn" data-target="mission">5. Die Mission</button>
     </div>
 </header>
 
@@ -50,36 +50,37 @@
 <main id="view-lab" class="single-layout">
     <div class="lab-container" id="content-lab">
         <div class="lab-card">
-            <h2 style="color: var(--lab-bg);">⚙️ Das KI-Trainingslager</h2>
-            <div id="lab-intro-text"></div> </div>
+            <h2 style="color: var(--lab-bg);">⚙️ Das KI-Labor: Wie lernt der Computer?</h2>
+            <div id="lab-intro-text"></div>
+        </div>
 
         <div class="lab-card" style="background: #0f172a; border-color: #334155;">
             <div class="simulator-box">
                 <div style="color: #94a3b8;">
-                    <label class="sim-label">🧠 Modell-Größe (Gehirn)</label>
+                    <label class="sim-label">🧠 Größe des Gehirns (Parameter)</label>
                     <input type="range" id="sim-params" min="1" max="100" value="20">
                     
-                    <label class="sim-label">📚 Daten-Menge (Bücher)</label>
+                    <label class="sim-label">📚 Gelesene Bücher (Datenmenge)</label>
                     <input type="range" id="sim-data" min="1" max="100" value="20">
                     
-                    <label class="sim-label">⚡ Rechenpower (Strom)</label>
+                    <label class="sim-label">⚡ Supercomputer-Power (Energie)</label>
                     <input type="range" id="sim-compute" min="1" max="100" value="20">
                 </div>
                 <div class="sim-output">
-                    <h3 style="color: var(--lab-color); margin:0 0 15px 0;">STATUS</h3>
-                    <p style="margin:5px 0;">IQ: <span id="iq-val">10</span>%</p>
+                    <h3 style="color: var(--lab-color); margin:0 0 15px 0;">KI STATUS</h3>
+                    <p style="margin:5px 0;">Schlauheit (IQ): <span id="iq-val">10</span>%</p>
                     <div class="bar-container"><div id="bar-iq" class="bar-fill" style="width:10%; background:var(--lab-color);"></div></div>
                     
-                    <p style="margin:15px 0 5px 0;">Energie:</p>
+                    <p style="margin:15px 0 5px 0;">Stromverbrauch:</p>
                     <div class="bar-container"><div id="bar-nrg" class="bar-fill" style="width:5%; background:linear-gradient(90deg, yellow, red);"></div></div>
                     
                     <div style="margin-top:20px; border-top:1px solid #333; padding-top:10px;">
-                        <span id="b1" class="badge">💬 Sprechen</span>
-                        <span id="b2" class="badge">➗ Mathe</span>
-                        <span id="b3" class="badge">💻 Coden</span>
-                        <span id="b4" class="badge">🧠 Logik</span>
+                        <span id="b1" class="badge">💬 Einfaches Plappern</span>
+                        <span id="b2" class="badge">➗ Mathe Aufgaben</span>
+                        <span id="b3" class="badge">💻 Apps programmieren</span>
+                        <span id="b4" class="badge">🧠 Logisches Denken</span>
                     </div>
-                    <div id="sim-warn" style="color: #ff5555; font-size: 0.8rem; margin-top: 10px; display: none;">⚠️ Zu wenig Power!</div>
+                    <div id="sim-warn" style="color: #ff5555; font-size: 0.8rem; margin-top: 10px; display: none;">⚠️ Zu wenig Computer-Power! Das Gehirn ist zu groß.</div>
                 </div>
             </div>
         </div>
@@ -88,12 +89,8 @@
 
 <main id="view-hybrid" class="split-layout">
     <div class="col-text" id="text-hybrid"></div>
-    <div class="col-puzzle" style="justify-content:center;">
-        <div class="hybrid-center-card">
-            <div style="font-size:3rem;">🤝</div>
-            <h3>Das Beste aus zwei Welten</h3>
-            <p>Verlässliche Fakten (Suche)<br>+<br>Verständliche Erklärung (KI)</p>
-        </div>
+    <div class="col-puzzle" style="justify-content:center; align-items: flex-start;">
+         <div class="hybrid-visual" id="hybrid-visual-content"></div>
     </div>
     <div class="col-tools" id="tools-hybrid">
         <div class="tool-header">Wissens-Check</div>
@@ -106,7 +103,7 @@
         <div style="text-align:center; margin-bottom:30px;" id="text-mission-intro">
             </div>
 
-        <h3 style="text-align:center;">Wähle dein Werkzeug (öffne in neuem Tab):</h3>
+        <h3 style="text-align:center;">Wähle dein Werkzeug (Klick öffnet neuen Tab):</h3>
         <div class="ai-tools-grid" id="mission-tools">
             </div>
 

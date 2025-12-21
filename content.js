@@ -47,7 +47,7 @@ const modules = {
                
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Baue das Puzzle rechts. Übertrage den Ablauf (Crawler -> Index -> Algorithmus -> Ergebnis) dann als kleine Zeichnung oder mit Formen in dein Dokument.
+                   Baue das Puzzle rechts. Übertrage den Ablauf dann als kleine Zeichnung oder mit Formen in dein Dokument.
                </div>`,
         puzzle: [
             { label: '1. Sammeln', correct: 'Crawler' },
@@ -106,8 +106,6 @@ const modules = {
         targetId: 'lab-intro-text',
         content: `
              
-
-[Image of neural network training diagram]
 
             <p>Du fragst dich vielleicht: "Warum ist die KI erst jetzt so schlau geworden?"<br>
             Das Geheimnis heißt <strong>Scaling</strong> (Skalieren). Das bedeutet: Wir machen alles viel, viel größer!</p>

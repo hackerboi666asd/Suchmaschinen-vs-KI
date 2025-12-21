@@ -219,7 +219,7 @@ mission: {
     `,
     tools: [
         { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Vielseitige' },
-        { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Die Wahrheit },
+        { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Der Wahrheitssucher' },
         { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'Der Google-Profi' },
         { name: 'Perplexity', icon: '🧠', url: 'https://www.perplexity.ai', sub: 'Der Quellen-Profi' }
     ],

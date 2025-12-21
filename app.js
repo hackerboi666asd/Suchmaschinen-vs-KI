@@ -1,5 +1,6 @@
 /* APP LOGIC 
    Steuert Navigation, Simulator, Drag & Drop
+   Version: 10.2 (Bugfix Drag & Drop)
 */
 
 const app = {
@@ -79,16 +80,19 @@ const app = {
 
             // Puzzles initialisieren (falls vorhanden)
             if (data.puzzle) {
-                // Kurze Verzögerung damit DOM bereit ist
+                // Verzögerung hilft beim Rendern
                 setTimeout(() => this.initPuzzle(mode, data), 50);
             }
 
             // Visualisierung Hybrid
             if(mode === 'hybrid') {
-                document.getElementById('hybrid-visual-content').innerHTML = `
-                    <div style="font-size: 2rem; color: #ccc;">(Hier Screenshot einfügen)</div>
-                    <p style="color:#aaa; font-size:0.8rem;">Platzhalter für deinen<br>SGE/AI Overview Screenshot</p>
-                `;
+                const visContainer = document.getElementById('hybrid-visual-content');
+                if(visContainer) {
+                    visContainer.innerHTML = `
+                        <div style="font-size: 2rem; color: #ccc;">🖼️</div>
+                        <p style="color:#aaa; font-size:0.8rem; margin-top:10px;">(Hier Screenshot von Google AI Overview einfügen)</p>
+                    `;
+                }
             }
 
             // Quiz rendern
@@ -106,7 +110,7 @@ const app = {
         }
     },
 
-    /* --- PUZZLE LOGIC (ROBUST FIX) --- */
+    /* --- PUZZLE LOGIC (FIXED) --- */
     initPuzzle: function(mode, data) {
         const pZone = document.getElementById(`puzzle-${mode}`);
         const tBox = document.getElementById(`toolbox-${mode}`);
@@ -118,15 +122,22 @@ const app = {
 
         // Drop Zones erstellen
         data.puzzle.forEach((step, i) => {
-            if (i > 0) pZone.innerHTML += '<div class="arrow-down">⬇️</div>';
+            // FIX: Pfeil als echtes Element erstellen, NICHT per innerHTML +=
+            if (i > 0) {
+                const arrow = document.createElement('div');
+                arrow.className = 'arrow-down';
+                arrow.innerText = '⬇️';
+                pZone.appendChild(arrow);
+            }
+
             const el = document.createElement('div');
             el.className = 'drop-zone';
             el.dataset.label = step.label;
             el.dataset.target = step.correct;
             
-            // WICHTIG: Event Delegation verhindern, direkt am Element hören
+            // Event Listeners
             el.ondragover = (e) => { 
-                e.preventDefault(); // ERLAUBT DROP
+                e.preventDefault(); 
                 el.classList.add('hovered');
             };
             el.ondragleave = () => el.classList.remove('hovered');
@@ -146,7 +157,6 @@ const app = {
             el.ondragstart = (e) => {
                 e.dataTransfer.setData('type', item.type);
                 e.dataTransfer.setData('text', item.text);
-                e.dataTransfer.effectAllowed = "move";
                 el.classList.add('dragging');
             };
             el.ondragend = () => el.classList.remove('dragging');
@@ -157,19 +167,22 @@ const app = {
 
     handleDrop: function(e, zone) {
         e.preventDefault();
-        e.stopPropagation(); // Bubbling verhindern
         zone.classList.remove('hovered');
         
+        // Wenn schon gelöst, nichts tun
+        if(zone.classList.contains('correct')) return;
+
         const type = e.dataTransfer.getData('type');
         const text = e.dataTransfer.getData('text');
         
         if (type === zone.dataset.target) {
-            zone.innerHTML = text; 
+            zone.innerText = text; 
             zone.classList.add('correct');
             // Altes Element löschen
             const old = document.querySelector('.draggable-item.dragging');
             if(old) old.remove();
         } else {
+            // Visuelles Feedback für Falsch
             zone.style.backgroundColor = '#fce8e6';
             setTimeout(() => zone.style.backgroundColor = 'rgba(255,255,255,0.8)', 500);
         }
@@ -244,9 +257,12 @@ const app = {
                     <button class="step-btn" onclick="app.copyToClip('p-${i}')">Kopieren</button>
                 </div>`;
             }
-            // KEIN Textarea mehr, sondern Hinweis
+            
+            // HIER IST DIE ÄNDERUNG: Nur noch der Hinweis, kein Input mehr
             if(!t.isInfo) {
-                html += `<div style="color:#666; font-style:italic; margin-top:10px;">✍️ Notiere die Antwort in deinem Pages/GoodNotes Dokument.</div>`;
+                html += `<div style="background:#fff3cd; color:#856404; padding:10px; border-radius:6px; font-size:0.9rem; margin-top:10px; border:1px solid #ffeeba;">
+                            ✍️ <strong>Aufgabe:</strong> Übertrage die Antwort der KI in dein Pages/GoodNotes Dokument.
+                         </div>`;
             }
             html += `</div>`;
             taskCont.innerHTML += html;
@@ -255,7 +271,7 @@ const app = {
 
     copyToClip: function(id) {
         navigator.clipboard.writeText(document.getElementById(id).innerText);
-        alert('Kopiert!');
+        alert('Text kopiert! Füge ihn jetzt bei der KI ein.');
     },
 
     attachGlossary: function() {

@@ -211,15 +211,15 @@ mission: {
         
         <h3>Deine Kandidaten:</h3>
         <ul style="text-align:left; font-size:1rem; margin-bottom:20px;">
-            <li><strong>ChatGPT:</strong> Der berühmte Alleskönner. Schreibt oft sehr gute Texte.</li>
-            <li><strong>Grok:</strong> Eine sehr neue KI, die oft frech oder lustig antwortet.</li>
+            <li><strong>ChatGPT:</strong> Die erste berühmte KI. Schreibt oft sehr gute Texte.</li>
+            <li><strong>Grok:</strong> Eine KI, die immer die Wahrheit und Neuigkeiten sucht.</li>
             <li><strong>Gemini:</strong> Die KI von Google, die auch aktuelle Infos suchen kann.</li>
             <li><strong>Perplexity:</strong> Der Streber, der immer seine Quellen nennt.</li>
         </ul>
     `,
     tools: [
-        { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Alleskönner' },
-        { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Der Neue (xAI)' },
+        { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Vielseitige' },
+        { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Die Wahrheit },
         { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'Der Google-Profi' },
         { name: 'Perplexity', icon: '🧠', url: 'https://www.perplexity.ai', sub: 'Der Quellen-Profi' }
     ],

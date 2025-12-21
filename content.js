@@ -76,7 +76,7 @@ const modules = {
 
     // --- MODUL 2: KI BASICS 1 (Erweitert) ---
     ai: {
-        text: `<h2>Wie funktioniert eine KI? (Teil 1)</h2>
+        text: `<h2>Wie funktioniert eine KI?</h2>
                
                
 
@@ -99,7 +99,7 @@ const modules = {
                <h3 class="ai-title">5. Risiko: Halluzination</h3>
                <p>Weil sie nur rät, kann sie auch Dinge erfinden, die total echt klingen. Das nennt man <strong>Halluzinieren</strong>. Eine Suchmaschine findet, was da ist. Eine KI erfindet, was passen könnte.</p>
 
-               <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--ai-color);">
+               <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--ai-color);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
                    Schreibe in eigenen Worten: Was ist der Unterschied zwischen <em>Suchen</em> (Google) und <em>Errechnen</em> (KI)?
                </div>`,
@@ -122,24 +122,47 @@ const modules = {
         hint: "Löse das Puzzle. Erkläre dann in deinem Dokument den Unterschied zwischen Suche und KI."
     },
 
-    // --- MODUL 3: KI BASICS 2 (LABOR) ---
-    lab: {
-        type: 'html-insert',
-        targetId: 'lab-intro-text',
-        content: `
-             
+// --- MODUL 3: KI BASICS 2 (LABOR) ---
+lab: {
+    type: 'html-insert',
+    targetId: 'lab-intro-text',
+    content: `
+         
 
-            <p>Du fragst dich vielleicht: "Warum ist die KI erst jetzt so schlau geworden?"<br>
-            Das Geheimnis heißt <strong>Scaling</strong> (Skalieren). Das bedeutet: Wir machen alles viel, viel größer!</p>
-            <p>Damit eine KI wirklich schlau wirkt, braucht sie drei Dinge gleichzeitig:</p>
-            <ul>
-                <li>🧠 <strong>Ein riesiges Gehirn:</strong> Viele Parameter (digitale Nervenzellen).</li>
-                <li>📚 <strong>Viel Wissen:</strong> Unmengen an Trainings-Daten (Bücher, Wikipedia).</li>
-                <li>⚡ <strong>Viel Power:</strong> Supercomputer, die Tag und Nacht rechnen (Compute).</li>
-            </ul>
-        `,
-        hint: "Spiele mit den Reglern! Beschreibe in Pages/GoodNotes, was passiert, wenn du zwar viel Gehirn, aber wenig Strom hast."
-    },
+        <h3>Warum sind KIs plötzlich so schlau? 🤯</h3>
+        <p>Vor ein paar Jahren waren Computer noch ziemlich "dumm". Sie konnten nicht mal einen Witz erzählen. Warum sind sie heute plötzlich so schlau wie Einstein?</p>
+        <p>Das Zauberwort heißt <strong>Scaling</strong>. Das ist Informatiker-Sprache für: <em>"Wir machen alles extrem riesig!"</em></p>
+        
+        <p>Damit eine KI super-schlau wird, musst du im Labor die perfekte Mischung aus 3 Zutaten finden:</p>
+        
+        <div style="background:#f0f4f8; padding:15px; border-radius:10px; margin-bottom:15px;">
+            <strong>🧠 1. Die Gehirn-Größe (Parameter)</strong><br>
+            Stell dir vor, dein Gehirn wäre so klein wie eine Erdnuss. Du könntest dir kaum etwas merken. Eine moderne KI hat ein "Gehirn" mit Milliarden von Verbindungen.
+            <br><em>Problem:</em> Ein riesiges Gehirn bringt nichts, wenn es leer ist!
+        </div>
+
+        <div style="background:#fff3e0; padding:15px; border-radius:10px; margin-bottom:15px;">
+            <strong>📚 2. Das Futter (Daten)</strong><br>
+            Die KI muss lesen, um zu lernen. Wenn du sie nur mit "SpongeBob"-Folgen fütterst, wird sie auf jede Mathe-Frage antworten: <em>"Ist hier die Krosse Krabbe?"</em> 🦀<br>
+            Damit sie schlau wird, muss sie <strong>alles</strong> lesen: Wikipedia, Bücher, Nachrichten, Programmier-Code.
+        </div>
+
+        <div style="background:#e0f2f1; padding:15px; border-radius:10px; margin-bottom:15px;">
+            <strong>⚡ 3. Die Muckis (Compute / Energie)</strong><br>
+            Das ganze Internet zu lesen, ist anstrengend! Das schafft kein normales Handy. Dafür braucht man riesige Hallen voller Super-Computer und extrem viel Strom.<br>
+            Ohne Strom "schläft" auch das größte Gehirn ein.
+        </div>
+
+        <p><strong>👨‍🔬 Dein Experiment:</strong><br>
+        Schiebe die Regler unten! Versuche, den IQ auf 100% zu bringen. Aber pass auf: Was passiert, wenn du der KI zwar viele Bücher gibst, aber ihr Gehirn winzig klein lässt?</p>
+
+        <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
+            <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
+            Spiele mit den Reglern. Beschreibe dann eine Situation, in der die KI <strong>"dumm"</strong> bleibt, obwohl du einen Regler ganz nach oben geschoben hast. Woran lag es?
+        </div>
+    `,
+    hint: "Teste alle Regler! Was passiert, wenn du viel Wissen (Daten) hast, aber ein kleines Gehirn?"
+},
 
     // --- MODUL 4: HYBRID ---
     hybrid: {
@@ -167,7 +190,7 @@ const modules = {
                    <li>❌ <strong>Strom-Hunger:</strong> Erinnere dich an das Labor! Eine KI-Antwort verbraucht ca. 10-mal mehr Strom als eine normale Suche.</li>
                </ul>
 
-               <div style="background: #fff8e1; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #fbbc04;">
+               <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #fbbc04;">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
                    Wähle je einen Vorteil (✅) und einen Nachteil (❌) aus, die du am wichtigsten findest. Notiere sie in deinem Dokument.
                </div>`,

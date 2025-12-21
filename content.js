@@ -1,6 +1,6 @@
 /* CONTENT MODULE 
    Texte & Aufgaben für Klasse 6
-   Update: Google Wiederholung & KI Erweiterung
+   Update: 5-Schritte-Puzzle für Google & KI
 */
 
 const modules = {
@@ -40,30 +40,36 @@ const modules = {
                <p>Kleine Programme, die <span class="term" data-def="Ein 'Software-Roboter', der Links verfolgt und Webseiten kopiert.">Crawler</span>, reisen Tag und Nacht durchs Netz und kopieren jede Seite, die sie finden.</p>
                
                <h3 style="color:var(--primary)">2. Ordnen (Index)</h3>
-               <p>Die Kopien kommen in ein riesiges Verzeichnis, den <span class="term" data-def="Ein gigantisches, sortiertes Verzeichnis aller Wörter im Internet.">Index</span>. Wenn du googelst, suchst du eigentlich in diesem Index, nicht im Live-Internet.</p>
+               <p>Die Kopien kommen in ein riesiges Verzeichnis, den <span class="term" data-def="Ein gigantisches, sortiertes Verzeichnis aller Wörter im Internet.">Index</span>.</p>
+
+               <h3 style="color:var(--primary)">3. Fragen (Suchanfrage)</h3>
+               <p>Der Index ist nutzlos, bis du kommst: Du tippst deine <strong>Suchanfrage</strong> (Keywords) in das Suchfeld ein.</p>
                
-               <h3 style="color:var(--primary)">3. Sortieren (Algorithmus)</h3>
-               <p>Auf deine Frage gibt es oft Millionen Antworten. Ein strenger <span class="term" data-def="Eine strenge Rechenvorschrift, die bestimmt, welches Ergebnis auf Platz 1 kommt.">Algorithmus</span> berechnet, welche Seite die beste und wichtigste ist (Ranking).</p>
+               <h3 style="color:var(--primary)">4. Sortieren (Algorithmus)</h3>
+               <p>Jetzt erwacht der <span class="term" data-def="Eine strenge Rechenvorschrift, die bestimmt, welches Ergebnis auf Platz 1 kommt.">Algorithmus</span>. Er berechnet blitzschnell, welche der Millionen Seiten am besten zu deinen Wörtern passt.</p>
                
-               <h3 style="color:var(--primary)">4. Anzeigen (Snippet)</h3>
-               <p>In der Ergebnisliste siehst du dann eine kleine Vorschau, das <span class="term" data-def="Die kleine Textvorschau in der Google-Liste.">Snippet</span>. So entscheidest du, ob du klickst.</p>
+               <h3 style="color:var(--primary)">5. Anzeigen (Snippet)</h3>
+               <p>Zum Schluss siehst du die Liste mit der kleinen Textvorschau, dem <span class="term" data-def="Die kleine Textvorschau in der Google-Liste.">Snippet</span>.</p>
 
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Baue das Puzzle rechts. Übertrage den Ablauf (Crawler -> Index -> Algorithmus -> Snippet) dann als kleine Zeichnung oder mit Formen in dein Dokument.
+                   Baue das Puzzle rechts. Übertrage den Ablauf dann als kleine Zeichnung oder mit Formen in dein Dokument.
                </div>`,
+        // Jetzt 5 Schritte
         puzzle: [
             { label: '1. Sammeln', correct: 'Crawler' },
             { label: '2. Speichern', correct: 'Index' },
-            { label: '3. Sortieren', correct: 'Algorithmus' },
-            { label: '4. Anzeigen', correct: 'Snippet' }
+            { label: '3. Eingeben', correct: 'Suchanfrage' },
+            { label: '4. Sortieren', correct: 'Algorithmus' },
+            { label: '5. Anzeigen', correct: 'Snippet' }
         ],
+        // Jetzt 5 Items (Suchanfrage ist jetzt ein richtiger Baustein)
         items: [
             { text: '🕷️ Crawler', type: 'Crawler' },
             { text: '📚 Der Index', type: 'Index' },
+            { text: '⌨️ Suchanfrage', type: 'Suchanfrage' },
             { text: '🧮 Algorithmus', type: 'Algorithmus' },
-            { text: '📝 Snippet', type: 'Snippet' },
-            { text: '⌨️ Suchanfrage', type: 'distractor' }
+            { text: '📝 Snippet', type: 'Snippet' }
         ],
         hint: "Puzzle fertig? Dann zeichne den Ablauf jetzt in dein Dokument (nutze Pfeile und Formen)."
     },
@@ -85,27 +91,33 @@ const modules = {
                <p>Die KI lernt keine Fakten auswendig wie ein Schüler vor dem Test. Sie lernt <strong>Muster</strong>. Sie lernt, welche Wörter oft zusammengehören (z.B. nach "Guten" kommt oft "Morgen").</p>
                
                <h3 class="ai-title">3. Wahrscheinlichkeit berechnen</h3>
-               <p>Wenn du eine Frage stellst, berechnet die KI die <strong>Wahrscheinlichkeit</strong> für das nächste Wort. Sie rät: <em>"Welches Wort passt zu 99% hier hin?"</em>. Sie versteht den Inhalt aber nicht wirklich.</p>
+               <p>Wenn du eine Frage stellst, berechnet die KI die <strong>Wahrscheinlichkeit</strong> für das nächste Wort. Sie rät: <em>"Welches Wort passt zu 99% hier hin?"</em>.</p>
+
+               <h3 class="ai-title">4. Antwort generieren</h3>
+               <p>Aus den berechneten Wörtern baut sie einen ganzen Satz. Das ist ihre <strong>Antwort</strong> an dich.</p>
                
-               <h3 class="ai-title">4. Halluzination</h3>
+               <h3 class="ai-title">5. Risiko: Halluzination</h3>
                <p>Weil sie nur rät, kann sie auch Dinge erfinden, die total echt klingen. Das nennt man <strong>Halluzinieren</strong>. Eine Suchmaschine findet, was da ist. Eine KI erfindet, was passen könnte.</p>
 
                <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--ai-color);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
                    Schreibe in eigenen Worten: Was ist der Unterschied zwischen <em>Suchen</em> (Google) und <em>Errechnen</em> (KI)?
                </div>`,
+        // Jetzt 5 Schritte
         puzzle: [
             { label: '1. Füttern', correct: 'Daten' },
             { label: '2. Verstehen', correct: 'Muster' },
             { label: '3. Raten', correct: 'Wahrscheinlichkeit' },
-            { label: '4. Fehler', correct: 'Halluzination' }
+            { label: '4. Ausgabe', correct: 'Antwort' },
+            { label: '5. Risiko', correct: 'Halluzination' }
         ],
+        // Items angepasst (Bewusstsein raus, Antwort rein)
         items: [
             { text: '🌍 Datenmengen', type: 'Daten' },
             { text: '🧠 Muster', type: 'Muster' },
             { text: '🎲 Wahrscheinlichkeit', type: 'Wahrscheinlichkeit' },
-            { text: '👻 Halluzination', type: 'Halluzination' },
-            { text: '🧐 Bewusstsein', type: 'distractor' }
+            { text: '💬 Antwort', type: 'Antwort' },
+            { text: '👻 Halluzination', type: 'Halluzination' }
         ],
         hint: "Löse das Puzzle. Erkläre dann in deinem Dokument den Unterschied zwischen Suche und KI."
     },

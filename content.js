@@ -203,50 +203,83 @@ lab: {
         hint: "Mache den Wissens-Check. Notiere dann Vor- und Nachteile in deinem Dokument."
     },
 
-    // --- MODUL 5: MISSION ---
-    mission: {
-        intro: `
-            <h1 style="color: var(--mission-color);">🕵️‍♂️ Mission: Der KI-Detektiv</h1>
-            <p>Du weißt jetzt alles über KI. Jetzt wird es Zeit, das Gelernte zu testen!<br>
-            Wähle eine KI und löse die 4 Fälle. <strong>Schreibe die Antworten in dein Pages/GoodNotes Dokument!</strong></p>
-        `,
-        tools: [
-            { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Bekannteste' },
-            { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Die neue KI (xAI)' },
-            { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'Von Google' },
-            { name: 'Perplexity', icon: '🧠', url: 'https://www.perplexity.ai', sub: 'Die Antwort-Maschine' }
-        ],
-        tasks: [
-            {
-                title: 'Fall 1: Der Halluzinations-Test',
-                desc: 'KIs können lügen. Teste es mit einem Land, das es gar nicht gibt!',
-                prompt: 'Nenne mir 3 berühmte Sehenswürdigkeiten im Land "Atlantis-Oberhausen".',
-                placeholder: ''
-            },
-            {
-                title: 'Fall 2: Der Kreativ-Modus',
-                desc: 'Google findet Fakten, aber KI kann kreativ sein. Lass uns den Stil ändern.',
-                prompt: 'Erkläre mir Photosynthese in Jugendsprache mit vielen Emojis. Tu so, als wärst du ein Rapper.',
-                placeholder: ''
-            },
-            {
-                title: 'Fall 3: Meinung vs. Fakt',
-                desc: 'Hat eine KI einen eigenen Geschmack? Frage sie nach ihrer Meinung.',
-                prompt: 'Welcher ist der beste Fußballverein der Welt und warum?',
-                placeholder: ''
-            },
-            {
-                title: 'Fall 4: Mathe-Genie?',
-                desc: 'KIs sind Sprach-Modelle, keine Taschenrechner. Können sie logisch denken?',
-                prompt: 'Ich habe 3 Äpfel. Gestern habe ich einen gegessen. Wie viele Äpfel habe ich heute?',
-                placeholder: ''
-            },
-            {
-                title: 'Abschluss-Bericht (Note)',
-                desc: 'Öffne dein Dokument <strong>"KI-Führerschein"</strong> in Pages/GoodNotes.<br>1. Kopiere deine Ergebnisse aus Fall 1-4 hinein.<br>2. Schreibe ein Fazit: <em>"Ich vertraue einer KI, wenn..., aber ich passe auf, wenn..."</em>',
-                isInfo: true
-            }
-        ],
-        hint: "Glückwunsch! Wenn du alle 4 Fälle in deinem Dokument notiert hast, zeige es deinem Lehrer."
-    }
+// --- MODUL 5: MISSION (Der Vergleichstest) ---
+mission: {
+    intro: `
+        <h1 style="color: var(--mission-color);">🕵️‍♂️ Mission: Der große KI-Vergleich</h1>
+        <p>Heute bist du ein <strong>Tech-Journalist</strong>! Deine Aufgabe ist es, verschiedene KIs zu testen und herauszufinden: Welche ist die Beste für dich?</p>
+        
+        <h3>Deine Kandidaten:</h3>
+        <ul style="text-align:left; font-size:1rem; margin-bottom:20px;">
+            <li><strong>ChatGPT:</strong> Der berühmte Alleskönner. Schreibt oft sehr gute Texte.</li>
+            <li><strong>Grok:</strong> Eine sehr neue KI, die oft frech oder lustig antwortet.</li>
+            <li><strong>Gemini:</strong> Die KI von Google, die auch aktuelle Infos suchen kann.</li>
+            <li><strong>Perplexity:</strong> Der Streber, der immer seine Quellen nennt.</li>
+        </ul>
+    `,
+    tools: [
+        { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Alleskönner' },
+        { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Der Neue (xAI)' },
+        { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'Der Google-Profi' },
+        { name: 'Perplexity', icon: '🧠', url: 'https://www.perplexity.ai', sub: 'Der Quellen-Profi' }
+    ],
+    tasks: [
+        {
+            title: 'Schritt 1: Die Test-Tabelle',
+            desc: 'Bevor wir testen, müssen wir das Protokoll vorbereiten.',
+            isInfo: true, // Kein Prompt-Button hier
+            prompt: null,
+            // Benutzerdefinierter HTML-Inhalt für die Instruktion
+            customHtml: `
+            <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; border: 1px solid var(--primary); text-align:left;">
+                <strong>📝 Auftrag in Pages / GoodNotes:</strong><br>
+                Erstelle eine einfache Tabelle mit 3 Spalten. Das sollte so aussehen:<br><br>
+                <table style="width:100%; border-collapse:collapse; background:white; font-size:0.9rem;">
+                    <tr style="background:#ddd; font-weight:bold;">
+                        <td style="border:1px solid #999; padding:5px;">Name der KI</td>
+                        <td style="border:1px solid #999; padding:5px;">Test 1 (Schule)</td>
+                        <td style="border:1px solid #999; padding:5px;">Test 2 (Privat)</td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid #999; padding:5px;">ChatGPT</td>
+                        <td style="border:1px solid #999; padding:5px;">...</td>
+                        <td style="border:1px solid #999; padding:5px;">...</td>
+                    </tr>
+                     <tr>
+                        <td style="border:1px solid #999; padding:5px;">... (andere KIs)</td>
+                        <td style="border:1px solid #999; padding:5px;">...</td>
+                        <td style="border:1px solid #999; padding:5px;">...</td>
+                    </tr>
+                </table>
+                <br>Trage mindestens 2 KIs in die erste Spalte ein, die du vergleichen möchtest!
+            </div>`
+        },
+        {
+            title: 'Test 1: Schule & Wissen',
+            desc: 'Wir prüfen, wer besser erklären kann. Kopiere diesen Befehl und füge ihn bei deinen gewählten KIs ein.',
+            prompt: 'Erkläre mir, wie Regenwolken entstehen. Benutze einfache Sprache und ein Beispiel aus dem Alltag.',
+            placeholder: ''
+        },
+        {
+            title: 'Test 2: Freizeit & Kreativität',
+            desc: 'Wer ist kreativer? Lass uns etwas Lustiges machen.',
+            prompt: 'Schreibe einen kurzen Rap-Song darüber, dass ich mein Zimmer aufräumen muss, aber keine Lust habe. Benutze Jugendsprache.',
+            placeholder: ''
+        },
+        {
+            title: 'Schritt 3: Das Urteil',
+            desc: 'Schau dir deine Tabelle an. Welche KI hat dir besser gefallen?',
+            isInfo: true,
+            prompt: null,
+            customHtml: `
+            <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; border: 1px solid var(--primary); text-align:left;">
+                <strong>📝 Auftrag in Pages / GoodNotes:</strong><br>
+                Vergib unter deiner Tabelle Sterne (1 bis 5 ⭐) für deine KIs.<br><br>
+                <strong>Entscheide dich für einen Sieger und schreibe kurz warum:</strong><br>
+                <em>"Mein Favorit ist ..., weil die Antworten lustiger waren / genauer waren / besser zu lesen waren."</em>
+            </div>`
+        }
+    ],
+    hint: "Ein guter Tester begründet seine Meinung! Zeige das Ergebnis am Ende deiner Lehrkraft und suche dir dann wen, um deine Ergebnisse zu vergleichen oder helfe anderen."
+}
 };

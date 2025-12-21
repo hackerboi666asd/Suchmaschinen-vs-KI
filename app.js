@@ -227,41 +227,52 @@ const app = {
 
     renderMission: function(data) {
         document.getElementById('text-mission-intro').innerHTML = data.intro;
+// 1. Tools rendern (bleibt gleich)
+const toolCont = document.getElementById('mission-tools');
+toolCont.innerHTML = '';
+data.tools.forEach(t => {
+    toolCont.innerHTML += `
+        <a href="${t.url}" target="_blank" class="ai-tool-card">
+            <span style="font-size:2rem; display:block; margin-bottom:5px;">${t.icon}</span>
+            <h4 style="margin:0; color:#333;">${t.name}</h4>
+            <small style="color:#666;">${t.sub}</small>
+        </a>`;
+});
 
-        const toolCont = document.getElementById('mission-tools');
-        toolCont.innerHTML = '';
-        data.tools.forEach(t => {
-            toolCont.innerHTML += `
-                <a href="${t.url}" target="_blank" class="ai-tool-card">
-                    <span style="font-size:2rem; display:block; margin-bottom:5px;">${t.icon}</span>
-                    <h4 style="margin:0; color:#333;">${t.name}</h4>
-                    <small style="color:#666;">${t.sub}</small>
-                </a>`;
-        });
+// 2. Tasks rendern (NEUE LOGIK)
+const taskCont = document.getElementById('mission-tasks');
+taskCont.innerHTML = '';
+data.tasks.forEach((t, i) => {
+    let html = `<div class="mission-card">`;
+    
+    // Wir nennen es jetzt immer "Schritt X", damit die Reihenfolge klar ist
+    html += `<div class="mission-badge">Schritt ${i+1}</div>`;
+    
+    html += `<h3 style="margin-top:0; color:#333;">${t.title}</h3><p style="line-height:1.6; color:#555;">${t.desc}</p>`;
+    
+    // NEU: Custom HTML einfügen (für die Tabelle und Bewertungs-Box)
+    if(t.customHtml) {
+        html += t.customHtml;
+    }
 
-        const taskCont = document.getElementById('mission-tasks');
-        taskCont.innerHTML = '';
-        data.tasks.forEach((t, i) => {
-            let html = `<div class="mission-card">`;
-            if(!t.isInfo) html += `<div class="mission-badge">Fall ${i+1}</div>`;
-            html += `<h3 style="margin-top:0; color:#333;">${t.title}</h3><p style="line-height:1.6; color:#555;">${t.desc}</p>`;
-            
-            if(t.prompt) {
-                html += `
-                <div class="copy-box">
-                    <span id="p-${i}">${t.prompt}</span>
-                    <button class="step-btn" onclick="app.copyToClip('p-${i}')">Kopieren</button>
-                </div>`;
-            }
-            
-            if(!t.isInfo) {
-                html += `<div style="background:#fff3cd; color:#856404; padding:10px; border-radius:6px; font-size:0.9rem; margin-top:10px; border:1px solid #ffeeba;">
-                            ✍️ <strong>Aufgabe:</strong> Übertrage die Antwort der KI in dein Pages/GoodNotes Dokument.
-                         </div>`;
-            }
-            html += `</div>`;
-            taskCont.innerHTML += html;
-        });
+    // Copy-Box nur anzeigen, wenn es einen Prompt gibt
+    if(t.prompt) {
+        html += `
+        <div class="copy-box">
+            <span id="p-${i}">${t.prompt}</span>
+            <button class="step-btn" onclick="app.copyToClip('p-${i}')">Kopieren</button>
+        </div>`;
+    }
+    
+    // Hinweis "In Tabelle eintragen" nur anzeigen, wenn es einen Prompt gab
+    if(t.prompt) {
+        html += `<div style="background:#fff3cd; color:#856404; padding:10px; border-radius:6px; font-size:0.9rem; margin-top:10px; border:1px solid #ffeeba;">
+                    ✍️ <strong>Aufgabe:</strong> Kopiere die Antwort der KI (oder eine Zusammenfassung) in deine Tabelle.
+                 </div>`;
+    }
+    html += `</div>`;
+    taskCont.innerHTML += html;
+});
     },
 
     copyToClip: function(id) {

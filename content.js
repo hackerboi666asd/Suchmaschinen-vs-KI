@@ -78,6 +78,16 @@ const modules = {
                
                <p>Eine KI (wie ChatGPT) funktioniert ganz anders als eine Suchmaschine. Sie sucht nicht nach fertigen Webseiten. Sie "denkt" sich die Antwort Wort für Wort neu aus.</p>
                
+               
+               <h3 class="ai-title">1. Training mit Daten</h3>
+               <p>Bevor die KI schlau ist, muss sie trainiert werden. Man füttert sie mit riesigen <strong>Datenmengen</strong> (Bücher, Wikipedia, Internet-Texte).</p>
+               
+               <h3 class="ai-title">2. Muster lernen</h3>
+               <p>Die KI lernt keine Fakten auswendig wie ein Schüler vor dem Test. Sie lernt <strong>Muster</strong>, zum Beispiel das nach dem Wort "Guten" oft "Morgen" kommt.</p>
+               
+               <h3 class="ai-title">3. Wahrscheinlichkeit berechnen</h3>
+               <p>Wenn du eine Frage stellst, berechnet die KI die <strong>Wahrscheinlichkeit</strong> für das nächste Wort. Sie rät: <em>"Welches Wort passt zu 99% hier hin?"</em>.</p>
+
                <div style="background:#fff; border:2px solid #ccc; padding:15px; border-radius:8px; margin:20px 0; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
                     <h4 style="margin-top:0;">🎮 Mini-Spiel: Sei die KI!</h4>
                     <p style="margin-bottom:10px;">Die KI sieht den Satzanfang: <em>"Die Maus frisst den..."</em><br>
@@ -86,15 +96,6 @@ const modules = {
                     <button onclick="alert('✅ Sehr wahrscheinlich (95%)! Das würde die KI wählen.')" style="margin:5px; padding:5px 10px; cursor:pointer; font-weight:bold;">Käse 🧀</button>
                     <button onclick="alert('⚠️ Möglich, aber seltener (4%). Vielleicht in einem Cartoon?')" style="margin:5px; padding:5px 10px; cursor:pointer;">Teppich 🧶</button>
                </div>
-
-               <h3 class="ai-title">1. Training mit Daten</h3>
-               <p>Bevor die KI schlau ist, muss sie trainiert werden. Man füttert sie mit riesigen <strong>Datenmengen</strong> (Bücher, Wikipedia, Internet-Texte).</p>
-               
-               <h3 class="ai-title">2. Muster lernen</h3>
-               <p>Die KI lernt keine Fakten auswendig wie ein Schüler vor dem Test. Sie lernt <strong>Muster</strong> (wie im Spiel oben: Maus -> Käse).</p>
-               
-               <h3 class="ai-title">3. Wahrscheinlichkeit berechnen</h3>
-               <p>Wenn du eine Frage stellst, berechnet die KI die <strong>Wahrscheinlichkeit</strong> für das nächste Wort. Sie rät: <em>"Welches Wort passt zu 99% hier hin?"</em>.</p>
 
                <h3 class="ai-title">4. Antwort generieren</h3>
                <p>Aus den berechneten Wörtern baut sie einen ganzen Satz. Das ist ihre <strong>Antwort</strong> an dich.</p>
@@ -132,7 +133,7 @@ const modules = {
 
             <h3>Warum sind KIs plötzlich so schlau? 🤯</h3>
             <p>Vor ein paar Jahren waren Computer noch ziemlich "dumm". Sie konnten nicht mal einen Witz erzählen. Warum sind sie heute plötzlich so schlau wie Einstein?</p>
-            <p>Das Zauberwort heißt <strong>Scaling</strong>. Das ist Informatiker-Sprache für: <em>"Wir machen alles extrem riesig!"</em></p>
+            <p>Das Zauberwort heißt <strong>Skalierung</strong>. Das ist Computer-Sprache für: <em>"Wir machen alles extrem riesig!"</em></p>
             
             <p>Damit eine KI super-schlau wird, musst du im Labor die perfekte Mischung aus 3 Zutaten finden:</p>
             
@@ -179,7 +180,7 @@ const modules = {
                        <li>Zum Schluss schreibt die KI eine <strong>Zusammenfassung</strong> für dich.</li>
                    </ol>
                    <p style="text-align:center; margin-top:15px;">
-                       <a href="https://www.google.com/search?q=Wie+entstehen+Regenbogen" target="_blank" style="background:#4285f4; color:white; padding:8px 15px; text-decoration:none; border-radius:20px; font-weight:bold;">🔎 Teste es hier live</a>
+                       <a href="https://www.google.com/search?q=Wie+entstehen+Regenbogen" target="_blank" style="background:#4285f4; color:white; padding:8px 15px; text-decoration:none; border-radius:20px; font-weight:bold;">🔎 Teste es hier</a>
                        <br><small>(Hinweis: Manchmal erscheint die AI-Box nicht bei jedem.)</small>
                    </p>
                </div>
@@ -217,10 +218,10 @@ const modules = {
             <p>Du wirst zum <strong>Technik-Tester</strong>. Vergleiche verschiedene KIs und finde heraus: Welche ist die beste für die Schule? Welche für die Freizeit?</p>
         `,
         tools: [
-            { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Alleskönner' },
-            { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Der Neue (xAI)' },
-            { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'Google Chatbot' },
-            { name: 'Google (AI)', icon: '🔎', url: 'https://www.google.com', sub: 'Klassisch + KI' }
+            { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Die Bekannte' },
+            { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Die Wahrheitssucherin' },
+            { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'von Google' },
+            { name: 'Google (AI)', icon: '🔎', url: 'https://www.google.com', sub: 'Klassische Suche + KI' }
         ],
         tasks: [
             {

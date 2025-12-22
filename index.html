@@ -82,10 +82,10 @@
                     <p style="margin:15px 0 5px 0;">Stromverbrauch:</p>
                     <div class="bar-container"><div id="bar-nrg" class="bar-fill" style="width:5%; background:linear-gradient(90deg, yellow, red);"></div></div>
                     <div style="margin-top:20px; border-top:1px solid #333; padding-top:10px;">
-                        <span id="b1" class="badge">💬 Plappern</span>
+                        <span id="b1" class="badge">💬 Texte schreiben</span>
                         <span id="b2" class="badge">➗ Mathe</span>
-                        <span id="b3" class="badge">💻 Coden</span>
-                        <span id="b4" class="badge">🧠 Logik</span>
+                        <span id="b3" class="badge">💻 Programmieren</span>
+                        <span id="b4" class="badge">🧠 Logik (schlau nachdenken)</span>
                     </div>
                     <div id="sim-warn" style="color: #ff5555; font-size: 0.8rem; margin-top: 10px; display: none;">⚠️ Zu wenig Computer-Power!</div>
                 </div>
@@ -110,7 +110,12 @@
 <main id="view-mission" class="single-layout">
     <div class="mission-container">
         <div style="text-align:center; margin-bottom:30px;" id="text-mission-intro"></div>
-        <div id="mission-content-area"></div> </div>
+        
+        <h3 style="text-align:center;">Die Kandidaten (Öffne sie in neuen Tabs):</h3>
+        <div class="ai-tools-grid" id="mission-tools"></div>
+        
+        <div id="mission-tasks"></div>
+    </div>
 </main>
 
 <main id="view-school" class="single-layout">
@@ -119,6 +124,9 @@
             <h1 style="color: var(--primary);">🎓 KI als Lernpartner</h1>
             <p style="font-size:1.1rem; color:#555;">KIs sind nicht zum Abschreiben da, sondern zum Üben! Hier sind die besten Tricks für deine Fächer.</p>
         </div>
+        <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
+            <strong>Auftrag</strong>: Teste die Fragen/Aufgaben mit deiner Lieblings-KI und schau wie sie dir beim Lernen helfen kann.
+        </div> <br>
         <div id="school-prompts-grid" class="school-grid"></div>
     </div>
 </main>

@@ -1,6 +1,6 @@
 /* CONTENT MODULE 
    Texte & Aufgaben für Klasse 6
-   Update: Erweiterte Mission & Hybrid-Aufgaben
+   Update: Sicherheits-Check, KI-Spiel, Schul-Prompts
 */
 
 const modules = {
@@ -22,6 +22,7 @@ const modules = {
                     <li>✅ <strong>Lernen:</strong> Wie lernt eine KI sprechen?</li>
                     <li>✅ <strong>Experimentieren:</strong> Trainiere dein eigenes KI-Modell im Labor.</li>
                     <li>✅ <strong>Mission:</strong> Löse 5 spannende Fälle im großen Vergleichstest.</li>
+                    <li>✅ <strong>Bonus:</strong> Lerne, wie KI dir bei Hausaufgaben hilft (ohne zu schummeln!).</li>
                 </ul>
                 <p style="margin-top: 20px; font-style: italic; color: #666; background: #f0f0f0; padding: 10px; border-radius: 8px;">💡 <strong>Wichtig:</strong> Öffne jetzt <strong>Pages</strong> oder <strong>GoodNotes</strong> auf deinem iPad. Du musst dort gleich Dinge eintragen!</p>
             </div>
@@ -33,7 +34,6 @@ const modules = {
     // --- MODUL 1: KLASSISCHE SUCHE ---
     google: {
         text: `<h2>Wiederholung: Die Suchmaschine</h2>
-               
                <p>Erinnerst du dich an unsere letzte Einheit? Das Internet ist wie eine Bibliothek, in der alle Bücher auf dem Boden liegen. Damit wir etwas finden, muss die Suchmaschine vorher aufräumen.</p>
                
                <h3 style="color:var(--primary)">1. Sammeln (Crawler)</h3>
@@ -69,24 +69,29 @@ const modules = {
             { text: '🧮 Algorithmus', type: 'Algorithmus' },
             { text: '📝 Snippet', type: 'Snippet' }
         ],
-        hint: "Ziehe die Bausteine von der Mitte nach rechts! Zeichne danach den Ablauf in dein Heft/Tablet."
+        hint: "Ziehe die Bausteine von oben nach unten in die richtigen Felder! Zeichne danach den Ablauf ab."
     },
 
     // --- MODUL 2: KI BASICS 1 ---
     ai: {
-        text: `<h2>Wie funktioniert eine KI? (Teil 1)</h2>
+        text: `<h2>Wie funktioniert eine KI?</h2>
                
-               
-
-[Image of neural network layers diagram]
-
                <p>Eine KI (wie ChatGPT) funktioniert ganz anders als eine Suchmaschine. Sie sucht nicht nach fertigen Webseiten. Sie "denkt" sich die Antwort Wort für Wort neu aus.</p>
                
+               <div style="background:#fff; border:2px solid #ccc; padding:15px; border-radius:8px; margin:20px 0; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top:0;">🎮 Mini-Spiel: Sei die KI!</h4>
+                    <p style="margin-bottom:10px;">Die KI sieht den Satzanfang: <em>"Die Maus frisst den..."</em><br>
+                    Welches Wort kommt wahrscheinlich als nächstes?</p>
+                    <button onclick="alert('❌ Unwahrscheinlich (0.01%). Warum sollte sie den Mond fressen?')" style="margin:5px; padding:5px 10px; cursor:pointer;">Mond 🌑</button>
+                    <button onclick="alert('✅ Sehr wahrscheinlich (95%)! Das würde die KI wählen.')" style="margin:5px; padding:5px 10px; cursor:pointer; font-weight:bold;">Käse 🧀</button>
+                    <button onclick="alert('⚠️ Möglich, aber seltener (4%). Vielleicht in einem Cartoon?')" style="margin:5px; padding:5px 10px; cursor:pointer;">Teppich 🧶</button>
+               </div>
+
                <h3 class="ai-title">1. Training mit Daten</h3>
-               <p>Bevor die KI schlau ist, muss sie trainiert werden. Man füttert sie mit riesigen <strong>Datenmengen</strong> (Bücher, Wikipedia, Internet-Texte). Sie liest quasi das ganze Internet.</p>
+               <p>Bevor die KI schlau ist, muss sie trainiert werden. Man füttert sie mit riesigen <strong>Datenmengen</strong> (Bücher, Wikipedia, Internet-Texte).</p>
                
                <h3 class="ai-title">2. Muster lernen</h3>
-               <p>Die KI lernt keine Fakten auswendig wie ein Schüler vor dem Test. Sie lernt <strong>Muster</strong>. Sie lernt, welche Wörter oft zusammengehören (z.B. nach "Guten" kommt oft "Morgen").</p>
+               <p>Die KI lernt keine Fakten auswendig wie ein Schüler vor dem Test. Sie lernt <strong>Muster</strong> (wie im Spiel oben: Maus -> Käse).</p>
                
                <h3 class="ai-title">3. Wahrscheinlichkeit berechnen</h3>
                <p>Wenn du eine Frage stellst, berechnet die KI die <strong>Wahrscheinlichkeit</strong> für das nächste Wort. Sie rät: <em>"Welches Wort passt zu 99% hier hin?"</em>.</p>
@@ -95,7 +100,7 @@ const modules = {
                <p>Aus den berechneten Wörtern baut sie einen ganzen Satz. Das ist ihre <strong>Antwort</strong> an dich.</p>
                
                <h3 class="ai-title">5. Risiko: Halluzination</h3>
-               <p>Weil sie nur rät, kann sie auch Dinge erfinden, die total echt klingen. Das nennt man <strong>Halluzinieren</strong>. Eine Suchmaschine findet, was da ist. Eine KI erfindet, was passen könnte.</p>
+               <p>Weil sie nur rät, kann sie auch Dinge erfinden, die total echt klingen. Das nennt man <strong>Halluzinieren</strong>.</p>
 
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
@@ -115,7 +120,7 @@ const modules = {
             { text: '💬 Antwort', type: 'Antwort' },
             { text: '👻 Halluzination', type: 'Halluzination' }
         ],
-        hint: "Baue den KI-Ablauf nach (Mitte -> Rechts). Erkläre dann den Unterschied zur Suche."
+        hint: "Spiele das Mini-Spiel im Text! Dann löse das Puzzle rechts."
     },
 
     // --- MODUL 3: LABOR ---
@@ -163,7 +168,7 @@ const modules = {
     // --- MODUL 4: HYBRID ---
     hybrid: {
         text: `<h2>Hybrid: Suchmaschine + KI</h2>
-               <p>Suchmaschinen ändern sich gerade gewaltig. Früher gab es nur 10 blaue Links. Heute gibt es oft <strong>KI-Antworten</strong> direkt ganz oben (Google nennt das "AI Overviews").</p>
+               <p>Suchmaschinen ändern sich gerade gewaltig. Früher gab es nur 10 blaue Links. Heute gibt es oft <strong>KI-Antworten</strong> direkt ganz oben.</p>
                
                <div class="hybrid-box">
                    <h3 style="margin-top:0; color:#e37400;">Der neue Mix</h3>
@@ -215,24 +220,43 @@ const modules = {
             { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Der Alleskönner' },
             { name: 'Grok', icon: '🌌', url: 'https://grok.com', sub: 'Der Neue (xAI)' },
             { name: 'Gemini', icon: '⭐', url: 'https://gemini.google.com', sub: 'Google Chatbot' },
-            { name: 'Google KI', icon: '🔎', url: 'https://www.google.com', sub: 'Suche (AI Overview)' }
+            { name: 'Google (AI)', icon: '🔎', url: 'https://www.google.com', sub: 'Klassisch + KI' }
         ],
         tasks: [
             {
+                title: '⚠️ WICHTIG: Sicherheits-Check',
+                desc: 'Bevor du startest, müssen wir sichergehen, dass du dich schützt. KIs speichern alles, was du schreibst!',
+                isInfo: true,
+                customHtml: `
+                <div style="background:#ffebee; border:2px solid #ef5350; padding:15px; border-radius:8px; text-align:left;">
+                    <strong>Die Goldene KI-Regel:</strong><br>
+                    Verrate der KI niemals:<br>
+                    ❌ Deinen vollen Namen<br>
+                    ❌ Deine Adresse oder Handynummer<br>
+                    ❌ Passwörter<br>
+                    <br>
+                    <label style="cursor:pointer; display:block; margin-top:10px; font-weight:bold;">
+                        <input type="checkbox" onchange="document.getElementById('safety-btn').disabled = !this.checked"> 
+                        Ich verspreche, keine privaten Daten einzugeben.
+                    </label>
+                    <button id="safety-btn" disabled style="margin-top:10px; padding:8px 15px; cursor:pointer; background:#202124; color:white; border:none; border-radius:5px;" onclick="this.parentElement.style.background='#e6f4ea'; this.parentElement.style.borderColor='#34a853'; this.innerText='✅ Schutz aktiv! Du kannst jetzt starten.'; this.disabled=true;">Bestätigen</button>
+                </div>`
+            },
+            {
                 title: 'Schritt 1: Das Test-Protokoll',
-                desc: 'Ein guter Detektiv macht sich Notizen. Bereite dein Dokument vor.',
+                desc: 'Bereite dein Dokument vor.',
                 isInfo: true,
                 prompt: null,
                 customHtml: `
                 <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; border: 1px solid var(--primary); text-align:left;">
                     <strong>📝 Auftrag in Pages / GoodNotes:</strong><br>
-                    Erstelle eine Tabelle mit 4 Spalten. Wähle 2 KIs aus, die du gegeneinander antreten lässt.<br><br>
+                    Erstelle eine Tabelle mit 4 Spalten. Wähle 2 KIs aus, die du testest.<br><br>
                     <table style="width:100%; border-collapse:collapse; background:white; font-size:0.85rem;">
                         <tr style="background:#ddd; font-weight:bold;">
                             <td style="border:1px solid #999; padding:4px;">Aufgabe</td>
                             <td style="border:1px solid #999; padding:4px;">Antwort KI 1</td>
                             <td style="border:1px solid #999; padding:4px;">Antwort KI 2</td>
-                            <td style="border:1px solid #999; padding:4px;">Bewertung (1-5 ⭐)</td>
+                            <td style="border:1px solid #999; padding:4px;">Note (1-5 ⭐)</td>
                         </tr>
                         <tr>
                             <td style="border:1px solid #999; padding:4px;">1. Halluzination</td>
@@ -284,6 +308,55 @@ const modules = {
                 </div>`
             }
         ],
-        hint: "Ein guter Tester begründet seine Meinung! Zeige die Tabelle am Ende deinem Lehrer."
+        hint: "Beginne mit dem Sicherheits-Check! Führe dann die Tests durch."
+    },
+
+    // --- MODUL 6: SCHULE (KI als Lernpartner) ---
+    school: {
+        hint: "Klicke auf die Kärtchen, um die Prompts zu kopieren. Teste sie aus!",
+        prompts: [
+            {
+                subject: 'Deutsch / Texte',
+                icon: '📝',
+                title: 'Der Text-Polierer',
+                desc: 'Lass die KI deinen Text verbessern, statt ihn schreiben zu lassen.',
+                prompt: 'Hier ist ein Text von mir. Bitte korrigiere die Rechtschreibung und gib mir 3 Tipps, wie ich ihn spannender schreiben kann: [Dein Text]'
+            },
+            {
+                subject: 'Mathe',
+                icon: '➗',
+                title: 'Der Schritt-für-Schritt Coach',
+                desc: 'Verstehe den Weg, nicht nur das Ergebnis.',
+                prompt: 'Ich verstehe diese Aufgabe nicht: [Aufgabe]. Bitte erkläre mir Schritt für Schritt den Lösungsweg, aber verrate mir noch nicht das Ergebnis.'
+            },
+            {
+                subject: 'Englisch / Sprachen',
+                icon: '🇬🇧',
+                title: 'Der Vokabel-Partner',
+                desc: 'Übe Vokabeln im Gespräch.',
+                prompt: 'Lass uns ein Rollenspiel auf Englisch machen. Ich möchte beim Bäcker ein Brot kaufen. Du bist der Verkäufer. Korrigiere meine Fehler am Ende.'
+            },
+            {
+                subject: 'Naturwissenschaften',
+                icon: '🧬',
+                title: 'Der Erklär-Profi',
+                desc: 'Komplizierte Dinge einfach verstehen.',
+                prompt: 'Erkläre mir das Thema [Thema, z.B. Schwerkraft] so, als wäre ich 10 Jahre alt. Benutze ein lustiges Beispiel.'
+            },
+            {
+                subject: 'Musik',
+                icon: '🎵',
+                title: 'Der Songwriter',
+                desc: 'Ideen für Lieder finden.',
+                prompt: 'Ich brauche 4 Zeilen für einen Song über Sommerferien. Es soll sich reimen auf: Eis, heiß, Meer, sehr.'
+            },
+            {
+                subject: 'Prüfung',
+                icon: '🎓',
+                title: 'Der Quiz-Master',
+                desc: 'Lass dich abfragen.',
+                prompt: 'Ich schreibe morgen einen Test über [Thema]. Bitte stelle mir 5 Fragen dazu, um mich zu testen. Warte auf meine Antwort.'
+            }
+        ]
     }
 };

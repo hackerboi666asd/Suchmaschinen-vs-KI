@@ -1,14 +1,15 @@
 /* APP LOGIC 
-   Steuert Navigation, Simulator, Drag & Drop
-   Version: 10.3 (Hybrid Quiz Extended)
+   Steuert Navigation, Simulator, Drag & Drop, Mission & Schul-Modul
+   Version: 11.0 (Final)
 */
 
 const app = {
-    sequence: ['start', 'google', 'ai', 'lab', 'hybrid', 'mission'],
+    // Die Reihenfolge der Seiten
+    sequence: ['start', 'google', 'ai', 'lab', 'hybrid', 'mission', 'school'],
     currentStep: 'start',
 
     init: function() {
-        // Navigation Events
+        // Navigation Events (Header Buttons)
         document.querySelectorAll('.step-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const target = e.target.closest('.step-btn').dataset.target;
@@ -16,11 +17,12 @@ const app = {
             });
         });
 
+        // "Weiter" Button im Footer
         document.getElementById('next-btn').addEventListener('click', () => {
             this.nextStep();
         });
 
-        // Simulator Events
+        // Simulator Events (Slider)
         ['sim-params', 'sim-data', 'sim-compute'].forEach(id => {
             const el = document.getElementById(id);
             if(el) el.addEventListener('input', () => this.updateSim());
@@ -54,14 +56,15 @@ const app = {
 
         // 2. Views umschalten
         document.querySelectorAll('main').forEach(m => m.classList.remove('active'));
-        document.getElementById(`view-${mode}`).classList.add('active');
+        const view = document.getElementById(`view-${mode}`);
+        if(view) view.classList.add('active');
 
         // 3. Footer und Inhalte laden
         const hintBox = document.getElementById('footer-hint');
         const nextBtn = document.getElementById('next-btn');
         
         // Button auf letzter Seite ausblenden
-        nextBtn.style.display = (mode === 'mission') ? 'none' : 'flex';
+        nextBtn.style.display = (mode === 'school') ? 'none' : 'flex';
 
         if (data) {
             // Hinweis Text setzen
@@ -78,9 +81,8 @@ const app = {
                 if(target) target.innerHTML = data.content;
             }
 
-            // Puzzles initialisieren (falls vorhanden)
+            // Puzzles initialisieren (mit Verzögerung für DOM-Aufbau)
             if (data.puzzle) {
-                // Verzögerung hilft beim Rendern
                 setTimeout(() => this.initPuzzle(mode, data), 50);
             }
 
@@ -102,12 +104,17 @@ const app = {
                 this.renderMission(data);
             }
 
+            // Schule rendern (NEU)
+            if (mode === 'school') {
+                this.renderSchool(data);
+            }
+
             // Glossar Logik anhängen
             setTimeout(() => this.attachGlossary(), 100);
         }
     },
 
-    /* --- PUZZLE LOGIC (FIXED) --- */
+    /* --- PUZZLE LOGIC --- */
     initPuzzle: function(mode, data) {
         const pZone = document.getElementById(`puzzle-${mode}`);
         const tBox = document.getElementById(`toolbox-${mode}`);
@@ -117,7 +124,7 @@ const app = {
         pZone.innerHTML = ''; 
         tBox.innerHTML = '';
 
-        // Drop Zones erstellen
+        // Drop Zones (Ziel) erstellen
         data.puzzle.forEach((step, i) => {
             if (i > 0) {
                 const arrow = document.createElement('div');
@@ -142,7 +149,7 @@ const app = {
             pZone.appendChild(el);
         });
 
-        // Draggables erstellen
+        // Draggables (Quelle) erstellen
         [...data.items].sort(() => Math.random() - 0.5).forEach(item => {
             const el = document.createElement('div');
             el.className = 'draggable-item';
@@ -165,7 +172,6 @@ const app = {
         e.preventDefault();
         zone.classList.remove('hovered');
         
-        // Wenn schon gelöst, nichts tun
         if(zone.classList.contains('correct')) return;
 
         const type = e.dataTransfer.getData('type');
@@ -174,11 +180,9 @@ const app = {
         if (type === zone.dataset.target) {
             zone.innerText = text; 
             zone.classList.add('correct');
-            // Altes Element löschen
             const old = document.querySelector('.draggable-item.dragging');
             if(old) old.remove();
         } else {
-            // Visuelles Feedback für Falsch
             zone.style.backgroundColor = '#fce8e6';
             setTimeout(() => zone.style.backgroundColor = 'rgba(255,255,255,0.8)', 500);
         }
@@ -227,54 +231,81 @@ const app = {
 
     renderMission: function(data) {
         document.getElementById('text-mission-intro').innerHTML = data.intro;
-// 1. Tools rendern (bleibt gleich)
-const toolCont = document.getElementById('mission-tools');
-toolCont.innerHTML = '';
-data.tools.forEach(t => {
-    toolCont.innerHTML += `
-        <a href="${t.url}" target="_blank" class="ai-tool-card">
-            <span style="font-size:2rem; display:block; margin-bottom:5px;">${t.icon}</span>
-            <h4 style="margin:0; color:#333;">${t.name}</h4>
-            <small style="color:#666;">${t.sub}</small>
-        </a>`;
-});
 
-// 2. Tasks rendern (NEUE LOGIK)
-const taskCont = document.getElementById('mission-tasks');
-taskCont.innerHTML = '';
-data.tasks.forEach((t, i) => {
-    let html = `<div class="mission-card">`;
-    
-    // Wir nennen es jetzt immer "Schritt X", damit die Reihenfolge klar ist
-    html += `<div class="mission-badge">Schritt ${i+1}</div>`;
-    
-    html += `<h3 style="margin-top:0; color:#333;">${t.title}</h3><p style="line-height:1.6; color:#555;">${t.desc}</p>`;
-    
-    // NEU: Custom HTML einfügen (für die Tabelle und Bewertungs-Box)
-    if(t.customHtml) {
-        html += t.customHtml;
-    }
+        // 1. Tools rendern
+        const toolCont = document.getElementById('mission-tools');
+        toolCont.innerHTML = '';
+        data.tools.forEach(t => {
+            toolCont.innerHTML += `
+                <a href="${t.url}" target="_blank" class="ai-tool-card">
+                    <span style="font-size:2rem; display:block; margin-bottom:5px;">${t.icon}</span>
+                    <h4 style="margin:0; color:#333;">${t.name}</h4>
+                    <small style="color:#666;">${t.sub}</small>
+                </a>`;
+        });
 
-    // Copy-Box nur anzeigen, wenn es einen Prompt gibt
-    if(t.prompt) {
-        html += `
-        <div class="copy-box">
-            <span id="p-${i}">${t.prompt}</span>
-            <button class="step-btn" onclick="app.copyToClip('p-${i}')">Kopieren</button>
-        </div>`;
-    }
-    
-    // Hinweis "In Tabelle eintragen" nur anzeigen, wenn es einen Prompt gab
-    if(t.prompt) {
-        html += `<div style="background:#fff3cd; color:#856404; padding:10px; border-radius:6px; font-size:0.9rem; margin-top:10px; border:1px solid #ffeeba;">
-                    ✍️ <strong>Aufgabe:</strong> Kopiere die Antwort der KI (oder eine Zusammenfassung) in deine Tabelle.
-                 </div>`;
-    }
-    html += `</div>`;
-    taskCont.innerHTML += html;
-});
+        // 2. Tasks rendern
+        const taskCont = document.getElementById('mission-tasks');
+        taskCont.innerHTML = '';
+        
+        data.tasks.forEach((t, i) => {
+            let html = `<div class="mission-card">`;
+            
+            // Badge nur wenn es kein reiner Info-Schritt ist (wie der Security Check)
+            if(!t.isInfo || i > 0) { 
+                 html += `<div class="mission-badge">Schritt ${i+1}</div>`;
+            }
+            
+            html += `<h3 style="margin-top:0; color:#333;">${t.title}</h3><p style="line-height:1.6; color:#555;">${t.desc}</p>`;
+            
+            // Custom HTML (Tabelle, Security Check, Fazit Box)
+            if(t.customHtml) {
+                html += t.customHtml;
+            }
+
+            // Prompt Box
+            if(t.prompt) {
+                html += `
+                <div class="copy-box">
+                    <span id="p-${i}">${t.prompt}</span>
+                    <button class="step-btn" onclick="app.copyToClip('p-${i}')">Kopieren</button>
+                </div>`;
+            }
+            
+            // Hinweis "In Tabelle eintragen"
+            if(t.prompt) {
+                html += `<div style="background:#fff3cd; color:#856404; padding:10px; border-radius:6px; font-size:0.9rem; margin-top:10px; border:1px solid #ffeeba;">
+                            ✍️ <strong>Aufgabe:</strong> Kopiere die Antwort (oder eine Zusammenfassung) in deine Tabelle.
+                         </div>`;
+            }
+            html += `</div>`;
+            taskCont.innerHTML += html;
+        });
     },
 
+    // --- NEU: SCHULE RENDERER ---
+    renderSchool: function(data) {
+        const grid = document.getElementById('school-prompts-grid');
+        if(!grid) return;
+        grid.innerHTML = '';
+
+        data.prompts.forEach((p, i) => {
+            const html = `
+            <div class="prompt-card">
+                <h3><span>${p.icon}</span> ${p.subject}</h3>
+                <h4 style="margin:10px 0; color:#333; font-size:1rem;">${p.title}</h4>
+                <p>${p.desc}</p>
+                <div class="copy-box" style="font-size:0.8rem; flex-direction:column; align-items:flex-start; gap:10px;">
+                    <span id="sp-${i}" style="width:100%; white-space: pre-wrap;">${p.prompt}</span>
+                    <button class="step-btn" style="width:100%; justify-content:center;" onclick="app.copyToClip('sp-${i}')">Kopieren</button>
+                </div>
+            </div>
+            `;
+            grid.innerHTML += html;
+        });
+    },
+
+    /* --- HELPERS --- */
     copyToClip: function(id) {
         navigator.clipboard.writeText(document.getElementById(id).innerText);
         alert('Text kopiert! Füge ihn jetzt bei der KI ein.');

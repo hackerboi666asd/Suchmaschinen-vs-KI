@@ -64,8 +64,9 @@ header {
 .step-btn.active[data-target="lab"] { background: var(--lab-bg); color: var(--lab-color); }
 .step-btn.active[data-target="hybrid"] { background: var(--hybrid-color); color: #333; }
 .step-btn.active[data-target="mission"] { background: var(--mission-color); }
+.step-btn.active[data-target="school"] { background: #ff5722; }
 
-/* MAIN LAYOUTS & GRID SYSTEM */
+/* LAYOUTS */
 main {
     flex: 1;
     overflow: hidden;
@@ -75,17 +76,15 @@ main {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* 3-Spalten Layout (Google & KI): Text | Tools | Puzzle */
+/* NEU: Split Layout ist jetzt 50/50 */
 main.active.split-layout {
     display: grid; 
-    /* Links (Text): 1.2fr | Mitte (Tools): 0.8fr | Rechts (Puzzle): 1.2fr */
-    grid-template-columns: 1.2fr 0.8fr 1.2fr;
+    grid-template-columns: 1fr 1fr; /* Text Links, Interaktion Rechts */
 }
 
-/* 2-Spalten Layout (Hybrid): Text | Stapel (Bild + Quiz) */
 main.active.hybrid-layout {
     display: grid;
-    grid-template-columns: 1.2fr 1fr; /* Text etwas breiter */
+    grid-template-columns: 1.2fr 1fr;
 }
 
 main.active.single-layout {
@@ -101,116 +100,111 @@ main.active.single-layout {
 .col-text h3 { margin-top: 20px; font-size: 1.1rem; color: var(--primary); }
 body .col-text h3.ai-title { color: var(--ai-color); }
 
-/* Tools (Quelle) - Jetzt in der Mitte */
+/* INTERACTIVE AREA (Rechts) */
+.interactive-area {
+    display: flex;
+    flex-direction: column;
+    background: #f8f9fa;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Tools (Oben) */
 .col-tools { 
     background: #fff; 
-    border-right: 1px solid var(--border); /* Trennlinie rechts zum Puzzle */
     padding: 20px; 
-    overflow-y: auto; 
+    border-bottom: 2px dashed var(--border);
+    flex-shrink: 0; 
+}
+.tool-header { font-weight: bold; color: #555; margin-bottom: 10px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+.toolbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    min-height: 50px;
 }
 
-/* Puzzle (Ziel) - Jetzt Rechts */
+.arrow-separator {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #999;
+    padding: 5px 0;
+    background: #f1f3f4;
+}
+
+/* Puzzle (Unten) */
 .col-puzzle { 
+    flex: 1; /* Nimmt den restlichen Platz */
     background: #f1f3f4; 
     padding: 20px; 
-    overflow-y: auto; 
     display: flex; flex-direction: column; align-items: center; 
+    gap: 5px;
 }
 
-/* RECHTER STAPEL (Hybrid) */
 .col-right-stack {
     background: #f8f9fa;
     padding: 20px;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    display: flex; flex-direction: column; gap: 20px; align-items: center;
 }
 
-/* PUZZLE ITEMS */
-.arrow-down { font-size: 1.5rem; color: #bdc1c6; margin: 2px 0; }
+/* ITEMS */
+.arrow-down { font-size: 1.2rem; color: #bdc1c6; margin: 0; }
+
 .drop-zone { 
-    width: 90%; min-height: 80px; 
+    width: 90%; min-height: 60px; 
     background: rgba(255,255,255,0.8); 
     border: 3px dashed #9aa0a6; 
-    border-radius: 12px; margin-bottom: 5px; 
+    border-radius: 12px; 
     display: flex; align-items: center; justify-content: center; 
     position: relative; font-weight: bold; color: #5f6368; 
     transition: all 0.2s;
 }
-.drop-zone::before { content: attr(data-label); position: absolute; top: 5px; left: 10px; font-size: 0.7rem; text-transform: uppercase; color: #999; letter-spacing: 1px; }
+.drop-zone::before { content: attr(data-label); position: absolute; top: 2px; left: 10px; font-size: 0.65rem; text-transform: uppercase; color: #999; letter-spacing: 1px; }
 .drop-zone.hovered { background: #e8f0fe; border-color: var(--primary); transform: scale(1.02); }
 .drop-zone.correct { background: #e6f4ea; border: 3px solid #34a853; color: #0d652d; border-style: solid; }
 
 .draggable-item { 
     background: white; border: 1px solid #dadce0; border-left: 5px solid #555; 
-    padding: 12px; margin-bottom: 10px; border-radius: 8px; 
+    padding: 8px 15px; border-radius: 8px; 
     cursor: grab; font-weight: 600; font-size: 0.95rem; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
     user-select: none;
 }
 .draggable-item:active { cursor: grabbing; transform: scale(0.98); }
 
-/* START PAGE */
-.start-container { max-width: 800px; margin: 40px auto; text-align: center; padding: 20px; }
-.hero-icon { font-size: 5rem; margin-bottom: 10px; animation: float 3s infinite ease-in-out; }
-.start-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; margin-top: 30px; box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3); transition: transform 0.2s; }
-.start-btn:hover { transform: scale(1.05); }
-
-/* HYBRID ELEMENTS */
+/* HYBRID */
 .hybrid-box { background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%); border: 2px solid #fbbc04; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
-
 .hybrid-visual { 
-    width: 100%;
-    max-width: 600px; /* Begrenzung für bessere Optik */
-    aspect-ratio: 16 / 9; /* Modernes Breitbild */
-    background: #fff; 
-    border: 3px solid #fbbc04; 
-    border-radius: 12px; 
-    display: flex; align-items: center; justify-content: center;
-    color: #888;
+    width: 100%; max-width: 600px; aspect-ratio: 16 / 9; 
+    background: #fff; border: 3px solid #fbbc04; border-radius: 12px; 
+    display: flex; align-items: center; justify-content: center; color: #888;
     background-image: url('https://www.eology.net/wp-content/uploads/2025/10/Bildschirmfoto-2025-10-14-um-13.30.06.png'); 
-    background-size: cover; /* Bild füllt Box aus */
-    background-position: top center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-size: cover; background-position: top center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-
 .hybrid-quiz-container {
-    width: 100%;
-    max-width: 600px;
-    border: 1px solid #fbbc04;
-    border-left: 5px solid #fbbc04; /* Markierung als Quiz */
-    border-radius: 12px;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    transition: transform 0.2s;
+    width: 100%; max-width: 600px; border: 1px solid #fbbc04; border-left: 5px solid #fbbc04; border-radius: 12px; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-.hybrid-quiz-container:hover { transform: translateY(-3px); }
-
-.quiz-option { padding:15px; border:1px solid #ccc; margin-bottom:10px; cursor:pointer; border-radius:8px; transition: background 0.2s; font-size: 0.95rem;}
+.quiz-option { padding:12px; border:1px solid #ccc; margin-bottom:8px; cursor:pointer; border-radius:8px; transition: background 0.2s; font-size: 0.9rem;}
 .quiz-option:hover { background: #f1f1f1; }
 
-/* LAB */
-.lab-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-.lab-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-.simulator-box { background: #1e293b; color: #e2e8f0; border-radius: 12px; padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.sim-label { color: var(--lab-color); font-weight:bold; display:block; margin-top: 15px; }
-.sim-output { background: #020617; padding: 15px; border-radius: 8px; border: 1px solid #1e293b; font-family: monospace; }
-input[type=range] { width: 100%; cursor: pointer; margin-bottom: 5px; }
-.bar-container { background: #333; height: 15px; border-radius: 10px; margin: 10px 0; overflow: hidden; }
-.bar-fill { height: 100%; transition: width 0.3s; }
-.badge { display: none; background: #ff0055; color: white; padding: 4px 8px; border-radius: 10px; font-size: 0.75rem; margin: 4px 2px; }
-
-/* MISSION */
-.mission-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+/* MISSION & SCHOOL */
+.mission-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 .mission-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .mission-badge { position: absolute; top: 0; right: 0; background: var(--mission-color); color: white; padding: 5px 15px; border-bottom-left-radius: 12px; font-weight: bold; }
 .copy-box { background: #f1f3f4; padding: 15px; border-radius: 6px; border: 1px dashed #999; margin: 15px 0; display: flex; justify-content: space-between; align-items: center; font-family: monospace; font-size: 0.95rem; }
-.mission-input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-top: 10px; font-family: inherit; font-size: 1rem; }
 .ai-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 30px 0; }
 .ai-tool-card { border: 1px solid var(--border); border-radius: 12px; padding: 15px; text-align: center; transition: all 0.2s; background: #fff; cursor: pointer; text-decoration: none; color: inherit; display: block; }
 .ai-tool-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: var(--primary); }
+
+/* SCHOOL GRID */
+.school-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 50px; }
+.prompt-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s; }
+.prompt-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: #ff5722; }
+.prompt-card h3 { margin-top: 0; color: #ff5722; display: flex; align-items: center; gap: 8px; }
+.prompt-card p { font-size: 0.9rem; color: #666; min-height: 40px; }
 
 /* FOOTER */
 .footer-nav { background: white; border-top: 1px solid var(--border); padding: 15px 40px; display: flex; align-items: center; justify-content: space-between; height: 70px; z-index: 100; flex-shrink: 0; }
@@ -218,8 +212,15 @@ input[type=range] { width: 100%; cursor: pointer; margin-bottom: 5px; }
 .next-btn { background: #202124; color: white; border: none; padding: 12px 30px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: background 0.2s; }
 .next-btn:hover { background: #000; }
 
-@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
+/* Start, Lab, etc. unverändert */
 .term { border-bottom: 2px dotted var(--primary); cursor: help; color: var(--primary); font-weight: bold; }
-#term-popup { display: none; position: fixed; background: #202124; color: #fff; padding: 15px; border-radius: 8px; z-index: 1000; max-width: 250px; font-size: 0.9rem; pointer-events: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+#term-popup { display: none; position: fixed; background: #202124; color: #fff; padding: 15px; border-radius: 8px; z-index: 1000; max-width: 250px; font-size: 0.9rem; pointer-events: none; }
+.start-container { max-width: 800px; margin: 40px auto; text-align: center; padding: 20px; }
+.hero-icon { font-size: 5rem; margin-bottom: 10px; animation: float 3s infinite ease-in-out; }
+.start-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; margin-top: 30px; box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3); transition: transform 0.2s; }
+.lab-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.lab-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.simulator-box { background: #1e293b; color: #e2e8f0; border-radius: 12px; padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+input[type=range] { width: 100%; cursor: pointer; margin-bottom: 5px; }
+.bar-container { background: #333; height: 15px; border-radius: 10px; margin: 10px 0; overflow: hidden; }
+.bar-fill { height: 100%; transition: width 0.3s; }

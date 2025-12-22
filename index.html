@@ -16,11 +16,12 @@
     
     <div class="stepper" id="stepper-nav">
         <button class="step-btn" data-target="start">Start</button>
-        <button class="step-btn" data-target="google">1. Klassische Suche</button>
-        <button class="step-btn" data-target="ai">2. KI Funktionsweise (1)</button>
-        <button class="step-btn" data-target="lab">3. KI Funktionsweise (2)</button>
-        <button class="step-btn" data-target="hybrid">4. Hybrid: Suche + KI</button>
-        <button class="step-btn" data-target="mission">5. Die Mission</button>
+        <button class="step-btn" data-target="google">1. Suche</button>
+        <button class="step-btn" data-target="ai">2. KI Basics 1</button>
+        <button class="step-btn" data-target="lab">3. KI Basics 2</button>
+        <button class="step-btn" data-target="hybrid">4. Hybrid</button>
+        <button class="step-btn" data-target="mission">5. Mission</button>
+        <button class="step-btn" data-target="school">6. KI & Schule</button>
     </div>
 </header>
 
@@ -31,23 +32,31 @@
 <main id="view-google" class="split-layout">
     <div class="col-text" id="text-google"></div>
     
-    <div class="col-tools" id="tools-google">
-        <div class="tool-header">Bausteine</div>
-        <div id="toolbox-google"></div>
+    <div class="interactive-area">
+        <div class="col-tools" id="tools-google">
+            <div class="tool-header">👇 Setze die Bausteine in das richtige Feld ein:</div>
+            <div id="toolbox-google" class="toolbox-container"></div>
+        </div>
+        
+        <div class="arrow-separator">⬇️</div>
+
+        <div class="col-puzzle" id="puzzle-google"></div>
     </div>
-    
-    <div class="col-puzzle" id="puzzle-google"></div>
 </main>
 
 <main id="view-ai" class="split-layout">
     <div class="col-text" id="text-ai"></div>
     
-    <div class="col-tools" id="tools-ai">
-        <div class="tool-header">Bausteine</div>
-        <div id="toolbox-ai"></div>
+    <div class="interactive-area">
+        <div class="col-tools" id="tools-ai">
+            <div class="tool-header">👇 Setze die Bausteine in das richtige Feld ein:</div>
+            <div id="toolbox-ai" class="toolbox-container"></div>
+        </div>
+
+        <div class="arrow-separator">⬇️</div>
+        
+        <div class="col-puzzle" id="puzzle-ai"></div>
     </div>
-    
-    <div class="col-puzzle" id="puzzle-ai"></div>
 </main>
 
 <main id="view-lab" class="single-layout">
@@ -101,11 +110,16 @@
 <main id="view-mission" class="single-layout">
     <div class="mission-container">
         <div style="text-align:center; margin-bottom:30px;" id="text-mission-intro"></div>
-        
-        <h3 style="text-align:center;">Die Kandidaten (Öffne sie in neuen Tabs):</h3>
-        <div class="ai-tools-grid" id="mission-tools"></div>
-        
-        <div id="mission-tasks"></div>
+        <div id="mission-content-area"></div> </div>
+</main>
+
+<main id="view-school" class="single-layout">
+    <div class="mission-container">
+        <div style="text-align:center; margin-bottom:30px;">
+            <h1 style="color: var(--primary);">🎓 KI als Lernpartner</h1>
+            <p style="font-size:1.1rem; color:#555;">KIs sind nicht zum Abschreiben da, sondern zum Üben! Hier sind die besten Tricks für deine Fächer.</p>
+        </div>
+        <div id="school-prompts-grid" class="school-grid"></div>
     </div>
 </main>
 

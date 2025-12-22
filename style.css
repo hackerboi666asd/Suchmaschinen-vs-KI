@@ -65,7 +65,7 @@ header {
 .step-btn.active[data-target="hybrid"] { background: var(--hybrid-color); color: #333; }
 .step-btn.active[data-target="mission"] { background: var(--mission-color); }
 
-/* LAYOUTS */
+/* MAIN LAYOUTS & GRID SYSTEM */
 main {
     flex: 1;
     overflow: hidden;
@@ -74,10 +74,20 @@ main {
     height: 100%;
     animation: fadeIn 0.3s ease-in-out;
 }
+
+/* 3-Spalten Layout (Google & KI): Text | Tools | Puzzle */
 main.active.split-layout {
     display: grid; 
-    grid-template-columns: 1.2fr 1.5fr 0.8fr;
+    /* Links (Text): 1.2fr | Mitte (Tools): 0.8fr | Rechts (Puzzle): 1.2fr */
+    grid-template-columns: 1.2fr 0.8fr 1.2fr;
 }
+
+/* 2-Spalten Layout (Hybrid): Text | Stapel (Bild + Quiz) */
+main.active.hybrid-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Text etwas breiter */
+}
+
 main.active.single-layout {
     display: block; 
     overflow-y: auto;
@@ -91,12 +101,32 @@ main.active.single-layout {
 .col-text h3 { margin-top: 20px; font-size: 1.1rem; color: var(--primary); }
 body .col-text h3.ai-title { color: var(--ai-color); }
 
+/* Tools (Quelle) - Jetzt in der Mitte */
+.col-tools { 
+    background: #fff; 
+    border-right: 1px solid var(--border); /* Trennlinie rechts zum Puzzle */
+    padding: 20px; 
+    overflow-y: auto; 
+}
+
+/* Puzzle (Ziel) - Jetzt Rechts */
 .col-puzzle { 
-    background: #f1f3f4; padding: 20px; 
+    background: #f1f3f4; 
+    padding: 20px; 
     overflow-y: auto; 
     display: flex; flex-direction: column; align-items: center; 
 }
-.col-tools { background: #fff; border-left: 1px solid var(--border); padding: 20px; overflow-y: auto; }
+
+/* RECHTER STAPEL (Hybrid) */
+.col-right-stack {
+    background: #f8f9fa;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
 
 /* PUZZLE ITEMS */
 .arrow-down { font-size: 1.5rem; color: #bdc1c6; margin: 2px 0; }
@@ -128,25 +158,35 @@ body .col-text h3.ai-title { color: var(--ai-color); }
 .start-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; margin-top: 30px; box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3); transition: transform 0.2s; }
 .start-btn:hover { transform: scale(1.05); }
 
-/* HYBRID PLACEHOLDER - RESPONSIVE FIX */
+/* HYBRID ELEMENTS */
 .hybrid-box { background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%); border: 2px solid #fbbc04; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
 
 .hybrid-visual { 
     width: 100%;
-    max-width: 864px; /* Maximale Breite des Originalbildes */
-    aspect-ratio: 864 / 464; /* Seitenverhältnis beibehalten */
-    background: #eee; 
-    border: 3px dashed #ccc; 
+    max-width: 600px; /* Begrenzung für bessere Optik */
+    aspect-ratio: 16 / 9; /* Modernes Breitbild */
+    background: #fff; 
+    border: 3px solid #fbbc04; 
     border-radius: 12px; 
-    margin: 20px auto; 
     display: flex; align-items: center; justify-content: center;
     color: #888;
-    /* Bild URL wird hier definiert, wird in app.js aber eh dynamisch gesetzt oder kann hier bleiben */
     background-image: url('https://www.eology.net/wp-content/uploads/2025/10/Bildschirmfoto-2025-10-14-um-13.30.06.png'); 
-    background-size: contain; /* Passt das Bild komplett ein */
-    background-repeat: no-repeat;
-    background-position: center;
+    background-size: cover; /* Bild füllt Box aus */
+    background-position: top center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
+
+.hybrid-quiz-container {
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #fbbc04;
+    border-left: 5px solid #fbbc04; /* Markierung als Quiz */
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+.hybrid-quiz-container:hover { transform: translateY(-3px); }
 
 .quiz-option { padding:15px; border:1px solid #ccc; margin-bottom:10px; cursor:pointer; border-radius:8px; transition: background 0.2s; font-size: 0.95rem;}
 .quiz-option:hover { background: #f1f1f1; }

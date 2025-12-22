@@ -30,20 +30,24 @@
 
 <main id="view-google" class="split-layout">
     <div class="col-text" id="text-google"></div>
-    <div class="col-puzzle" id="puzzle-google"></div>
+    
     <div class="col-tools" id="tools-google">
         <div class="tool-header">Bausteine</div>
         <div id="toolbox-google"></div>
     </div>
+    
+    <div class="col-puzzle" id="puzzle-google"></div>
 </main>
 
 <main id="view-ai" class="split-layout">
     <div class="col-text" id="text-ai"></div>
-    <div class="col-puzzle" id="puzzle-ai"></div>
+    
     <div class="col-tools" id="tools-ai">
         <div class="tool-header">Bausteine</div>
         <div id="toolbox-ai"></div>
     </div>
+    
+    <div class="col-puzzle" id="puzzle-ai"></div>
 </main>
 
 <main id="view-lab" class="single-layout">
@@ -69,10 +73,10 @@
                     <p style="margin:15px 0 5px 0;">Stromverbrauch:</p>
                     <div class="bar-container"><div id="bar-nrg" class="bar-fill" style="width:5%; background:linear-gradient(90deg, yellow, red);"></div></div>
                     <div style="margin-top:20px; border-top:1px solid #333; padding-top:10px;">
-                        <span id="b1" class="badge">💬 Texte schreiben</span>
+                        <span id="b1" class="badge">💬 Plappern</span>
                         <span id="b2" class="badge">➗ Mathe</span>
-                        <span id="b3" class="badge">💻 Computer-Code schreiben</span>
-                        <span id="b4" class="badge">🧠 Logik (schlau nachdenken)</span>
+                        <span id="b3" class="badge">💻 Coden</span>
+                        <span id="b4" class="badge">🧠 Logik</span>
                     </div>
                     <div id="sim-warn" style="color: #ff5555; font-size: 0.8rem; margin-top: 10px; display: none;">⚠️ Zu wenig Computer-Power!</div>
                 </div>
@@ -81,22 +85,26 @@
     </div>
 </main>
 
-<main id="view-hybrid" class="split-layout">
+<main id="view-hybrid" class="split-layout hybrid-layout">
     <div class="col-text" id="text-hybrid"></div>
-    <div class="col-puzzle" style="justify-content:center; align-items: center;">
+    
+    <div class="col-right-stack">
          <div class="hybrid-visual" id="hybrid-visual-content"></div>
-    </div>
-    <div class="col-tools" id="tools-hybrid">
-        <div class="tool-header">Wissens-Check</div>
-        <div id="quiz-hybrid"></div>
+         
+         <div class="col-tools hybrid-quiz-container" id="tools-hybrid">
+            <div class="tool-header">Wissens-Check (Klick mich!)</div>
+            <div id="quiz-hybrid"></div>
+         </div>
     </div>
 </main>
 
 <main id="view-mission" class="single-layout">
     <div class="mission-container">
         <div style="text-align:center; margin-bottom:30px;" id="text-mission-intro"></div>
-        <h3 style="text-align:center;">Wähle dein Werkzeug (Klick öffnet neuen Tab):</h3>
+        
+        <h3 style="text-align:center;">Die Kandidaten (Öffne sie in neuen Tabs):</h3>
         <div class="ai-tools-grid" id="mission-tools"></div>
+        
         <div id="mission-tasks"></div>
     </div>
 </main>

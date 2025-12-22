@@ -224,3 +224,51 @@ body .col-text h3.ai-title { color: var(--ai-color); }
 input[type=range] { width: 100%; cursor: pointer; margin-bottom: 5px; }
 .bar-container { background: #333; height: 15px; border-radius: 10px; margin: 10px 0; overflow: hidden; }
 .bar-fill { height: 100%; transition: width 0.3s; }
+
+/* GAME LAUNCHER CARD */
+.game-launcher {
+    background: linear-gradient(135deg, #0288d1 0%, #01579b 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    margin-bottom: 40px;
+    border: 1px solid #4fc3f7;
+}
+
+.game-icon {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    animation: float 3s infinite ease-in-out;
+}
+
+.mute-warning {
+    background: rgba(0,0,0,0.3);
+    color: #ffcc00;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 1px solid #ffcc00;
+}
+
+.launch-btn {
+    display: inline-block;
+    background: #ffcc00;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.launch-btn:hover {
+    transform: scale(1.05);
+    background: #ffd633;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}

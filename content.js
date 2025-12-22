@@ -124,47 +124,72 @@ const modules = {
         hint: "Spiele das Mini-Spiel im Text! Dann löse das Puzzle rechts."
     },
 
-    // --- MODUL 3: LABOR ---
-    lab: {
-        type: 'html-insert',
-        targetId: 'lab-intro-text',
-        content: `
-             
+// --- MODUL 3: KI LABOR (Spiel + Simulator) ---
+lab: {
+    type: 'html-insert',
+    targetId: 'lab-intro-text',
+    content: `
+        <h3>Experiment 1: Du bist der Lehrer! 🐟🥫</h3>
+        <p>Bevor wir über Supercomputer reden, musst du verstehen, wie wichtig <strong>gute Daten</strong> sind. Eine KI weiß nicht, was ein Fisch ist. Du musst es ihr zeigen!</p>
+        
+        <div style="background: #e0f7fa; border-left: 5px solid #00bcd4; padding: 15px; margin-bottom: 20px;">
+            <strong>🎮 Deine Aufgabe:</strong>
+            <ol style="margin:5px 0 0 20px; padding:0;">
+                <li>Klicke unten auf den großen Button.</li>
+                <li><strong>WICHTIG:</strong> Schalte den Ton an deinem iPad/Computer aus! 🔇</li>
+                <li>Bring der KI bei: <strong>Was ist ein Fisch? Was ist Müll?</strong></li>
+                <li>Komm danach hierher zurück für Experiment 2.</li>
+            </ol>
+        </div>
 
-            <h3>Warum sind KIs plötzlich so schlau? 🤯</h3>
-            <p>Vor ein paar Jahren waren Computer noch ziemlich "dumm". Sie konnten nicht mal einen Witz erzählen. Warum sind sie heute plötzlich so schlau wie Einstein?</p>
-            <p>Das Zauberwort heißt <strong>Skalierung</strong>. Das ist Computer-Sprache für: <em>"Wir machen alles extrem riesig!"</em></p>
+        <div class="game-launcher">
+            <div class="game-icon">🐟🤖</div>
+            <h2 style="color:white; margin:10px 0;">AI for Oceans</h2>
+            <div class="mute-warning">🔇 BITTE TON AUSSCHALTEN!</div>
+            <p style="margin-bottom:25px; font-size:1.1rem;">Trainiere die KI: Ist das ein Fisch oder gehört das in den Müll?</p>
             
-            <p>Damit eine KI super-schlau wird, musst du im Labor die perfekte Mischung aus 3 Zutaten finden:</p>
-            
-            <div style="background:#f0f4f8; padding:15px; border-radius:10px; margin-bottom:15px;">
-                <strong>🧠 1. Die Gehirn-Größe (Parameter)</strong><br>
-                Stell dir vor, dein Gehirn wäre so klein wie eine Erdnuss. Du könntest dir kaum etwas merken. Eine moderne KI hat ein "Gehirn" mit Milliarden von Verbindungen.
-                <br><em>Problem:</em> Ein riesiges Gehirn bringt nichts, wenn es leer ist!
-            </div>
+            <a href="https://studio.code.org/courses/oceans/units/1/lessons/1/levels/2" target="_blank" class="launch-btn">
+                Spiel im neuen Tab starten 🚀
+            </a>
+        </div>
 
-            <div style="background:#fff3e0; padding:15px; border-radius:10px; margin-bottom:15px;">
-                <strong>📚 2. Das Futter (Daten)</strong><br>
-                Die KI muss lesen, um zu lernen. Wenn du sie nur mit "SpongeBob"-Folgen fütterst, wird sie auf jede Mathe-Frage antworten: <em>"Ist hier die Krosse Krabbe?"</em> 🦀<br>
-                Damit sie schlau wird, muss sie <strong>alles</strong> lesen: Wikipedia, Bücher, Nachrichten, Programmier-Code.
-            </div>
+        <hr style="margin: 40px 0; border: 0; border-top: 2px dashed #ccc;">
 
-            <div style="background:#e0f2f1; padding:15px; border-radius:10px; margin-bottom:15px;">
-                <strong>⚡ 3. Die Muckis (Compute / Energie)</strong><br>
-                Das ganze Internet zu lesen, ist anstrengend! Das schafft kein normales Handy. Dafür braucht man riesige Hallen voller Super-Computer und extrem viel Strom.<br>
-                Ohne Strom "schläft" auch das größte Gehirn ein.
-            </div>
+        <h3>Experiment 2: Warum sind KIs plötzlich so schlau? 🤯</h3>
+        <p>Vor ein paar Jahren waren Computer noch ziemlich "dumm". Sie konnten nicht mal einen Witz erzählen. Warum sind sie heute plötzlich so schlau wie Einstein?</p>
+        <p>Das Zauberwort heißt <strong>Skalierung</strong> (Scaling). Das ist Computer-Sprache für: <em>"Wir machen alles extrem riesig!"</em></p>
+        
+        <p>Damit eine KI super-schlau wird, musst du im Labor die perfekte Mischung aus 3 Zutaten finden:</p>
+        
+        <div style="background:#f0f4f8; padding:15px; border-radius:10px; margin-bottom:15px;">
+            <strong>🧠 1. Die Gehirn-Größe (Parameter)</strong><br>
+            Stell dir vor, dein Gehirn wäre so klein wie eine Erdnuss. Du könntest dir kaum etwas merken. Eine moderne KI hat ein "Gehirn" mit Milliarden von Verbindungen.
+            <br><em>Problem:</em> Ein riesiges Gehirn bringt nichts, wenn es leer ist!
+        </div>
 
-            <p><strong>👨‍🔬 Dein Experiment:</strong><br>
-            Schiebe die Regler unten! Versuche, den IQ auf 100% zu bringen. Aber pass auf: Was passiert, wenn du der KI zwar viele Bücher gibst, aber ihr Gehirn winzig klein lässt?</p>
+        <div style="background:#fff3e0; padding:15px; border-radius:10px; margin-bottom:15px;">
+            <strong>📚 2. Das Futter (Daten)</strong><br>
+            Die KI muss lesen, um zu lernen. Wenn du sie nur mit "SpongeBob"-Folgen fütterst, wird sie auf jede Mathe-Frage antworten: <em>"Ist hier die Krosse Krabbe?"</em> 🦀<br>
+            Damit sie schlau wird, muss sie <strong>alles</strong> lesen: Wikipedia, Bücher, Nachrichten, Programmier-Code.
+        </div>
 
-            <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
-                <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                Spiele mit den Reglern. Beschreibe dann eine Situation, in der die KI <strong>"dumm"</strong> bleibt, obwohl du einen Regler ganz nach oben geschoben hast. Woran lag es?
-            </div>
-        `,
-        hint: "Teste alle Regler! Was passiert, wenn du viel Wissen (Daten) hast, aber ein kleines Gehirn?"
-    },
+        <div style="background:#e0f2f1; padding:15px; border-radius:10px; margin-bottom:15px;">
+            <strong>⚡ 3. Die Muckis (Compute / Energie)</strong><br>
+            Das ganze Internet zu lesen, ist anstrengend! Das schafft kein normales Handy. Dafür braucht man riesige Hallen voller Super-Computer und extrem viel Strom.<br>
+            Ohne Strom "schläft" auch das größte Gehirn ein.
+        </div>
+
+        <p><strong>👨‍🔬 Dein Experiment:</strong><br>
+        Schiebe die Regler unten! Versuche, den IQ auf 100% zu bringen. Aber pass auf: Was passiert, wenn du der KI zwar viele Bücher gibst, aber ihr Gehirn winzig klein lässt?</p>
+
+        <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
+            <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
+            1. Beschreibe kurz, was beim Ozean-Spiel passiert ist: Hat die KI am Anfang Fehler gemacht? Warum?<br>
+            2. Beschreibe beim Regler-Experiment: Warum braucht eine schlaue KI viel Strom?
+        </div>
+    `,
+    hint: "Spiele erst das Ozean-Spiel (Button klicken). Teste danach die Regler unten!"
+},
 
     // --- MODUL 4: HYBRID ---
     hybrid: {
@@ -180,9 +205,8 @@ const modules = {
                        <li>Zum Schluss schreibt die KI eine <strong>Zusammenfassung</strong> für dich.</li>
                    </ol>
                    <p style="text-align:center; margin-top:15px;">
-                       <a href="https://www.google.com/search?q=Wie+entstehen+Regenbogen" target="_blank" style="background:#4285f4; color:white; padding:8px 15px; text-decoration:none; border-radius:20px; font-weight:bold;">🔎 Teste es hier</a>
-                       <br><small>(Hinweis: Manchmal erscheint die AI-Box nicht bei jedem.)</small>
-                   </p>
+                       <a href="https://www.google.com/search?q=Wie+entstehen+Regenbogen" target="_blank" style="background:#4285f4; color:white; padding:8px 15px; text-decoration:none; border-radius:20px; font-weight:bold;">🔎 Teste es hier (klicke oben links auf "KI-Modus")</a>
+                </p>
                </div>
                
                <h3>Das Gute & Das Schlechte</h3>

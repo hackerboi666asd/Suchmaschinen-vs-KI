@@ -221,16 +221,10 @@ lab: {
 
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Erstelle eine Liste mit Vor- und Nachteilen. 
+                   Erstelle eine Liste mit Vor- und Nachteilen.
                    <br><strong>Wichtig:</strong> Sortiere sie! Was ist für DICH der größte Vorteil? Was ist die gefährlichste Gefahr? Begründe kurz.
                </div>`,
-        quiz: [
-            { text: 'Vorteil: Man spart Zeit.', correct: true, feedback: '✅ Richtig! Das ist der Hauptgrund für KI-Suche.' },
-            { text: 'Nachteil: Quellen-Blindheit.', correct: true, feedback: '✅ Genau! Man weiß nicht mehr, wer es geschrieben hat.' },
-            { text: 'Vorteil: Die KI übersetzt schwere Texte.', correct: true, feedback: '✅ Stimmt! Sie hilft beim Verstehen.' },
-            { text: 'Die KI verbraucht weniger Strom.', correct: false, feedback: '❌ Falsch. KI braucht riesige Rechenzentren.' }
-        ],
-        hint: "Klicke rechts auf den Wissens-Check! Sortiere danach die Vor- und Nachteile in deinem Dokument."
+        hint: "Sortiere die Vor- und Nachteile in deinem Dokument."
     },
 
     // --- MODUL 5: MISSION ---
@@ -289,8 +283,35 @@ lab: {
                             <td style="border:1px solid #999; padding:4px;"></td>
                             <td style="border:1px solid #999; padding:4px;"></td>
                         </tr>
+                        <tr>
+                            <td style="border:1px solid #999; padding:4px;">2. Kreativität</td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #999; padding:4px;">3. Meinung vs. Fakt</td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #999; padding:4px;">4. Logik & Mathe</td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #999; padding:4px;">5. Hilfe für die Schule</td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <parameter name="newString">                        <tr>
+                            <td style="border:1px solid #999; padding:4px;">5. Hilfe für die Schule</td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                            <td style="border:1px solid #999; padding:4px;"></td>
+                        </tr>
                     </table>
-                    <br><em>Füge Zeilen für die anderen Aufgaben hinzu!</em>
                 </div>`
             },
             {
@@ -314,9 +335,9 @@ lab: {
                 prompt: 'Ich habe 3 Äpfel. Gestern habe ich einen gegessen. Wie viele Äpfel habe ich heute?',
             },
             {
-                title: 'Test 5: Der Erklär-Bär (Schule)',
+                title: 'Test 5: Hilfe für die Schule',
                 desc: 'Kann die KI dir bei den Hausaufgaben helfen?',
-                prompt: 'Erkläre mir Photosynthese so, als wäre ich 5 Jahre alt. Benutze ein Beispiel mit Pizza.',
+                prompt: 'Erkläre mir die Kommasetzung im Deutschen so, als wäre ich 5 Jahre alt. Benutze ein Beispiel mit Pizza.',
             },
             {
                 title: 'Schritt 7: Das Urteil',

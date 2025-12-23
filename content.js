@@ -187,6 +187,8 @@ lab: {
             1. Beschreibe kurz, was beim Ozean-Spiel passiert ist: Hat die KI am Anfang Fehler gemacht? Warum?<br>
             2. Beschreibe beim Regler-Experiment: Warum braucht eine schlaue KI viel Strom?
         </div>
+
+       Teste dein Wissen über KI Training im <a href="./escape-game.html" target="_blank">Escape-Spiel</a>!</p>
     `,
     hint: "Spiele erst das Ozean-Spiel (Button klicken). Teste danach die Regler unten!"
 },

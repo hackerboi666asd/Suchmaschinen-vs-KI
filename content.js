@@ -144,11 +144,12 @@ lab: {
 
         <div class="game-launcher">
             <div class="game-icon">🐟🤖</div>
-            <h2 style="color:white; margin:10px 0;">AI for Oceans</h2>
+            <h2 style="color:white; margin:10px 0;">Eine KI trainieren</h2>
             <div class="mute-warning">🔇 BITTE TON AUSSCHALTEN!</div>
             <p style="margin-bottom:25px; font-size:1.1rem;">Trainiere die KI: Ist das ein Fisch oder gehört das in den Müll?</p>
+            <p style="font-size:0.9rem; color:#ffeb3b;">🇩🇪 Ändere die Sprache auf Deutsch unten links!</p>
             
-            <a href="https://studio.code.org/courses/oceans/units/1/lessons/1/levels/2" target="_blank" class="launch-btn">
+            <a href="https://studio.code.org/courses/oceans/units/1/lessons/1/levels/2?lang=de-DE" target="_blank" class="launch-btn">
                 Spiel im neuen Tab starten 🚀
             </a>
         </div>
@@ -215,6 +216,7 @@ lab: {
                <ul style="line-height: 1.6;">
                    <li>✅ <strong>Zeit-Sparer:</strong> Du musst nicht 5 verschiedene Webseiten öffnen. Die KI fasst alles zusammen.</li>
                    <li>✅ <strong>Verständlichkeit:</strong> Die KI kann komplizierte Experten-Texte in einfache Sprache übersetzen.</li>
+                   <li>✅ <strong>Interaktivität:</strong> Du kannst Folgefragen stellen und einen Dialog führen.</li>
                    <hr style="border:0; border-top:1px dashed #ccc; margin:10px 0;">
                    <li>❌ <strong>"Stille Post"-Effekt:</strong> Wenn die KI den Text falsch versteht, erzählt sie dir Quatsch, obwohl die Quelle richtig war.</li>
                    <li>❌ <strong>Quellen-Blindheit:</strong> Man prüft oft nicht mehr, <em>wer</em> das eigentlich geschrieben hat.</li>
@@ -304,10 +306,6 @@ lab: {
                             <td style="border:1px solid #999; padding:4px;"></td>
                         </tr>
                         <tr>
-                            <td style="border:1px solid #999; padding:4px;">5. Hilfe für die Schule</td>
-                            <td style="border:1px solid #999; padding:4px;"></td>
-                            <td style="border:1px solid #999; padding:4px;"></td>
-                            <parameter name="newString">                        <tr>
                             <td style="border:1px solid #999; padding:4px;">5. Hilfe für die Schule</td>
                             <td style="border:1px solid #999; padding:4px;"></td>
                             <td style="border:1px solid #999; padding:4px;"></td>

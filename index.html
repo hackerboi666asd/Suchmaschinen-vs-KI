@@ -17,8 +17,8 @@
     <div class="stepper" id="stepper-nav">
         <button class="step-btn" data-target="start">Start</button>
         <button class="step-btn" data-target="google">1. Suche</button>
-        <button class="step-btn" data-target="ai">2. KI Basics 1</button>
-        <button class="step-btn" data-target="lab">3. KI Basics 2</button>
+        <button class="step-btn" data-target="ai">2. KI Grundlagen 1</button>
+        <button class="step-btn" data-target="lab">3. KI Grundlagen 2</button>
         <button class="step-btn" data-target="hybrid">4. Hybrid</button>
         <button class="step-btn" data-target="mission">5. Mission</button>
         <button class="step-btn" data-target="school">6. KI & Schule</button>
@@ -82,6 +82,7 @@
                     <p style="margin:15px 0 5px 0;">Stromverbrauch:</p>
                     <div class="bar-container"><div id="bar-nrg" class="bar-fill" style="width:5%; background:linear-gradient(90deg, yellow, red);"></div></div>
                     <div style="margin-top:20px; border-top:1px solid #333; padding-top:10px;">
+                        <p style="margin:0 0 10px 0; color: var(--lab-color); font-weight: bold;">Die KI kann jetzt:</p>
                         <span id="b1" class="badge">💬 Texte schreiben</span>
                         <span id="b2" class="badge">➗ Mathe</span>
                         <span id="b3" class="badge">💻 Programmieren</span>
@@ -94,12 +95,8 @@
     </div>
 </main>
 
-<main id="view-hybrid" class="split-layout hybrid-layout">
+<main id="view-hybrid" class="single-layout">
     <div class="col-text" id="text-hybrid"></div>
-    
-    <div class="col-right-stack">
-         <div class="hybrid-visual" id="hybrid-visual-content"></div>
-    </div>
 </main>
 
 <main id="view-mission" class="single-layout">
@@ -120,12 +117,12 @@
             <p style="font-size:1.1rem; color:#555;">KIs sind nicht zum Abschreiben da, sondern zum Üben! Hier sind die besten Tricks für deine Fächer.</p>
         </div>
         <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
-            <strong>Auftrag</strong>: Teste die Fragen/Aufgaben mit deiner Lieblings-KI und schau wie sie dir beim Lernen helfen kann.
+            <strong>Auftrag</strong>: Teste die Fragen/Aufgaben mit deiner Lieblings-KI und schau wie sie dir beim Lernen helfen kann. Schreibe dann in Stichworten deine Erfahrung auf und wofür du KI in der Schule zukünftig einsetzen könntest.
         </div>
 
         <div style="background: #fff3cd; padding: 20px; border-radius: 12px; margin: 20px 0 40px 0; border: 2px solid #ffeb3b; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
             <h2 style="color: #f57c00; margin-top: 0;">🤖 Profi-Anleitung: So wirst du zum KI-Experten</h2>
-            <p>Hast du schon mal eine Antwort von der KI bekommen, die totaler Quatsch war? Das liegt meistens nicht an der KI, sondern am Prompt (so nennt man den Befehl, den du eintippst). Hier sind die vier wichtigsten Tricks aus dem Video:</p>
+            <p>Hast du schon mal eine Antwort von der KI bekommen, die totaler Quatsch war? Das liegt meistens nicht an der KI, sondern am Prompt (so nennt man den Befehl, den du eintippst). Hier sind die vier wichtigsten Tricks:</p>
 
             <ol style="line-height: 1.8;">
                 <li><strong>Gib der KI eine Rolle (Persona) 👤</strong><br>

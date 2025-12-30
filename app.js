@@ -28,6 +28,9 @@ const app = {
             if(el) el.addEventListener('input', () => this.updateSim());
         });
 
+        // Initial update for simulator
+        this.updateSim();
+
         // Start
         this.goToStep('start');
     },

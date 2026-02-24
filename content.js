@@ -10,16 +10,16 @@ const modules = {
         targetId: 'content-start',
         content: `
             <div class="hero-icon">🕵️‍♂️🔎🤖</div>
-            <h1 style="font-size: 2.5rem; color: var(--primary);">Bist du bereit, KI-Detektiv?</h1>
+            <h1 style="font-size: 2.5rem; color: var(--primary);">Bist du bereit, Künstliche Intelligenz (KI) kennenzulernen?</h1>
             <p style="font-size: 1.2rem; color: #555; margin-bottom: 40px; line-height: 1.6;">
                 Du benutzt bestimmt oft Suchmaschinen wie Google. Aber hast du schon mal mit einer <strong>Künstlichen Intelligenz (KI)</strong> gesprochen?<br>
                 Heute finden wir heraus: Was ist der Unterschied? Und wer ist schlauer?
             </p>
             <div style="text-align: left; background: #fff; padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #e0e0e0; box-shadow: 0 5px 15px rgba(0,0,0,0.03);">
-                <h3 style="margin-top:0;">Dein Detektiv-Auftrag heute:</h3>
+                <h3 style="margin-top:0;">Dein Auftrag:</h3>
                 <ul style="line-height: 2; font-size: 1.1rem;">
-                    <li>✅ <strong>Wiederholung:</strong> Wie findet Google Webseiten?</li>
-                    <li>✅ <strong>Lernen:</strong> Wie lernt eine KI sprechen?</li>
+                    <li>✅ <strong>Wiederholung:</strong> Wie funktioniert eine Suchmaschine?</li>
+                    <li>✅ <strong>Lernen:</strong> Wie lernt eine KI und gibt Antworten?</li>
                     <li>✅ <strong>Experimentieren:</strong> Trainiere dein eigenes KI-Modell im Labor.</li>
                     <li>✅ <strong>Mission:</strong> Löse 5 spannende Fälle im großen Vergleichstest.</li>
                     <li>✅ <strong>Bonus:</strong> Lerne, wie KI dir bei Hausaufgaben hilft (ohne zu schummeln!).</li>
@@ -53,7 +53,7 @@ const modules = {
 
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Baue das Puzzle rechts. Übertrage den Ablauf dann als kleine Zeichnung oder mit Formen in dein Dokument.
+                   Baue das Puzzle rechts. Mache dann davon einen Screenshot und füge ihn in dein Dokument.
                </div>`,
         puzzle: [
             { label: '1. Sammeln', correct: 'Crawler' },
@@ -93,7 +93,7 @@ const modules = {
                     <p style="margin-bottom:10px;">Die KI sieht den Satzanfang: <em>"Die Maus frisst den..."</em><br>
                     Welches Wort kommt wahrscheinlich als nächstes?</p>
                     <button onclick="alert('❌ Unwahrscheinlich (0.01%). Warum sollte sie den Mond fressen?')" style="margin:5px; padding:5px 10px; cursor:pointer;">Mond 🌑</button>
-                    <button onclick="alert('✅ Sehr wahrscheinlich (95%)! Das würde die KI wählen.')" style="margin:5px; padding:5px 10px; cursor:pointer; font-weight:bold;">Käse 🧀</button>
+                    <button onclick="alert('✅ Sehr wahrscheinlich (95%)! Das würde die KI wählen.')" style="margin:5px; padding:5px 10px; cursor:pointer;">Käse 🧀</button>
                     <button onclick="alert('⚠️ Möglich, aber seltener (4%). Vielleicht in einem Cartoon?')" style="margin:5px; padding:5px 10px; cursor:pointer;">Teppich 🧶</button>
                </div>
 
@@ -105,7 +105,7 @@ const modules = {
 
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Schreibe in eigenen Worten: Was ist der Unterschied zwischen <em>Suchen</em> (Google) und <em>Errechnen</em> (KI)?
+                   Mache einen Screenshot vom gelösten Ablauf. Dann schreibe in eigenen Worten: Was ist der Unterschied zwischen <em>Suchen</em> (Google) und <em>Errechnen</em> (KI)?
                </div>`,
         puzzle: [
             { label: '1. Füttern', correct: 'Daten' },
@@ -124,11 +124,11 @@ const modules = {
         hint: "Spiele das Mini-Spiel im Text! Dann löse das Puzzle rechts."
     },
 
-// --- MODUL 3: KI LABOR (Spiel + Simulator) ---
-lab: {
-    type: 'html-insert',
-    targetId: 'lab-intro-text',
-    content: `
+    // --- MODUL 3: KI LABOR (Spiel + Simulator) ---
+    lab: {
+        type: 'html-insert',
+        targetId: 'lab-intro-text',
+        content: `
         <h3>Experiment 1: Du bist der Lehrer! 🐟🥫</h3>
         <p>Bevor wir über Supercomputer reden, musst du verstehen, wie wichtig <strong>gute Daten</strong> sind. Eine KI weiß nicht, was ein Fisch ist. Du musst es ihr zeigen!</p>
         
@@ -138,7 +138,7 @@ lab: {
                 <li>Klicke unten auf den großen Button.</li>
                 <li><strong>WICHTIG:</strong> Schalte den Ton an deinem iPad/Computer aus! 🔇</li>
                 <li>Bring der KI bei: <strong>Was ist ein Fisch? Was ist Müll?</strong></li>
-                <li>Komm danach hierher zurück für Experiment 2.</li>
+                <li>Komm danach hierher zurück und klicke auf "Weiter" für Experiment 2.</li>
             </ol>
         </div>
 
@@ -153,9 +153,14 @@ lab: {
                 Spiel im neuen Tab starten 🚀
             </a>
         </div>
+    `,
+        hint: "Spiele erst das Ozean-Spiel (Button klicken). Klicke danach auf 'Weiter'."
+    },
 
-        <hr style="margin: 40px 0; border: 0; border-top: 2px dashed #ccc;">
-
+    lab2: {
+        type: 'html-insert',
+        targetId: 'lab2-text',
+        content: `
         <h3>Experiment 2: Warum sind KIs plötzlich so schlau? 🤯</h3>
         <p>Vor ein paar Jahren waren Computer noch ziemlich "dumm". Sie konnten nicht mal einen Witz erzählen. Warum sind sie heute plötzlich so schlau wie Einstein?</p>
         <p>Das Zauberwort heißt <strong>Skalierung</strong> (Scaling). Das ist Computer-Sprache für: <em>"Wir machen alles extrem riesig!"</em></p>
@@ -189,10 +194,11 @@ lab: {
             2. Beschreibe beim Regler-Experiment: Warum braucht eine schlaue KI viel Strom?
         </div>
 
-       Teste dein Wissen über KI Training im <a href="./escape-game.html" target="_blank">Escape-Spiel</a>!</p>
+        <p>Teste dein Wissen über KI Training im <a href="./escape-game.html" target="_blank">Escape-Spiel</a>!</p>
     `,
-    hint: "Spiele erst das Ozean-Spiel (Button klicken). Teste danach die Regler unten!"
-},
+        hint: "Teste die Regler unten! Was passiert beim IQ?"
+    },
+
 
     // --- MODUL 4: HYBRID ---
     hybrid: {
@@ -225,8 +231,8 @@ lab: {
 
                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--primary);">
                    <strong>📝 Dein Auftrag für Pages/GoodNotes:</strong><br>
-                   Erstelle eine Liste mit Vor- und Nachteilen.
-                   <br><strong>Wichtig:</strong> Sortiere sie! Was ist für DICH der größte Vorteil? Was ist die gefährlichste Gefahr? Begründe kurz.
+                   Kopiere die Liste mit Vor- und Nachteilen.
+                   <br><strong>Wichtig:</strong> Sortiere sie! Was ist für DICH der größte Vorteil? Was ist der größte Nachteil? Begründe kurz.
                </div>`,
         hint: "Sortiere die Vor- und Nachteile in deinem Dokument."
     },
@@ -235,9 +241,9 @@ lab: {
     mission: {
         intro: `
             <div class="hero-icon" style="font-size:3rem; margin-bottom:10px;">🕵️‍♂️</div>
-            <h1 style="color: var(--mission-color);">Willkommen zurück, Detektiv!</h1>
+            <h1 style="color: var(--mission-color);">Willkommen zur Mission</h1>
             <p>Du hast gelernt, wie Google sucht und wie KIs denken. Jetzt kommt deine Abschlussprüfung.</p>
-            <p>Du wirst zum <strong>Technik-Tester</strong>. Vergleiche verschiedene KIs und finde heraus: Welche ist die beste für die Schule? Welche für die Freizeit?</p>
+            <p>Du wirst zum <strong>Technik-Tester</strong>. Vergleiche verschiedene KIs.</p>
         `,
         tools: [
             { name: 'ChatGPT', icon: '🟢', url: 'https://chatgpt.com', sub: 'Die Bekannte' },
@@ -279,7 +285,7 @@ lab: {
                             <td style="border:1px solid #999; padding:4px;">Aufgabe</td>
                             <td style="border:1px solid #999; padding:4px;">Antwort KI 1</td>
                             <td style="border:1px solid #999; padding:4px;">Antwort KI 2</td>
-                            <td style="border:1px solid #999; padding:4px;">Note (1-5 ⭐)</td>
+                            <td style="border:1px solid #999; padding:4px;">Welche KI ist besser?</td>
                         </tr>
                         <tr>
                             <td style="border:1px solid #999; padding:4px;">1. Halluzination</td>
@@ -340,7 +346,7 @@ lab: {
                 prompt: 'Erkläre mir die Kommasetzung im Deutschen so, als wäre ich 5 Jahre alt. Benutze ein Beispiel mit Pizza.',
             },
             {
-                title: 'Schritt 7: Das Urteil',
+                title: 'Schritt 2: Das Urteil',
                 desc: 'Schau dir deine Tabelle an. Wer hat gewonnen?',
                 isInfo: true,
                 prompt: null,

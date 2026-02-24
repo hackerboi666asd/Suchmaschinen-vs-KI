@@ -5,10 +5,10 @@
 
 const app = {
     // Die Reihenfolge der Seiten
-    sequence: ['start', 'google', 'ai', 'lab', 'hybrid', 'mission', 'school'],
+    sequence: ['start', 'google', 'ai', 'lab', 'lab2', 'hybrid', 'mission', 'school'],
     currentStep: 'start',
 
-    init: function() {
+    init: function () {
         // Navigation Events (Header Buttons)
         document.querySelectorAll('.step-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -25,7 +25,7 @@ const app = {
         // Simulator Events (Slider)
         ['sim-params', 'sim-data', 'sim-compute'].forEach(id => {
             const el = document.getElementById(id);
-            if(el) el.addEventListener('input', () => this.updateSim());
+            if (el) el.addEventListener('input', () => this.updateSim());
         });
 
         // Initial update for simulator
@@ -35,20 +35,20 @@ const app = {
         this.goToStep('start');
     },
 
-    goToStep: function(targetId) {
+    goToStep: function (targetId) {
         if (!this.sequence.includes(targetId)) return;
         this.currentStep = targetId;
         this.updateUI();
     },
 
-    nextStep: function() {
+    nextStep: function () {
         const currentIdx = this.sequence.indexOf(this.currentStep);
         if (currentIdx < this.sequence.length - 1) {
             this.goToStep(this.sequence[currentIdx + 1]);
         }
     },
 
-    updateUI: function() {
+    updateUI: function () {
         const mode = this.currentStep;
         const data = modules[mode];
 
@@ -60,12 +60,12 @@ const app = {
         // 2. Views umschalten
         document.querySelectorAll('main').forEach(m => m.classList.remove('active'));
         const view = document.getElementById(`view-${mode}`);
-        if(view) view.classList.add('active');
+        if (view) view.classList.add('active');
 
         // 3. Footer und Inhalte laden
         const hintBox = document.getElementById('footer-hint');
         const nextBtn = document.getElementById('next-btn');
-        
+
         // Button auf letzter Seite ausblenden
         nextBtn.style.display = (mode === 'school') ? 'none' : 'flex';
 
@@ -81,7 +81,7 @@ const app = {
             // HTML Insert (für Start/Lab)
             if (data.type === 'html-insert' && data.targetId) {
                 const target = document.getElementById(data.targetId);
-                if(target) target.innerHTML = data.content;
+                if (target) target.innerHTML = data.content;
             }
 
             // Puzzles initialisieren (mit Verzögerung für DOM-Aufbau)
@@ -90,9 +90,9 @@ const app = {
             }
 
             // Visualisierung Hybrid
-            if(mode === 'hybrid') {
+            if (mode === 'hybrid') {
                 const visContainer = document.getElementById('hybrid-visual-content');
-                if(visContainer) {
+                if (visContainer) {
                     visContainer.innerHTML = ``;
                 }
             }
@@ -118,13 +118,13 @@ const app = {
     },
 
     /* --- PUZZLE LOGIC --- */
-    initPuzzle: function(mode, data) {
+    initPuzzle: function (mode, data) {
         const pZone = document.getElementById(`puzzle-${mode}`);
         const tBox = document.getElementById(`toolbox-${mode}`);
-        
+
         if (!pZone || !tBox) return;
 
-        pZone.innerHTML = ''; 
+        pZone.innerHTML = '';
         tBox.innerHTML = '';
 
         // Drop Zones (Ziel) erstellen
@@ -140,10 +140,10 @@ const app = {
             el.className = 'drop-zone';
             el.dataset.label = step.label;
             el.dataset.target = step.correct;
-            
+
             // Event Listeners
-            el.ondragover = (e) => { 
-                e.preventDefault(); 
+            el.ondragover = (e) => {
+                e.preventDefault();
                 el.classList.add('hovered');
             };
             el.ondragleave = () => el.classList.remove('hovered');
@@ -159,32 +159,32 @@ const app = {
             el.draggable = true;
             el.innerText = item.text;
             el.dataset.type = item.type;
-            
+
             el.ondragstart = (e) => {
                 e.dataTransfer.setData('type', item.type);
                 e.dataTransfer.setData('text', item.text);
                 el.classList.add('dragging');
             };
             el.ondragend = () => el.classList.remove('dragging');
-            
+
             tBox.appendChild(el);
         });
     },
 
-    handleDrop: function(e, zone) {
+    handleDrop: function (e, zone) {
         e.preventDefault();
         zone.classList.remove('hovered');
-        
-        if(zone.classList.contains('correct')) return;
+
+        if (zone.classList.contains('correct')) return;
 
         const type = e.dataTransfer.getData('type');
         const text = e.dataTransfer.getData('text');
-        
+
         if (type === zone.dataset.target) {
-            zone.innerText = text; 
+            zone.innerText = text;
             zone.classList.add('correct');
             const old = document.querySelector('.draggable-item.dragging');
-            if(old) old.remove();
+            if (old) old.remove();
         } else {
             zone.style.backgroundColor = '#fce8e6';
             setTimeout(() => zone.style.backgroundColor = 'rgba(255,255,255,0.8)', 500);
@@ -192,39 +192,45 @@ const app = {
     },
 
     /* --- SIMULATOR --- */
-    updateSim: function() {
+    updateSim: function () {
         const p = parseInt(document.getElementById('sim-params').value);
         const d = parseInt(document.getElementById('sim-data').value);
         const c = parseInt(document.getElementById('sim-compute').value);
-        
+
         const potential = (p + d) / 2;
         let realized = c >= potential ? potential : c + (potential - c) * 0.1;
-        
-        document.getElementById('iq-val').innerText = Math.round(realized);
-        document.getElementById('bar-iq').style.width = realized + '%';
-        
-        let energy = (p * d) / 80;
-        document.getElementById('bar-nrg').style.width = Math.min(energy, 100) + '%';
-        
-        document.getElementById('b1').style.display = realized > 10 ? 'inline-block' : 'none';
-        document.getElementById('b2').style.display = realized > 40 ? 'inline-block' : 'none';
-        document.getElementById('b3').style.display = realized > 70 ? 'inline-block' : 'none';
-        document.getElementById('b4').style.display = realized > 90 ? 'inline-block' : 'none';
 
-        document.getElementById('sim-warn').style.display = (c < potential - 15) ? 'block' : 'none';
+        const iqVal = document.getElementById('iq-val');
+        const barIq = document.getElementById('bar-iq');
+        const barNrg = document.getElementById('bar-nrg');
+        const simWarn = document.getElementById('sim-warn');
+
+        if (iqVal) iqVal.innerText = Math.round(realized);
+        if (barIq) barIq.style.width = realized + '%';
+        if (barNrg) barNrg.style.width = Math.min(energy, 100) + '%';
+
+        const badges = ['b1', 'b2', 'b3', 'b4'];
+        const thresholds = [10, 40, 70, 90];
+
+        badges.forEach((id, idx) => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = realized > thresholds[idx] ? 'inline-block' : 'none';
+        });
+
+        if (simWarn) simWarn.style.display = (c < potential - 15) ? 'block' : 'none';
     },
 
     /* --- RENDER HELPER --- */
-    renderQuiz: function(mode, questions) {
+    renderQuiz: function (mode, questions) {
         const container = document.getElementById(`quiz-${mode}`);
-        if(!container) return;
+        if (!container) return;
         container.innerHTML = '';
-        
+
         questions.forEach(q => {
             const el = document.createElement('div');
             el.className = 'quiz-option';
             el.innerText = q.text;
-            el.onclick = function() {
+            el.onclick = function () {
                 this.style.background = q.correct ? '#e6f4ea' : '#fce8e6';
                 this.innerText = q.feedback;
             };
@@ -232,7 +238,7 @@ const app = {
         });
     },
 
-    renderMission: function(data) {
+    renderMission: function (data) {
         document.getElementById('text-mission-intro').innerHTML = data.intro;
 
         // 1. Tools rendern
@@ -250,33 +256,33 @@ const app = {
         // 2. Tasks rendern
         const taskCont = document.getElementById('mission-tasks');
         taskCont.innerHTML = '';
-        
+
         data.tasks.forEach((t, i) => {
             let html = `<div class="mission-card">`;
-            
+
             // Badge nur wenn es kein reiner Info-Schritt ist (wie der Security Check)
-            if(!t.isInfo || i > 0) { 
-                 html += `<div class="mission-badge">Schritt ${i+1}</div>`;
+            if (!t.isInfo || i > 0) {
+                html += `<div class="mission-badge">Schritt ${i + 1}</div>`;
             }
-            
+
             html += `<h3 style="margin-top:0; color:#333;">${t.title}</h3><p style="line-height:1.6; color:#555;">${t.desc}</p>`;
-            
+
             // Custom HTML (Tabelle, Security Check, Fazit Box)
-            if(t.customHtml) {
+            if (t.customHtml) {
                 html += t.customHtml;
             }
 
             // Prompt Box
-            if(t.prompt) {
+            if (t.prompt) {
                 html += `
                 <div class="copy-box">
                     <span id="p-${i}">${t.prompt}</span>
                     <button class="step-btn" onclick="app.copyToClip('p-${i}')">Kopieren</button>
                 </div>`;
             }
-            
+
             // Hinweis "In Tabelle eintragen"
-            if(t.prompt) {
+            if (t.prompt) {
                 html += `<div style="background:#fff3cd; color:#856404; padding:10px; border-radius:6px; font-size:0.9rem; margin-top:10px; border:1px solid #ffeeba;">
                             ✍️ <strong>Aufgabe:</strong> Kopiere die Antwort (oder eine Zusammenfassung) in deine Tabelle.
                          </div>`;
@@ -287,9 +293,9 @@ const app = {
     },
 
     // --- NEU: SCHULE RENDERER ---
-    renderSchool: function(data) {
+    renderSchool: function (data) {
         const grid = document.getElementById('school-prompts-grid');
-        if(!grid) return;
+        if (!grid) return;
         grid.innerHTML = '';
 
         data.prompts.forEach((p, i) => {
@@ -309,12 +315,12 @@ const app = {
     },
 
     /* --- HELPERS --- */
-    copyToClip: function(id) {
+    copyToClip: function (id) {
         navigator.clipboard.writeText(document.getElementById(id).innerText);
         alert('Text kopiert! Füge ihn jetzt bei der KI ein.');
     },
 
-    attachGlossary: function() {
+    attachGlossary: function () {
         const popup = document.getElementById('term-popup');
         document.querySelectorAll('.term').forEach(t => {
             t.onmouseenter = e => {

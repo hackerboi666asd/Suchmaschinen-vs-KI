@@ -207,7 +207,7 @@ const app = {
 
         if (iqVal) iqVal.innerText = Math.round(realized);
         if (barIq) barIq.style.width = realized + '%';
-        if (barNrg) barNrg.style.width = Math.min(energy, 100) + '%';
+        if (barNrg) barNrg.style.width = Math.min(c, 100) + '%';
 
         const badges = ['b1', 'b2', 'b3', 'b4'];
         const thresholds = [10, 40, 70, 90];

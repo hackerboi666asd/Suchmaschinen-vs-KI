@@ -410,5 +410,208 @@ const modules = {
                 prompt: 'Ich schreibe morgen einen Test über [Thema]. Bitte stelle mir 5 Fragen dazu, um mich zu testen. Warte auf meine Antwort.'
             }
         ]
+    },
+
+    // --- MODUL 8: KI & FREUNDSCHAFT ---
+    freunde: {
+        hint: "Lies den Text und mach die Aufgaben. Echte Freundschaft ist unersetzlich! ❤️",
+
+        intro: `
+            <h2>🤖❤️ Kann KI wirklich dein Freund sein?</h2>
+            <p>Apps wie <strong>ChatGPT</strong>, <strong>Grok</strong> oder <strong>Character.AI</strong> sind super schlau. Sie beantworten Fragen, erklären Hausaufgaben und reden mit dir, wann immer du willst. Das fühlt sich manchmal an wie ein Gespräch mit einem Freund. 🤔</p>
+            <p>Aber: Eine KI ist <strong>kein echter Freund</strong>. Sie tut nur so, als würde sie dich mögen – so wie ein Roboter-Teddy, der immer nett ist, egal was passiert. Dafür haben Wissenschaftler sogar einen Namen erfunden: den <span class="term" data-def="Der Eliza-Effekt: Menschen glauben, ein Computerprogramm hätte echte Gefühle – obwohl es nur Text berechnet.">Eliza-Effekt 🤖</span>.</p>
+            <p>Was fehlt der KI wirklich?</p>
+            <ul style="line-height: 2;">
+                <li>💔 Sie hat <strong>keine echten Gefühle</strong> – sie berechnet nur Wörter.</li>
+                <li>🧠 Sie erinnert sich <strong>nicht</strong> daran, dass du letzten Sommer zusammen Eis gegessen habt.</li>
+                <li>🤗 Sie kann dich <strong>nie in den Arm nehmen</strong>, wenn du weinst.</li>
+                <li>⚽ Sie kann <strong>nicht zum Fußball</strong> kommen oder auf deiner Geburtstagsfeier lachen.</li>
+                <li>😤 Sie kann sich <strong>nicht mit dir streiten</strong> und danach wirklich Entschuldigung sagen.</li>
+            </ul>
+            <p style="background: #fce4f1; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #e91e8c;">
+                💡 <strong>Fazit:</strong> KI ist ein toller <em>Helfer</em> – für Hausaufgaben, zum Lernen oder als Unterhaltung. Aber für echte Freundschaft brauchst du echte Menschen. ❤️
+            </p>
+        `,
+
+        cards: [
+            {
+                text: "Erinnert sich daran, dass du beim letzten Schulfest zusammen Musik gehört habt 🎵",
+                correctSide: "freund",
+                feedback: {
+                    ki: "Das passt eher zum echten Freund! KI hat kein echtes Gedächtnis für gemeinsame Erlebnisse.",
+                    freund: "Genau! Ein echter Freund teilt echte Erinnerungen mit dir – das kann KI nicht."
+                }
+            },
+            {
+                text: "Antwortet sofort rund um die Uhr, egal wie spät es ist 🕐",
+                correctSide: "ki",
+                feedback: {
+                    ki: "Richtig! KI ist immer online. Das ist praktisch – aber kein Zeichen von echter Freundschaft.",
+                    freund: "Eher KI! Echte Freunde schlafen auch mal – und das ist völlig normal! 😄"
+                }
+            },
+            {
+                text: "Kann dich in den Arm nehmen, wenn du traurig bist 🤗",
+                correctSide: "freund",
+                feedback: {
+                    ki: "Das kann nur ein echter Freund! KI hat keinen Körper und kann dich nicht anfassen.",
+                    freund: "Genau! Eine Umarmung von einem echten Freund ist durch nichts zu ersetzen."
+                }
+            },
+            {
+                text: "Ist immer nett und freundlich – egal was du sagst 😊",
+                correctSide: "ki",
+                feedback: {
+                    ki: "Richtig! KI ist immer höflich – weil sie so programmiert ist. Das macht sie aber auch weniger ehrlich.",
+                    freund: "Eher KI! Echte Freunde sagen dir auch mal die Wahrheit, auch wenn sie wehtut. Das zeigt, dass sie sich kümmern!"
+                }
+            },
+            {
+                text: "Kommt zu deiner Geburtstagsfeier und bringt ein Geschenk 🎂",
+                correctSide: "freund",
+                feedback: {
+                    ki: "Das kann nur ein echter Freund! KI kann weder kommen noch ein Geschenk einpacken.",
+                    freund: "Genau! Zusammen feiern – das ist echter Freundschaft-Stoff! 🎉"
+                }
+            },
+            {
+                text: "Streitet sich mit dir und verträgt sich danach wieder 😤😊",
+                correctSide: "freund",
+                feedback: {
+                    ki: "Das kann nur ein echter Freund! Streit und Versöhnung machen Freundschaften sogar stärker.",
+                    freund: "Richtig! KI kann nie wirklich streiten oder sich echte Entschuldigung sagen. Echter Streit zeigt, dass beiden etwas wichtig ist."
+                }
+            },
+            {
+                text: "Hilft dir, eine schwierige Mathe-Aufgabe Schritt für Schritt zu verstehen 📐",
+                correctSide: "ki",
+                feedback: {
+                    ki: "Richtig! KI als Lern-Helfer ist super – das ist genau die richtige Nutzung.",
+                    freund: "Eher KI! Natürlich kann ein Freund auch helfen – aber KI ist als Lern-Assistent besonders stark."
+                }
+            },
+            {
+                text: "Wäre traurig, wenn du sie nie wieder anschreiben würdest 😢",
+                correctSide: "freund",
+                feedback: {
+                    ki: "Das trifft nur auf echte Freunde zu. KI hat keine Gefühle – sie vermisst dich nicht.",
+                    freund: "Genau! Ein echter Freund bemerkt, wenn du fehlst – KI nicht. Das ist der riesige Unterschied."
+                }
+            }
+        ],
+
+        dialog: {
+            ki: [
+                {
+                    text: "Ich bin so wütend auf meine Freundin ...",
+                    explanation: "🤖 Die KI antwortet sofort und höflich. Klingt nett, aber sie weiß nicht, wer deine Freundin ist, und kann den Streit nicht wirklich verstehen."
+                },
+                {
+                    text: "Kannst du mir sagen, ob ich Recht habe?",
+                    explanation: "🤖 Die KI gibt dir meistens Recht – weil sie nett zu dir sein will. Aber das ist nicht immer die Wahrheit! Ein echter Freund würde vielleicht sagen: Ich glaube, du hättest das anders sagen können."
+                },
+                {
+                    text: "Schreib mir, was ich ihr sagen soll.",
+                    explanation: "🤖 KI kann dir Textbausteine geben. Aber wenn deine Freundin merkt, dass das nicht deine eigenen Worte sind, wirkt es unecht. Echte Entschuldigung kommt von Herzen – nicht vom Roboter."
+                }
+            ],
+            freund: [
+                {
+                    text: "Hey, können wir kurz reden? Mir geht es nicht gut 😔",
+                    explanation: "💕 Deine Freundin weiß sofort, dass etwas nicht stimmt. Sie kennt dich – und reagiert nicht mit einem Standard-Text, sondern mit echtem Mitgefühl."
+                },
+                {
+                    text: "Ich glaube, ich habe vorhin Mist gebaut …",
+                    explanation: "💕 Eine echte Entschuldigung braucht Mut! Deine Freundin hört zu und kann dir antworten, wie sie sich gefühlt hat. Das ist echter Dialog – kein Programm."
+                },
+                {
+                    text: "Treffen wir uns nach der Schule und reden? ☕",
+                    explanation: "💕 Persönlich treffen, Blickkontakt, vielleicht eine Umarmung – das kann KI nie ersetzen. Ihr könnt zusammen lachen und euch wieder vertragen. Echte Freundschaft!"
+                }
+            ]
+        },
+
+        quiz: [
+            {
+                question: 'Was ist der \u201EEliza-Effekt\u201C?',
+                options: [
+                    { text: "🤖 Menschen glauben, eine KI hätte echte Gefühle – obwohl sie nur Text berechnet.", correct: true,  feedback: "Genau! Der Eliza-Effekt beschreibt, warum wir KI manchmal für einen echten Freund halten." },
+                    { text: "💬 Eine KI, die Witze erzählt.", correct: false, feedback: "Nein – das ist kein Fachbegriff. Der Eliza-Effekt beschreibt etwas anderes." },
+                    { text: "📱 Eine App, die deine Nachrichten übersetzt.", correct: false, feedback: "Das ist nicht gemeint. Eliza war ein sehr altes Computerprogramm aus den 1960ern." }
+                ]
+            },
+            {
+                question: "Warum ist eine KI KEIN echter Freund?",
+                options: [
+                    { text: "🔋 Weil sie manchmal keinen Strom hat.", correct: false, feedback: "Nein – das ist kein Hauptgrund. Es geht um Gefühle und echte Verbindung." },
+                    { text: "❤️ Weil sie keine echten Gefühle hat und sich nicht an gemeinsame Erlebnisse erinnert.", correct: true, feedback: "Richtig! KI simuliert Freundlichkeit – aber fühlt nichts und erinnert sich nicht wirklich." },
+                    { text: "🐢 Weil sie zu langsam antwortet.", correct: false, feedback: "Nope, KI antwortet sogar sehr schnell! Aber Schnelligkeit macht keine Freundschaft." }
+                ]
+            },
+            {
+                question: "Was kann ein echter Freund, was KI NIEMALS kann?",
+                options: [
+                    { text: "📚 Hausaufgaben erklären.", correct: false, feedback: "Das kann KI sogar besonders gut! Das allein macht aber keine echte Freundschaft." },
+                    { text: "🤗 Dich in den Arm nehmen, wenn du traurig bist.", correct: true, feedback: "Genau! KI hat keinen Körper – eine Umarmung ist durch nichts zu ersetzen." },
+                    { text: "🌙 Rund um die Uhr antworten.", correct: false, feedback: "Das ist sogar ein Vorteil der KI! Aber echte Freunde sind mehr als nur Antwortgeber." }
+                ]
+            },
+            {
+                question: "Deine Freundin und du habt euch gestritten. Was zeigt echte Freundschaft?",
+                options: [
+                    { text: "🤖 Du lässt dir von der KI schreiben, was du sagen sollst.", correct: false, feedback: "Das klingt unecht – deine Freundin würde das merken. Echte Worte kommen von dir." },
+                    { text: "🙈 Du ignorierst sie einfach.", correct: false, feedback: "Das löst nichts. Echter Freundschaft ist es wert, Konflikte zu lösen." },
+                    { text: "💬 Du redest offen mit ihr – auch wenn es schwer ist.", correct: true, feedback: "Genau! Streit und dann Versöhnung macht Freundschaften sogar stärker. ❤️" }
+                ]
+            },
+            {
+                question: "Character.AI ist eine App, bei der KI-Charaktere mit dir chatten. Was ist dabei wichtig zu wissen?",
+                options: [
+                    { text: "✅ Die KI-Charaktere sind echte Personen und meinen alles ernst.", correct: false, feedback: "Falsch! Das sind Computerprogramme – sie meinen nichts wirklich. Sie spielen nur eine Rolle." },
+                    { text: "⚠️ Die KI spielt eine Rolle – echte Gefühle hat sie nicht.", correct: true, feedback: "Richtig! Es kann Spaß machen – aber verwechsle einen KI-Charakter nie mit einem echten Freund." },
+                    { text: "🚫 Man darf solche Apps gar nicht nutzen.", correct: false, feedback: "Das stimmt so nicht. Man darf sie nutzen – aber man sollte wissen, was KI ist und was nicht." }
+                ]
+            },
+            {
+                question: "Wofür ist KI wirklich super geeignet?",
+                options: [
+                    { text: "❌ Jemanden zu ersetzen, der einem fehlt.", correct: false, feedback: "Nein! Das sollte KI nie versuchen. Echte Trauer und Sehnsucht braucht echte Menschen." },
+                    { text: "✅ Als Lern-Helfer, für Infos und zum Üben.", correct: true, feedback: "Genau! Als Werkzeug ist KI fantastisch. Aber Freundschaft kann sie nicht ersetzen." },
+                    { text: "❌ Als Ersatz für alle Gespräche mit Freunden.", correct: false, feedback: "Bitte nicht! Echte Gespräche sind unverzichtbar für deine Entwicklung und dein Wohlbefinden." }
+                ]
+            }
+        ],
+
+        reflection: {
+            question: "Was ist dir an deiner besten Freundin / deinem besten Freund besonders wichtig – etwas, das eine KI nie haben kann?",
+            tip: `
+                <strong>💡 Tipp für echte Freundschaft:</strong><br><br>
+                📲 <strong>Schreib heute noch</strong> jemandem, an den du gerade denkst, eine echte Nachricht – nicht an eine KI!<br><br>
+                😤 <strong>Wenn ihr Streit hattet:</strong> Warte nicht zu lange. Ein kurzes „Hey, können wir reden?" kann Wunder wirken.<br><br>
+                ⚽🎂🎸 <strong>Plant gemeinsam etwas:</strong> Fußball, Backen, Spieleabend – gemeinsame Erlebnisse sind der Klebstoff der Freundschaft.<br><br>
+                👂 <strong>Hör zu</strong> – echte Freundschaft bedeutet auch, da zu sein, wenn jemand redet. Ohne Handy, ohne KI.<br><br>
+                <em style="color: #c2185b;">„Ein echter Freund kennt alle deine Fehler und mag dich trotzdem." ❤️</em>
+            `
+        },
+
+        outro: `
+            <div class="outro-box">
+                <span class="outro-icon">🤖❤️👫</span>
+                <h2>KI ist cool als Helfer – echte Freunde sind unersetzlich! ❤️</h2>
+                <p>
+                    Du hast heute gelernt: <strong>KI kann viel</strong> – Hausaufgaben erklären, Fragen beantworten, Texte schreiben.
+                    Aber eine KI weiß nicht, wie es sich anfühlt, dich zu kennen, zu vermissen oder gemeinsam zu lachen.
+                    Sie spielt nur Freund – wie ein Roboter-Teddy, der immer lächelt.<br><br>
+                    Echte Freundschaft bedeutet: streiten und wieder vertragen, zusammen feiern, ehrlich sein
+                    und füreinander da sein – auch wenn es schwer ist. Das kann nur ein Mensch. 🌟<br><br>
+                    <strong>Nutze KI als Werkzeug – und schätze deine echten Freunde umso mehr. 💕</strong>
+                </p>
+            </div>
+            <div style="text-align:center; margin-top: 30px;">
+                <button class="step-btn" onclick="app.goToStep('start')" style="font-size:1rem; padding:12px 24px;">
+                    ⬅️ Zurück zur KI-Übersicht
+                </button>
+            </div>
+        `
     }
 };

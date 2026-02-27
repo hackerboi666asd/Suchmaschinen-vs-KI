@@ -5,7 +5,7 @@
 
 const app = {
     // Die Reihenfolge der Seiten
-    sequence: ['start', 'google', 'ai', 'lab', 'lab2', 'hybrid', 'mission', 'school'],
+    sequence: ['start', 'google', 'ai', 'lab', 'lab2', 'hybrid', 'mission', 'school', 'freunde'],
     currentStep: 'start',
 
     init: function () {
@@ -67,7 +67,8 @@ const app = {
         const nextBtn = document.getElementById('next-btn');
 
         // Button auf letzter Seite ausblenden
-        nextBtn.style.display = (mode === 'school') ? 'none' : 'flex';
+        const isLastStep = this.sequence.indexOf(mode) === this.sequence.length - 1;
+        nextBtn.style.display = (mode === 'school' || isLastStep) ? 'none' : 'flex';
 
         if (data) {
             // Hinweis Text setzen
@@ -110,6 +111,11 @@ const app = {
             // Schule rendern (NEU)
             if (mode === 'school') {
                 this.renderSchool(data);
+            }
+
+            // Freundschaft Modul rendern
+            if (mode === 'freunde') {
+                this.renderFreunde(data);
             }
 
             // Glossar Logik anhängen
@@ -312,6 +318,225 @@ const app = {
             `;
             grid.innerHTML += html;
         });
+    },
+
+    /* --- FREUNDE MODUL --- */
+    renderFreunde: function (data) {
+        const container = document.getElementById('content-freunde');
+        if (!container) return;
+        container.innerHTML = '';
+
+        // ── Sektion 1: Intro ─────────────────────────────────────────
+        const s1 = document.createElement('div');
+        s1.className = 'freunde-section';
+        s1.innerHTML = data.intro;
+        container.appendChild(s1);
+
+        // ── Sektion 2: Karten-Spiel ──────────────────────────────────
+        const s2 = document.createElement('div');
+        s2.className = 'freunde-section';
+        let scoreRichtig = 0;
+        const totalKarten = data.cards.length;
+
+        let kartenHTML = `
+            <h2>🃏 Spiel: KI-Freund oder echter Freund?</h2>
+            <p>Wer kann das wirklich? Klicke auf den richtigen Button – und sieh sofort, ob du Recht hast! 👇</p>
+            <div class="karten-score" id="karten-score">0 / ${totalKarten} richtig ✅</div>
+            <div class="karten-grid" id="karten-grid">
+        `;
+        data.cards.forEach((karte, idx) => {
+            kartenHTML += `
+                <div class="karte-item" id="karte-${idx}">
+                    <div class="karte-text">${karte.text}</div>
+                    <div class="karte-buttons">
+                        <button class="karte-btn karte-btn-ki"
+                            onclick="app.karteKlick(${idx}, 'ki', '${karte.correctSide}', \`${karte.feedback.ki.replace(/`/g, '\\`')}\`, \`${karte.feedback.freund.replace(/`/g, '\\`')}\`)">
+                            🤖 KI-Freund
+                        </button>
+                        <button class="karte-btn karte-btn-freund"
+                            onclick="app.karteKlick(${idx}, 'freund', '${karte.correctSide}', \`${karte.feedback.ki.replace(/`/g, '\\`')}\`, \`${karte.feedback.freund.replace(/`/g, '\\`')}\`)">
+                            👫 Echter Freund
+                        </button>
+                    </div>
+                    <div class="karte-feedback" id="karte-fb-${idx}"></div>
+                </div>`;
+        });
+        kartenHTML += `</div>`;
+        s2.innerHTML = kartenHTML;
+        container.appendChild(s2);
+
+        // ── Sektion 3: Dialog-Simulation ─────────────────────────────
+        const s3 = document.createElement('div');
+        s3.className = 'freunde-section';
+        let dialogHTML = `
+            <h2>💬 Simulation: Wer antwortet besser?</h2>
+            <p>Du bist traurig 😢 – du hast dich mit deiner besten Freundin gestritten. Wen fragst du?<br>
+            Klicke auf eine Antwort und sieh den Unterschied!</p>
+            <div class="dialog-grid">
+                <div class="dialog-panel dialog-panel-ki">
+                    <h3>🤖 Du schreibst der KI …</h3>
+        `;
+        data.dialog.ki.forEach((opt, idx) => {
+            dialogHTML += `
+                <button class="dialog-option" id="dialog-ki-btn-${idx}"
+                    onclick="app.dialogKlick('ki', ${idx})">
+                    ${opt.text}
+                </button>
+                <div class="dialog-explanation" id="dialog-ki-exp-${idx}">${opt.explanation}</div>
+            `;
+        });
+        dialogHTML += `
+                </div>
+                <div class="dialog-panel dialog-panel-freund">
+                    <h3>💕 Du schreibst deiner Freundin …</h3>
+        `;
+        data.dialog.freund.forEach((opt, idx) => {
+            dialogHTML += `
+                <button class="dialog-option" id="dialog-freund-btn-${idx}"
+                    onclick="app.dialogKlick('freund', ${idx})">
+                    ${opt.text}
+                </button>
+                <div class="dialog-explanation" id="dialog-freund-exp-${idx}">${opt.explanation}</div>
+            `;
+        });
+        dialogHTML += `</div></div>`;
+        s3.innerHTML = dialogHTML;
+        container.appendChild(s3);
+
+        // ── Sektion 4: Quiz ───────────────────────────────────────────
+        const s4 = document.createElement('div');
+        s4.className = 'freunde-section';
+        let quizHTML = `<h2>🎯 Quiz: Weißt du's?</h2>
+            <p>6 Fragen – beantworte jede und sieh sofort, ob du richtig liegst! Am Ende gibt es deine Gesamtpunktzahl. 🏆</p>`;
+
+        data.quiz.forEach((frage, fi) => {
+            quizHTML += `<div class="quiz-frage-block" id="quiz-frage-${fi}">
+                <p>${fi + 1}. ${frage.question}</p>`;
+            frage.options.forEach((opt, oi) => {
+                quizHTML += `<button class="quiz-option-freunde" id="qopt-${fi}-${oi}"
+                    onclick="app.quizKlick(${fi}, ${oi}, ${opt.correct}, \`${opt.feedback.replace(/`/g, '\\`')}\`, ${frage.options.length})">
+                    ${opt.text}
+                </button>`;
+            });
+            quizHTML += `</div>`;
+        });
+        quizHTML += `
+            <div class="quiz-score-box" id="quiz-score-box">
+                <span class="score-zahl" id="quiz-score-zahl">0 / ${data.quiz.length}</span>
+                <p id="quiz-score-text">Klasse gemacht! Weiter so! 🎉</p>
+            </div>`;
+        s4.innerHTML = quizHTML;
+        container.appendChild(s4);
+
+        // ── Sektion 5: Reflexion ──────────────────────────────────────
+        const s5 = document.createElement('div');
+        s5.className = 'freunde-section';
+        s5.innerHTML = `
+            <h2>💭 Dein Gedanke</h2>
+            <h3>${data.reflection.question}</h3>
+            <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 16px; border: 1px solid var(--primary);">
+                <strong>📝 Dein Auftrag für Pages / GoodNotes:</strong><br>
+                Schreib deine Antwort in eigenen Worten in dein Dokument auf. Mindestens 2–3 Sätze!
+            </div>
+            <br>
+            <button class="btn-tipp" onclick="app.tippAnzeigen()">💡 Tipp für echte Freundschaft anzeigen</button>
+            <div class="tipp-box" id="freunde-tipp">${data.reflection.tip}</div>
+        `;
+        container.appendChild(s5);
+
+        // ── Sektion 6: Outro ──────────────────────────────────────────
+        const s6 = document.createElement('div');
+        s6.className = 'freunde-section';
+        s6.innerHTML = data.outro;
+        container.appendChild(s6);
+
+        // Score-Tracking initialisieren
+        this._karteScore = 0;
+        this._quizScore = 0;
+        this._quizAnswered = 0;
+        this._quizTotal = data.quiz.length;
+    },
+
+    karteKlick: function (idx, gewählt, richtige, feedbackKi, feedbackFreund) {
+        const karteEl = document.getElementById(`karte-${idx}`);
+        const fbEl = document.getElementById(`karte-fb-${idx}`);
+        if (!karteEl || karteEl.classList.contains('karte-richtig') || karteEl.classList.contains('karte-falsch')) return;
+
+        const istRichtig = gewählt === richtige;
+        karteEl.classList.add(istRichtig ? 'karte-richtig' : 'karte-falsch');
+
+        // Buttons deaktivieren
+        karteEl.querySelectorAll('.karte-btn').forEach(b => b.disabled = true);
+
+        // Feedback anzeigen
+        fbEl.style.display = 'block';
+        fbEl.className = `karte-feedback ${istRichtig ? 'richtig-fb' : 'falsch-fb'}`;
+        const fbText = gewählt === 'ki' ? feedbackKi : feedbackFreund;
+        fbEl.innerHTML = (istRichtig ? '✅ Richtig! ' : '❌ Nicht ganz. ') + fbText;
+
+        // Score
+        if (istRichtig) {
+            this._karteScore = (this._karteScore || 0) + 1;
+        }
+        const scoreEl = document.getElementById('karten-score');
+        if (scoreEl) scoreEl.textContent = `${this._karteScore || 0} / ${document.querySelectorAll('.karte-item').length} richtig ✅`;
+    },
+
+    dialogKlick: function (seite, idx) {
+        const expEl = document.getElementById(`dialog-${seite}-exp-${idx}`);
+        if (!expEl) return;
+        // Toggle
+        const istSichtbar = expEl.style.display === 'block';
+        expEl.style.display = istSichtbar ? 'none' : 'block';
+    },
+
+    quizKlick: function (frageIdx, optIdx, istRichtig, feedback, anzOptionen) {
+        const frageBlock = document.getElementById(`quiz-frage-${frageIdx}`);
+        if (frageBlock && frageBlock.dataset.beantwortet) return;
+
+        // Alle Optionen dieser Frage deaktivieren + einfärben
+        for (let i = 0; i < anzOptionen; i++) {
+            const btn = document.getElementById(`qopt-${frageIdx}-${i}`);
+            if (btn) {
+                btn.disabled = true;
+                if (i === optIdx) {
+                    btn.classList.add(istRichtig ? 'richtig' : 'falsch');
+                    btn.innerHTML += `<br><small style="font-weight:normal;">${feedback}</small>`;
+                }
+            }
+        }
+        if (frageBlock) frageBlock.dataset.beantwortet = '1';
+
+        if (istRichtig) this._quizScore = (this._quizScore || 0) + 1;
+        this._quizAnswered = (this._quizAnswered || 0) + 1;
+
+        // Ergebnis zeigen wenn alle beantwortet
+        if (this._quizAnswered >= this._quizTotal) {
+            const scoreBox = document.getElementById('quiz-score-box');
+            const scoreZahl = document.getElementById('quiz-score-zahl');
+            const scoreText = document.getElementById('quiz-score-text');
+            if (scoreBox && scoreZahl && scoreText) {
+                scoreZahl.textContent = `${this._quizScore} / ${this._quizTotal}`;
+                const pct = this._quizScore / this._quizTotal;
+                scoreText.textContent = pct === 1
+                    ? '🏆 Perfekt! Du bist ein Experte für echte Freundschaft!'
+                    : pct >= 0.7
+                        ? '🎉 Super gemacht! Du verstehst es schon sehr gut!'
+                        : pct >= 0.5
+                            ? '👍 Nicht schlecht – lies nochmal die Tipps oben!'
+                            : '💪 Noch ein bisschen üben – du schaffst das!';
+                scoreBox.style.display = 'block';
+                scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    },
+
+    tippAnzeigen: function () {
+        const el = document.getElementById('freunde-tipp');
+        if (el) {
+            el.style.display = el.style.display === 'block' ? 'none' : 'block';
+            if (el.style.display === 'block') el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
     },
 
     /* --- HELPERS --- */
